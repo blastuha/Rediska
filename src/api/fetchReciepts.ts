@@ -1,4 +1,4 @@
-import { getReciepts } from '../firebase'
+import { getReciepts } from './getReciepts'
 
 export const fetchReciepts = async () => {
   const response = await getReciepts()
