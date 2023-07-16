@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react'
 import { DocumentData } from 'firebase/firestore/lite'
 import { fetchReciepts } from './api/fetchReciepts'
 
-import { Header } from './components/layout/Header/Header'
+import { Layout } from './components/layout/Layout'
+import { Main } from './components/pages/Main'
 
-import './styles/global.scss'
+import './styles/global.css'
 
 function App() {
   const [reciepts, setReciepts] = useState<DocumentData[]>([])
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Layout>
+        <Main />
+      </Layout>
     </>
   )
 }

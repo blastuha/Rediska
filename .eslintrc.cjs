@@ -24,4 +24,12 @@ module.exports = {
     ],
     '@typescript-eslint/no-non-null-assertion': 'off',
   },
+  overrides: [
+    {
+      files: ['/tailwind.config.js'],
+      rules: {
+        'eslint-disable-next-line': 'off',
+      },
+    },
+  ],
 }
