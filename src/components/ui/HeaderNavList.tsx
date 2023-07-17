@@ -18,7 +18,7 @@ export const HeaderNavList: React.FC = () => {
         return (
           <li
             key={i}
-            className='mr-8 cursor-pointer font-raleway last:mr-0 self-center'
+            className='mr-8 cursor-pointer font-inter last:mr-0 self-center'
           >
             {item.name}
           </li>

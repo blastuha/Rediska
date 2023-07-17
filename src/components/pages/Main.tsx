@@ -1,5 +1,5 @@
 import React from 'react'
 
 export const Main: React.FC = () => {
-  return <div>Main</div>
+  return <main className='flex-grow'>Main</main>
 }

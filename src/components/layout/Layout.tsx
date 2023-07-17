@@ -9,9 +9,11 @@ type LayoutProps = {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Header />
-      {children}
-      <Footer />
+      <div className='flex flex-col min-h-screen'>
+        <Header />
+        {children}
+        <Footer />
+      </div>
     </>
   )
 }
