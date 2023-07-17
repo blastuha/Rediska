@@ -3,7 +3,7 @@ import { FooterContent } from '../ui/FooterContent'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className='bg-[#F9F9F9] pb-5 pt-5'>
+    <footer className='bg-[#F9F9F9] pb-5 pt-5 mt-14'>
       <div className='flex container mx-auto pl-4 pr-4'>
         <FooterContent />
         <div className='w-1/5 '>
@@ -25,24 +25,6 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className='w-1/5 '>
-          <ul className='pr-8'>
-            <li className='pb-2'>Legal</li>
-            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
-              Связь с нами
-            </li>
-            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
-              Реклама
-            </li>
-            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
-              Стек технологий
-            </li>
-            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
-              Авторы проекта
-            </li>
-          </ul>
-        </div>
-
-        <div className='w-1/5 '>
           <ul className=''>
             <li className='pb-2'>Follow</li>
             <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
@@ -56,6 +38,18 @@ export const Footer: React.FC = () => {
             </li>
             <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
               Youtube
+            </li>
+          </ul>
+        </div>
+
+        <div className='w-1/5 '>
+          <ul className='pr-8'>
+            <li className='pb-2'>Проект</li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              О Проекте
+            </li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Связь с нами
             </li>
           </ul>
         </div>
