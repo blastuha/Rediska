@@ -4,43 +4,59 @@ import { FooterContent } from '../ui/FooterContent'
 export const Footer: React.FC = () => {
   return (
     <footer className='bg-[#F9F9F9] pb-5 pt-5'>
-      <div className='flex justify-between container max-w-1140 mx-auto  mb-5'>
+      <div className='flex container mx-auto pl-4 pr-4'>
         <FooterContent />
-        <div className='flex justify-between border-2 border-solid border-sky-500'>
-          <ul className='pr-20'>
-            <li className='pb-1'>Rediska</li>
-            <li className='text-sm text-[#7F7F7F] pb-1 cursor-pointer'>
-              About us
+        <div className='w-1/5 '>
+          <ul className='pr-8'>
+            <li className='pb-2'>Rediska</li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Главная
             </li>
-            <li className='text-sm text-[#7F7F7F] pb-1 cursor-pointer'>
-              Careers
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Рецепты
             </li>
-            <li className='text-sm text-[#7F7F7F] pb-1 cursor-pointer'>
-              Contact us
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Хиты сезона
             </li>
-            <li className='text-sm text-[#7F7F7F] pb-1 cursor-pointer'>
-              Feedback
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              О нас
             </li>
           </ul>
+        </div>
 
-          <ul className='pr-20'>
-            <li>Rediska</li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>About us</li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>Careers</li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>
-              Contact us
+        <div className='w-1/5 '>
+          <ul className='pr-8'>
+            <li className='pb-2'>Legal</li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Связь с нами
             </li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>Feedback</li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Реклама
+            </li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Стек технологий
+            </li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Авторы проекта
+            </li>
           </ul>
+        </div>
 
-          <ul>
-            <li>Rediska</li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>About us</li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>Careers</li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>
-              Contact us
+        <div className='w-1/5 '>
+          <ul className=''>
+            <li className='pb-2'>Follow</li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Github
             </li>
-            <li className='text-sm text-[#7F7F7F] cursor-pointer'>Feedback</li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Instagram
+            </li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Telegram
+            </li>
+            <li className='text-sm text-[#7F7F7F] pb-2 cursor-pointer'>
+              Youtube
+            </li>
           </ul>
         </div>
       </div>
