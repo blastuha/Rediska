@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
 
-import { DocumentData } from 'firebase/firestore/lite'
-import { fetchReciepts } from './api/fetchReciepts'
-
 import { Layout } from './components/layout/Layout'
 import { Main } from './components/pages/Main'
+import { MainWidget } from './components/ui/MainWidget'
+import { MainSwiper } from './components/ui/MainSwiper'
+
+import { DocumentData } from 'firebase/firestore/lite'
+import { fetchReciepts } from './api/fetchReciepts'
+import { fetchNews } from './api/fetchNews'
+
+import 'swiper/css'
+import 'swiper/css/navigation'
 
 import './styles/global.css'
 
 function App() {
   const [reciepts, setReciepts] = useState<DocumentData[]>([])
+  const [news, setNews] = useState<DocumentData[]>([])
 
-  console.log(reciepts)
+  console.log({ reciepts, news })
 
   useEffect(() => {
     fetchReciepts()
@@ -19,10 +26,21 @@ function App() {
       .catch((err) => console.error('Ошибка получения данных', err))
   }, [])
 
+  useEffect(() => {
+    fetchNews()
+      .then((res) => setNews(res))
+      .catch((err) => console.error('Ошибка получения данных', err))
+  }, [])
+
   return (
     <>
       <Layout>
-        <Main />
+        <Main>
+          <MainSwiper>
+            <MainWidget />
+          </MainSwiper>
+          {/* <MainWidget /> */}
+        </Main>
       </Layout>
     </>
   )

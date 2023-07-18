@@ -1,6 +1,6 @@
-import { getReciepts } from './getReciepts'
+import { getReceipts } from './getReciepts'
 
 export const fetchReciepts = async () => {
-  const response = await getReciepts()
+  const response = await getReceipts()
   return response
 }
