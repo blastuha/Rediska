@@ -36,10 +36,9 @@ function App() {
     <>
       <Layout>
         <Main>
-          <MainSwiper>
+          <MainSwiper newsData={news}>
             <MainWidget />
           </MainSwiper>
-          {/* <MainWidget /> */}
         </Main>
       </Layout>
     </>

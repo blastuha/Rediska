@@ -1,6 +1,5 @@
 import React from 'react'
 import { NewsSection } from '../ui/NewsSection'
-import { MainSwiper } from '../ui/MainSwiper'
 
 export const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
