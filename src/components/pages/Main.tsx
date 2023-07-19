@@ -9,7 +9,6 @@ export const Main: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className='mb-14'>{children}</div>
         <NewsSection />
         <MarkdownExample />
-        <h1>HELLOOOOOOOOOO</h1>
       </div>
     </main>
   )

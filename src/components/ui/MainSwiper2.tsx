@@ -7,9 +7,9 @@ import 'swiper/css'
 import 'swiper/css/scrollbar'
 
 export const MainSwiper: React.FC<{
-  children: React.ReactElement
   newsData: NewsData[]
-}> = ({ children, newsData }) => {
+  childrenEl: (data: NewsData) => React.ReactElement
+}> = ({ newsData, childrenEl }) => {
   return (
     <>
       <Swiper
@@ -19,11 +19,7 @@ export const MainSwiper: React.FC<{
         modules={[Scrollbar]}
       >
         {newsData.map((item) => {
-          return (
-            <SwiperSlide key={item.id}>
-              {React.cloneElement(children, { ...item })}
-            </SwiperSlide>
-          )
+          return <SwiperSlide key={item.id}>{childrenEl(item)}</SwiperSlide>
         })}
       </Swiper>
     </>
