@@ -13,7 +13,7 @@ body {
   font-size: 16px;
 }
 
-*,
+/* *,
 *::before,
 *::after {
   padding: 0;
@@ -40,4 +40,4 @@ h5,
 h6 {
   font-weight: inherit;
   font-size: inherit;
-}
+} */

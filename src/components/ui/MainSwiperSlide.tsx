@@ -1,8 +1,8 @@
 import React from 'react'
-import { DocumentData } from 'firebase/firestore/lite'
 import { ArrowButton } from './ArrowButton'
+import { NewsData } from '../../models'
 
-export const MainSwiperSlide: React.FC<DocumentData> = ({
+export const MainSwiperSlide: React.FC<NewsData> = ({
   title,
   photoURL,
   smallText,
