@@ -5,7 +5,7 @@ import image from '../../assets/images/varenie.jpg'
 export const NewsSection: React.FC = () => {
   return (
     <div>
-      <SectionTitle title='Новости' />
+      <SectionTitle title='Сюжеты недели' />
       <div className='flex'>
         <div className='card w-96 bg-base-100 shadow-xl'>
           <figure>
@@ -15,14 +15,12 @@ export const NewsSection: React.FC = () => {
             />
           </figure>
           <div className='card-body'>
-            <h2 className='card-title'>
-              Shoes!
-              <div className='badge badge-secondary'>NEW</div>
-            </h2>
+            <h2 className='card-title'>Shoes!</h2>
             <p>If a dog chews shoes whose shoes does he choose?</p>
             <div className='card-actions justify-end'>
-              <div className='badge badge-outline'>Fashion</div>
-              <div className='badge badge-outline'>Products</div>
+              <div className='badge badge-primary bg-[#0d0e43]'>
+                Потребляй разумно
+              </div>
             </div>
           </div>
         </div>

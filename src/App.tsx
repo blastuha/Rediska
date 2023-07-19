@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import { Layout } from './components/layout/Layout'
 import { Main } from './components/pages/Main'
-import { MainWidget } from './components/ui/MainWidget'
+import { MainSwiperSlide } from './components/ui/MainSwiperSlide'
 import { MainSwiper } from './components/ui/MainSwiper'
 
 import { DocumentData } from 'firebase/firestore/lite'
@@ -37,7 +37,7 @@ function App() {
       <Layout>
         <Main>
           <MainSwiper newsData={news}>
-            <MainWidget />
+            <MainSwiperSlide />
           </MainSwiper>
         </Main>
       </Layout>

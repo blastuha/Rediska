@@ -18,9 +18,9 @@ export const MainSwiper: React.FC<{
         }}
         modules={[Scrollbar]}
       >
-        {newsData.map((item, i) => {
+        {newsData.map((item) => {
           return (
-            <SwiperSlide key={i}>
+            <SwiperSlide key={item.id}>
               {React.cloneElement(children, { ...item })}
             </SwiperSlide>
           )
