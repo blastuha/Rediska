@@ -1,0 +1,19 @@
+.h1 {
+  @apply font-dancingScript font-bold text-3xl mb-4 mt-4;
+}
+
+.h2 {
+  @apply font-inter font-bold text-2xl mb-8 mt-8;
+}
+
+.p {
+  @apply font-inter text-[16px] mb-5;
+}
+
+.ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.li {
+  @apply pt-1 pb-1 ml-8 text-[15px];
+}

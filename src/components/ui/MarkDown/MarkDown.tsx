@@ -1,11 +1,24 @@
 import { useState, useEffect } from 'react'
 import ReactMarkdown, { Components } from 'react-markdown'
-import MARKDOWN from '../../markdown.md'
+import MARKDOWN from '../../../markdown.md'
 
-import styles from './MarkdownExample.module.scss'
+import styles from './MarkDown.module.scss'
 
-const MarkdownExample: React.FC = () => {
-  const [content, setContent] = useState<string>('')
+type Content = {
+  id: number
+  text: string
+}
+
+const MarkDown: React.FC = ({ content }) => {
+  // const [content, setContent] = useState<string>('')
+
+  // useEffect(() => {
+  //   fetch(MARKDOWN)
+  //     .then((res) => res.text())
+  //     .then((md) => {
+  //       setContent(md)
+  //     })
+  // }, [])
 
   const customRenderers: Components = {
     //  классы для заголовков
@@ -19,15 +32,7 @@ const MarkdownExample: React.FC = () => {
     li: (props) => <li className={styles.li}>{props.children}</li>,
   }
 
-  useEffect(() => {
-    fetch(MARKDOWN)
-      .then((res) => res.text())
-      .then((md) => {
-        setContent(md)
-      })
-  }, [])
-
   return <ReactMarkdown components={customRenderers}>{content}</ReactMarkdown>
 }
 
-export default MarkdownExample
+export default MarkDown

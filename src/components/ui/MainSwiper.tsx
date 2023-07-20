@@ -2,14 +2,14 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
 import { NewsData } from '../../models'
+import { MainSwiperSlide } from './MainSwiperSlide'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 
 export const MainSwiper: React.FC<{
-  children: React.ReactElement
   newsData: NewsData[]
-}> = ({ children, newsData }) => {
+}> = ({ newsData }) => {
   return (
     <>
       <Swiper
@@ -18,10 +18,10 @@ export const MainSwiper: React.FC<{
         }}
         modules={[Scrollbar]}
       >
-        {newsData.map((item) => {
+        {newsData.map((item: NewsData) => {
           return (
             <SwiperSlide key={item.id}>
-              {React.cloneElement(children, { ...item })}
+              <MainSwiperSlide {...item} />
             </SwiperSlide>
           )
         })}
