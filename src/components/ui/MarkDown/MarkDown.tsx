@@ -4,10 +4,10 @@ import MARKDOWN from '../../../markdown.md'
 
 import styles from './MarkDown.module.scss'
 
-type Content = {
-  id: number
-  text: string
-}
+// type Content = {
+//   id: number
+//   text: string
+// }
 
 const MarkDown: React.FC = ({ content }) => {
   // const [content, setContent] = useState<string>('')

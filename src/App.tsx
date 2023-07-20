@@ -3,23 +3,26 @@ import { useState, useEffect } from 'react'
 import { Layout } from './components/layout/Layout'
 import { Main } from './components/pages/Main'
 import { MainSwiper } from './components/ui/MainSwiper'
+import { WeekPlotsSection } from './components/ui/WeekPlotsSection'
+import { WeekPlotsGrid } from './components/ui/WeekPlotsGrid'
+import MarkDown from './components/ui/MarkDown/MarkDown'
 
 import { DocumentData } from 'firebase/firestore/lite'
 import { fetchReciepts } from './api/fetchReciepts'
 import { fetchNews } from './api/fetchNews'
 import { fetchWeekPlots } from './api/fetchWeekPlots'
 
-import { NewsData } from './models'
+import { NewsData, WeekPlotsData } from './models/index'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import './styles/global.css'
-import MarkDown from './components/ui/MarkDown/MarkDown'
 
 function App() {
+  // изменить тип recipets
   const [reciepts, setReciepts] = useState<DocumentData[]>([])
   const [news, setNews] = useState<NewsData[]>([])
-  const [weekPlots, setWeekPlots] = useState<NewsData[]>([])
+  const [weekPlots, setWeekPlots] = useState<WeekPlotsData[]>([])
 
   console.log(weekPlots)
 
@@ -50,7 +53,9 @@ function App() {
       <Layout>
         <Main>
           <MainSwiper newsData={news} />
-          <MarkDown content={weekPlots} />
+          <WeekPlotsSection>
+            <WeekPlotsGrid weekPlotsData={weekPlots} />
+          </WeekPlotsSection>
         </Main>
       </Layout>
     </>

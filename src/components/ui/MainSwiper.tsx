@@ -7,9 +7,11 @@ import { MainSwiperSlide } from './MainSwiperSlide'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 
-export const MainSwiper: React.FC<{
+type MainSwiperProps = {
   newsData: NewsData[]
-}> = ({ newsData }) => {
+}
+
+export const MainSwiper: React.FC<MainSwiperProps> = ({ newsData }) => {
   return (
     <>
       <Swiper
