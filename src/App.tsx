@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import { Layout } from './components/layout/Layout'
 import { Main } from './components/pages/Main'
-import { MainSwiper } from './components/ui/MainSwiper'
-import { WeekPlotsSection } from './components/ui/WeekPlotsSection'
-import { WeekPlotsGrid } from './components/ui/WeekPlotsGrid'
-import MarkDown from './components/ui/MarkDown/MarkDown'
+import { WeekPlotPage } from './components/pages/WeekPlotPage'
+import { ErrorPage } from './components/pages/Error'
+import { MainContainer } from './components/ui/MainContainer'
+
+// import MarkDown from './components/ui/MarkDown/MarkDown'
 
 import { DocumentData } from 'firebase/firestore/lite'
 import { fetchReciepts } from './api/fetchReciepts'
@@ -48,18 +51,34 @@ function App() {
       )
   }, [])
 
-  return (
-    <>
-      <Layout>
-        <Main>
-          <MainSwiper newsData={news} />
-          <WeekPlotsSection>
-            <WeekPlotsGrid weekPlotsData={weekPlots} />
-          </WeekPlotsSection>
-        </Main>
-      </Layout>
-    </>
-  )
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: (
+            <Main
+              mainContent={
+                <MainContainer
+                  news={news}
+                  weekPlots={weekPlots}
+                />
+              }
+            />
+          ),
+        },
+        {
+          path: 'weekPlot',
+          element: <WeekPlotPage />,
+        },
+      ],
+    },
+  ])
+
+  return <RouterProvider router={router} />
 }
 
 export default App

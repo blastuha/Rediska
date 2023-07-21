@@ -14,10 +14,7 @@ export const WeekPlotsCard: React.FC<WeekPlotsCardProps> = ({
   category,
 }) => {
   return (
-    <div
-      className='flex'
-      key={id}
-    >
+    <div className='flex'>
       <div className='card w-96 bg-base-100 shadow-xl  group  cursor-pointer'>
         <figure>
           <img
