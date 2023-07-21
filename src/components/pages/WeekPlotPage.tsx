@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const WeekPlot: React.FC = () => {
+export const WeekPlotPage: React.FC = () => {
   return <div>WeekPlot</div>
 }
