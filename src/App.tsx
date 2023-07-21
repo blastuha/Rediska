@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     fetchWeekPlots()
-      .then((res) => setWeekPlots(res as NewsData[]))
+      .then((res) => setWeekPlots(res as WeekPlotsData[]))
       .catch((err) =>
         console.error('Ошибка получения новостей для swiper', err)
       )
