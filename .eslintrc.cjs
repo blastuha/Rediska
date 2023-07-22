@@ -26,7 +26,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['/tailwind.config.js'],
+      files: ['tailwind.config.js'],
       rules: {
         'eslint-disable-next-line': 'off',
       },
