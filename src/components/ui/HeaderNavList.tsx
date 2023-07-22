@@ -19,9 +19,10 @@ export const HeaderNavList: React.FC = () => {
         return (
           <Link
             to={item.link}
+            key={i}
             className='mr-8 cursor-pointer font-inter last:mr-0 self-center'
           >
-            <li key={i}>{item.name}</li>
+            <li>{item.name}</li>
           </Link>
         )
       })}

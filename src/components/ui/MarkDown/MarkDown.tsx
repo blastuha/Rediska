@@ -9,7 +9,7 @@ import styles from './MarkDown.module.scss'
 //   text: string
 // }
 
-const MarkDown: React.FC = ({ content }) => {
+export const MarkDown: React.FC = ({ content }) => {
   // const [content, setContent] = useState<string>('')
 
   // useEffect(() => {
@@ -34,5 +34,3 @@ const MarkDown: React.FC = ({ content }) => {
 
   return <ReactMarkdown components={customRenderers}>{content}</ReactMarkdown>
 }
-
-export default MarkDown
