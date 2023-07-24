@@ -1,5 +1,5 @@
 export type WeekPlotsData = {
-  id: number
+  id: string
   text: string
   photoURL: string
   title: string

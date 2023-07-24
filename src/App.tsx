@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { Layout } from './components/layout/Layout'
@@ -10,20 +9,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import './styles/global.css'
 
-import { WeekPlotsData } from './models'
-import { fetchWeekPlots } from './api/fetchWeekPlots'
-
 const App = () => {
-  const [weekPlots, setWeekPlots] = useState<WeekPlotsData[]>([])
-
-  useEffect(() => {
-    fetchWeekPlots()
-      .then((res) => setWeekPlots(res as WeekPlotsData[]))
-      .catch((err) =>
-        console.error('Ошибка получения новостей для swiper', err)
-      )
-  }, [])
-
   const router = createBrowserRouter([
     {
       path: '/',
@@ -35,7 +21,7 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: 'weekPlot',
+          path: 'weekPlot/:id',
           element: <WeekPlotPage />,
         },
       ],

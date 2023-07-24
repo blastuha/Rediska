@@ -2,19 +2,21 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 type WeekPlotsCardProps = {
-  id: number
+  id: string
   photoURL: string
   title: string
   category: string
 }
 
 export const WeekPlotsCard: React.FC<WeekPlotsCardProps> = ({
+  id,
   photoURL,
   title,
   category,
 }) => {
+  console.log(id)
   return (
-    <Link to='/weekPlot'>
+    <Link to={`weekPlot/${id}`}>
       <div className='flex h-full'>
         <div className='card w-96 bg-base-100 shadow-xl  group  cursor-pointer'>
           <figure>
