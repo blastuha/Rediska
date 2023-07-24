@@ -6,6 +6,7 @@ import { fetchWeekPlotsById } from '../../api/fetchWeekPlotById'
 import { MarkDown } from '../ui/MarkDown/MarkDown'
 
 import { Plot } from '../../models/Plot'
+import { WeekPlotPageHeader } from '../ui/WeekPlotPageHeader'
 
 export const WeekPlotPage: React.FC = () => {
   const [plot, setPlot] = useState<Plot | undefined>(undefined)
@@ -21,6 +22,7 @@ export const WeekPlotPage: React.FC = () => {
     <div className='flex-grow'>
       <div className='container mx-auto pr-4 pl-4'>
         <div className='mb-14'>
+          <WeekPlotPageHeader />
           <MarkDown content={plot?.text} />
         </div>
       </div>
