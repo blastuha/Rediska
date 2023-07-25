@@ -5,9 +5,7 @@ type WeekPlotsSectionProps = {
   children: React.ReactNode
 }
 
-export const WeekPlotsSection: React.FC<WeekPlotsSectionProps> = ({
-  children,
-}) => {
+export const WeekPlotsSection: React.FC<WeekPlotsSectionProps> = ({ children }) => {
   return (
     <section>
       <SectionTitle title='Сюжеты недели' />
