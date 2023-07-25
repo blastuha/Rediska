@@ -1,11 +1,11 @@
 import React from 'react'
 import { SectionTitle } from './SectionTitle'
 
-type WeekPlotsSectionProps = {
+type HomeSectionProps = {
   children: React.ReactNode
 }
 
-export const WeekPlotsSection: React.FC<WeekPlotsSectionProps> = ({ children }) => {
+export const HomeSection: React.FC<HomeSectionProps> = ({ children }) => {
   return (
     <section>
       <SectionTitle title='Сюжеты недели' />

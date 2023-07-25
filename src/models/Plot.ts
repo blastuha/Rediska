@@ -1,7 +1,8 @@
 export type Plot = {
-  photoURL: string
+  id: string
   text: string
+  photoURL: string
   title: string
   category: string
-  id: number
+  date: string
 }

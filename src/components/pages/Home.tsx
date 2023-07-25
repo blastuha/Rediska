@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { MainSwiper } from '../ui/MainSwiper'
-import { WeekPlotsSection } from '../ui/WeekPlotsSection'
+import { HomeSection } from '../ui/HomeSection.tsx'
 import { WeekPlotsGrid } from '../ui/WeekPlotsGrid'
 // import MarkDown from './components/ui/MarkDown/MarkDown'
 
@@ -10,13 +10,14 @@ import { fetchReciepts } from '../../api/fetchReciepts.ts'
 import { fetchNews } from '../../api/fetchNews.ts'
 import { fetchWeekPlots } from '../../api/fetchWeekPlots.ts'
 
-import { NewsData, WeekPlotsData } from '../../models'
+import { NewsData } from '../../models'
+import { Plot } from '../../models/Plot.ts'
 
 export const Home: React.FC = () => {
   // изменить тип recipets
   const [reciepts, setReciepts] = useState<DocumentData[]>([])
   const [news, setNews] = useState<NewsData[]>([])
-  const [weekPlots, setWeekPlots] = useState<WeekPlotsData[]>([])
+  const [weekPlots, setWeekPlots] = useState<Plot[]>([])
 
   useEffect(() => {
     fetchReciepts()
@@ -27,28 +28,22 @@ export const Home: React.FC = () => {
   useEffect(() => {
     fetchNews()
       .then((res) => setNews(res as NewsData[]))
-      .catch((err) =>
-        console.error('Ошибка получения новостей для swiper', err)
-      )
+      .catch((err) => console.error('Ошибка получения новостей для swiper', err))
   }, [])
 
   useEffect(() => {
     fetchWeekPlots()
-      .then((res) => setWeekPlots(res as WeekPlotsData[]))
-      .catch((err) =>
-        console.error('Ошибка получения новостей для swiper', err)
-      )
+      .then((res) => setWeekPlots(res as Plot[]))
+      .catch((err) => console.error('Ошибка получения новостей для swiper', err))
   }, [])
 
   return (
     <main className='flex-grow'>
-      <div className='container mx-auto pr-4 pl-4'>
-        <div className='mb-14'>
-          <MainSwiper newsData={news} />
-          <WeekPlotsSection>
-            <WeekPlotsGrid weekPlotsData={weekPlots} />
-          </WeekPlotsSection>
-        </div>
+      <div className='container mx-auto pl-4 pr-4'>
+        <MainSwiper newsData={news} />
+        <HomeSection>
+          <WeekPlotsGrid weekPlotsData={weekPlots} />
+        </HomeSection>
       </div>
     </main>
   )

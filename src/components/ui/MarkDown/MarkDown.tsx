@@ -11,19 +11,16 @@ const customRenderers: Components = {
   //  классы для списков
   ul: (props) => <ul className={styles.ul}>{props.children}</ul>,
   li: (props) => <li className={styles.li}>{props.children}</li>,
+  //  классы для images
+  img: (props) => <img className={styles.img} src={props.src} alt={props.alt} />,
 }
 
-export const MarkDown: React.FC<{ content: string | undefined }> = ({
-  content,
-}) => {
+export const MarkDown: React.FC<{ content: string | undefined }> = ({ content }) => {
   // Разделяем содержимое на блоки Markdown
   const markdownBlocks = content?.split('\\')
 
   return markdownBlocks?.map((block, index) => (
-    <ReactMarkdown
-      key={index}
-      components={customRenderers}
-    >
+    <ReactMarkdown key={index} components={customRenderers}>
       {block}
     </ReactMarkdown>
   ))

@@ -7,7 +7,7 @@ import { ErrorPage } from './components/pages/Error'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
-import './styles/global.css'
+import './styles/global.scss'
 
 const App = () => {
   const router = createBrowserRouter([

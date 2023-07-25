@@ -9,7 +9,7 @@ import { Plot } from '../../models/Plot'
 import { WeekPlotPageHeader } from '../ui/WeekPlotPageHeader'
 
 export const WeekPlotPage: React.FC = () => {
-  const [plot, setPlot] = useState<Plot | undefined>(undefined)
+  const [plot, setPlot] = useState<Plot | null>(null)
   const { id } = useParams()
 
   useEffect(() => {
@@ -20,11 +20,9 @@ export const WeekPlotPage: React.FC = () => {
 
   return (
     <div className='flex-grow'>
-      <div className='container mx-auto pr-4 pl-4'>
-        <div className='mb-14'>
-          <WeekPlotPageHeader />
-          <MarkDown content={plot?.text} />
-        </div>
+      <div className='container mx-auto pl-4 pr-4'>
+        <WeekPlotPageHeader {...plot} />
+        <MarkDown content={plot?.text} />
       </div>
     </div>
   )
