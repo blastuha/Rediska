@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { Layout } from './components/layout/Layout'
-import { Home } from './components/pages/Home'
-import { WeekPlotPage } from './components/pages/WeekPlotPage'
+import { Home } from './components/pages/Home/Home.tsx'
+import { WeekPlotPage } from './components/pages/WeekPlot/WeekPlotPage.tsx'
 import { ErrorPage } from './components/pages/Error'
 
 import 'swiper/css'

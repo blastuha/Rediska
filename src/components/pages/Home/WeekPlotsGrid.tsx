@@ -6,7 +6,7 @@ type WeekPlotsGridProps = {
   weekPlotsData: Plot[]
 }
 
-export const WeekPlotGrid: React.FC<WeekPlotsGridProps> = ({ weekPlotsData }) => {
+export const WeekPlotsGrid: React.FC<WeekPlotsGridProps> = ({ weekPlotsData }) => {
   return (
     <div className='grid grid-cols-3 grid-rows-2 gap-4'>
       {weekPlotsData.map((plot) => (

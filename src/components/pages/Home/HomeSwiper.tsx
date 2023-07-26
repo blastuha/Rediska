@@ -1,8 +1,8 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar } from 'swiper/modules'
-import { NewsData } from '../../models'
-import { MainSwiperSlide } from './MainSwiperSlide'
+import { NewsData } from '../../../models'
+import { MainSwiperSlide } from './MainSwiperSlide.tsx'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
@@ -11,7 +11,7 @@ type MainSwiperProps = {
   newsData: NewsData[]
 }
 
-export const MainSwiper: React.FC<MainSwiperProps> = ({ newsData }) => {
+export const HomeSwiper: React.FC<MainSwiperProps> = ({ newsData }) => {
   return (
     <>
       <Swiper

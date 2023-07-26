@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionTitle } from './SectionTitle'
+import { SectionTitle } from '../../ui/SectionTitle.tsx'
 
 type HomeSectionProps = {
   children: React.ReactNode

@@ -2,12 +2,12 @@ import React from 'react'
 import { Date } from './Icons/Date'
 import { Heart } from './Icons/Heart'
 
-type TopPageHeading = {
+type ContentHeading = {
   date?: string
   title?: string
 }
 
-export const PageHeader: React.FC<TopPageHeading> = ({ date, title }) => {
+export const PageHeader: React.FC<ContentHeading> = ({ date, title }) => {
   return (
     <div className='flex flex-col'>
       <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{title}</h1>

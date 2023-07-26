@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
-import { MainSwiper } from '../ui/MainSwiper'
-import { HomeSection } from '../ui/HomeSection.tsx'
-import { WeekPlotsGrid } from '../ui/WeekPlotsGrid'
-// import MarkDown from './components/ui/MarkDown/MarkDown'
+import { HomeSwiper } from './HomeSwiper.tsx'
+import { HomeSection } from './HomeSection.tsx'
+import { WeekPlotsGrid } from './WeekPlotsGrid.tsx'
 
 import { DocumentData } from 'firebase/firestore/lite'
-import { fetchReciepts } from '../../api/fetchReciepts.ts'
-import { fetchNews } from '../../api/fetchNews.ts'
-import { fetchWeekPlots } from '../../api/fetchWeekPlots.ts'
+import { fetchReciepts } from '../../../api/fetchReciepts.ts'
+import { fetchNews } from '../../../api/fetchNews.ts'
+import { fetchWeekPlots } from '../../../api/fetchWeekPlots.ts'
 
-import { NewsData } from '../../models'
-import { Plot } from '../../models/Plot.ts'
+import { NewsData } from '../../../models'
+import { Plot } from '../../../models/Plot.ts'
+import { CategoriesGrid } from './CategoriesGrid.tsx'
 
 export const Home: React.FC = () => {
   // изменить тип recipets
@@ -40,9 +40,12 @@ export const Home: React.FC = () => {
   return (
     <main className='flex-grow'>
       <div className='container mx-auto pl-4 pr-4'>
-        <MainSwiper newsData={news} />
-        <HomeSection>
+        <HomeSwiper newsData={news} />
+        <HomeSection title='Сюжеты недели'>
           <WeekPlotsGrid weekPlotsData={weekPlots} />
+        </HomeSection>
+        <HomeSection title='Популярные категории'>
+          <CategoriesGrid />
         </HomeSection>
       </div>
     </main>
