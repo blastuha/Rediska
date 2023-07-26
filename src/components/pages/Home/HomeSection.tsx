@@ -3,12 +3,13 @@ import { SectionTitle } from './SectionTitle'
 
 type HomeSectionProps = {
   children: React.ReactNode
+  title: string
 }
 
-export const HomeSection: React.FC<HomeSectionProps> = ({ children }) => {
+export const HomeSection: React.FC<HomeSectionProps> = ({ children, title }) => {
   return (
-    <section>
-      <SectionTitle title='Сюжеты недели' />
+    <section className='mb-6'>
+      <SectionTitle title={title} />
       {children}
     </section>
   )

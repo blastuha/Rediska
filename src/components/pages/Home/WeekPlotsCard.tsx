@@ -16,7 +16,7 @@ export const WeekPlotsCard: React.FC<WeekPlotsCardProps> = ({ id, photoURL, titl
           <figure>
             <img
               src={photoURL}
-              alt='Shoes'
+              alt='picture'
               className='transform transition-transform duration-700 group-hover:scale-110'
             />
           </figure>
