@@ -2,7 +2,7 @@ import React from 'react'
 import { ArrowButton } from '../../ui/ArrowButton.tsx'
 import { NewsData } from '../../../models'
 
-export const SwiperSlide: React.FC<NewsData> = ({
+export const SwiperCard: React.FC<NewsData> = ({
   title,
   photoURL,
   smallText,

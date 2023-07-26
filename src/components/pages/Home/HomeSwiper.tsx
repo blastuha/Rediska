@@ -1,8 +1,7 @@
 import React from 'react'
-import SwiperCore from 'swiper';
+import SwiperCore from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Scrollbar, Autoplay } from 'swiper/modules'
-
 
 import { SwiperCard } from './SwiperCard.tsx'
 
@@ -11,13 +10,13 @@ import { NewsData } from '../../../models'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 
-SwiperCore.use([Autoplay, Scrollbar]);
+SwiperCore.use([Autoplay, Scrollbar])
 
 type SwiperProps = {
   newsData: NewsData[]
 }
 
-export const Swiper: React.FC<SwiperProps> = ({ newsData }) => {
+export const HomeSwiper: React.FC<SwiperProps> = ({ newsData }) => {
   return (
     <>
       <Swiper
@@ -26,7 +25,7 @@ export const Swiper: React.FC<SwiperProps> = ({ newsData }) => {
         }}
         modules={[Scrollbar]}
         autoplay={{
-          delay: 1500, 
+          delay: 2000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}

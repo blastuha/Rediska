@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 import { HomeSwiper } from './HomeSwiper.tsx'
 import { HomeSection } from './HomeSection.tsx'
@@ -38,16 +39,25 @@ export const Home: React.FC = () => {
   }, [])
 
   return (
-    <main className='flex-grow'>
-      <div className='container mx-auto pl-4 pr-4'>
-        <HomeSwiper newsData={news} />
-        <HomeSection title='Сюжеты недели'>
-          <WeekPlotsGrid weekPlotsData={weekPlots} />
-        </HomeSection>
-        <HomeSection title='Популярные категории'>
-          <CategoriesGrid />
-        </HomeSection>
-      </div>
-    </main>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: '100%',
+        transition: { duration: 0.3 },
+      }}
+      exit={{ opacity: 0, transition: { duration: 0.2 } }}
+    >
+      <main className='flex-grow'>
+        <div className='container mx-auto pl-4 pr-4'>
+          <HomeSwiper newsData={news} />
+          <HomeSection title='Сюжеты недели'>
+            <WeekPlotsGrid weekPlotsData={weekPlots} />
+          </HomeSection>
+          <HomeSection title='Популярные категории'>
+            <CategoriesGrid />
+          </HomeSection>
+        </div>
+      </main>
+    </motion.div>
   )
 }
