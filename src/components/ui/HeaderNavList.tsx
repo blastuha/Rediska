@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 type HeaderNavigation = {
   name: string
@@ -16,12 +17,12 @@ export const HeaderNavList: React.FC = () => {
     <ul className='flex'>
       {headerNavigation.map((item, i) => {
         return (
-          <li
-            key={i}
+          <Link
+            to={item.link}
             className='mr-8 cursor-pointer font-inter last:mr-0 self-center'
           >
-            {item.name}
-          </li>
+            <li key={i}>{item.name}</li>
+          </Link>
         )
       })}
     </ul>

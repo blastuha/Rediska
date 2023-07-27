@@ -1,5 +1,5 @@
 import React from 'react'
 
 export const WeekPlotPage: React.FC = () => {
-  return <div>WeekPlot</div>
+  return <div className='flex-grow'>WeekPlotPage</div>
 }
