@@ -7,7 +7,7 @@ export async function getWeekPlotsById(id: string | undefined) {
     'reciepts',
     'Q4Dhy8x85wPSOsHSsaim',
     'weekPlots',
-    `${id ? id : ''}`
+    `${id ? id : ''}`,
   )
 
   const weekPlotsDocSnapshot = await getDoc(weekPlotsDocRef)

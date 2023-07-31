@@ -5,24 +5,26 @@ import { HomeSwiper } from './HomeSwiper.tsx'
 import { HomeSection } from './HomeSection.tsx'
 import { WeekPlotsGrid } from './WeekPlotsGrid.tsx'
 
-import { DocumentData } from 'firebase/firestore/lite'
 import { fetchReciepts } from '../../../api/fetchReciepts.ts'
 import { fetchNews } from '../../../api/fetchNews.ts'
 import { fetchWeekPlots } from '../../../api/fetchWeekPlots.ts'
 
-import { NewsData } from '../../../models'
+import { NewsData, RecieptsData } from '../../../models'
 import { Plot } from '../../../models/Plot.ts'
 import { CategoriesGrid } from './CategoriesGrid.tsx'
+import { RecieptsGrid } from './RecieptsGrid.tsx'
 
 export const Home: React.FC = () => {
   // изменить тип recipets
-  const [reciepts, setReciepts] = useState<DocumentData[]>([])
+  const [reciepts, setReciepts] = useState<RecieptsData[]>([])
   const [news, setNews] = useState<NewsData[]>([])
   const [weekPlots, setWeekPlots] = useState<Plot[]>([])
 
+  console.log(reciepts)
+
   useEffect(() => {
     fetchReciepts()
-      .then((res) => setReciepts(res))
+      .then((res) => setReciepts(res as RecieptsData[]))
       .catch((err) => console.error('Ошибка получения рецептов', err))
   }, [])
 
@@ -47,16 +49,17 @@ export const Home: React.FC = () => {
       }}
       exit={{ opacity: 0, transition: { duration: 0.2 } }}
     >
-      <main className='flex-grow'>
-        <div className='container mx-auto pl-4 pr-4'>
-          <HomeSwiper newsData={news} />
-          <HomeSection title='Сюжеты недели'>
-            <WeekPlotsGrid weekPlotsData={weekPlots} />
-          </HomeSection>
-          <HomeSection title='Популярные категории'>
-            <CategoriesGrid />
-          </HomeSection>
-        </div>
+      <main className='container mx-auto flex-grow pl-4 pr-4'>
+        <HomeSwiper newsData={news} />
+        <HomeSection title='Сюжеты недели'>
+          <WeekPlotsGrid weekPlotsData={weekPlots} />
+        </HomeSection>
+        <HomeSection title='Популярные категории'>
+          <CategoriesGrid />
+        </HomeSection>
+        <HomeSection title='Последние рецепты'>
+          <RecieptsGrid recieptsData={reciepts} />
+        </HomeSection>
       </main>
     </motion.div>
   )

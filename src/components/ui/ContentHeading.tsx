@@ -2,19 +2,19 @@ import React from 'react'
 import { Date } from './Icons/Date'
 import { Heart } from './Icons/Heart'
 
-type ContentHeading = {
+type ContentHeadingProps = {
   date?: string
   title?: string
 }
 
-export const PageHeader: React.FC<ContentHeading> = ({ date, title }) => {
+export const ContentHeading: React.FC<ContentHeadingProps> = ({ date, title }) => {
   return (
     <div className='flex flex-col'>
       <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{title}</h1>
       <div className='flex'>
         <div className='mr-6 flex'>
           <Date styles='w-6 h-6 mr-2 cursor-pointer' />
-          <span>{date}</span>
+          <span>{date ? date : ''}</span>
         </div>
         <div className='flex'>
           <Heart styles='w-6 h-6 mr-2 cursor-pointer' />

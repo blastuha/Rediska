@@ -2,26 +2,18 @@ import React from 'react'
 import { ArrowButton } from '../../ui/ArrowButton.tsx'
 import { NewsData } from '../../../models'
 
-export const SwiperCard: React.FC<NewsData> = ({
-  title,
-  photoURL,
-  smallText,
-}) => {
+export const SwiperCard: React.FC<NewsData> = ({ title, photoURL, smallText }) => {
   return (
-    <div className='flex max-w-full rounded-xl bg-[#E4F1FF]'>
-      <div className='w-3/5 card w-100 bg-base-100 shadow-xl'>
-        <img
-          src={photoURL}
-          alt='Shoes'
-          className='rounded-l-xl'
-        />
+    <div className='flex max-w-full rounded-lg bg-[#E4F1FF]'>
+      <div className='w-100 card w-3/5 bg-base-100 shadow-xl'>
+        <img src={photoURL} alt='Shoes' className='rounded-l-lg' />
       </div>
-      <div className='flex flex-col h w-2/5 p-10 relative  max-h-[388px]'>
-        <h1 className='text-3xl max-h-2/3 mb-6 font-playfair font-extrabold line-clamp-4'>
+      <div className='h relative flex max-h-[388px] w-2/5 flex-col  p-10'>
+        <h1 className='max-h-2/3 mb-6 line-clamp-4 font-playfair text-3xl font-extrabold'>
           {title}
         </h1>
-        <p className='font-medium max-h-1/3 line-clamp-5'>{smallText}</p>
-        <div className='absolute right-10 bottom-4'>
+        <p className='max-h-1/3 line-clamp-5 font-medium'>{smallText}</p>
+        <div className='absolute bottom-4 right-10'>
           <ArrowButton />
         </div>
       </div>

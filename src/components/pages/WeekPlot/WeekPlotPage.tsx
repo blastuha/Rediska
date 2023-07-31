@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { useParams } from 'react-router-dom'
 
 import { fetchWeekPlotsById } from '../../../api/fetchWeekPlotById.ts'
@@ -6,7 +7,7 @@ import { fetchWeekPlotsById } from '../../../api/fetchWeekPlotById.ts'
 import { MarkDown } from '../../ui/MarkDown/MarkDown.tsx'
 
 import { Plot } from '../../../models/Plot.ts'
-import { PageHeader } from '../../ui/ContentHeading.tsx'
+import { ContentHeading } from '../../ui/ContentHeading.tsx'
 
 export const WeekPlotPage: React.FC = () => {
   const [plot, setPlot] = useState<Plot | null>(null)
@@ -21,7 +22,7 @@ export const WeekPlotPage: React.FC = () => {
   return (
     <div className='flex-grow'>
       <div className='container mx-auto pl-4 pr-4'>
-        <PageHeader {...plot} />
+        <ContentHeading {...plot} />
         <MarkDown content={plot?.text} />
       </div>
     </div>
