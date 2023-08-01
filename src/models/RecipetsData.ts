@@ -5,11 +5,17 @@ export type RecieptsData = {
   cookingTime: string
   paragraph: string
   ingredients: string[]
-  steps: Step[]
   id: string
+  steps: Step[]
+  nutritionFacts: NutritionFact[]
 }
 
 export type Step = {
-  photoURL?: string
-  text?: string
+  photoURL: string
+  text: string
+}
+
+export type NutritionFact = {
+  name: string
+  value: string
 }

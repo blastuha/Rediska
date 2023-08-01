@@ -1,5 +1,6 @@
 import ReactMarkdown, { Components } from 'react-markdown'
 import styles from './MarkDown.module.scss'
+//! Перенести в WeekPlotPage
 
 const customRenderers: Components = {
   //  классы для заголовков
