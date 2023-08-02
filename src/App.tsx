@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Layout } from './components/layout/Layout'
 import { Home } from './components/pages/Home/Home.tsx'
 import { WeekPlotPage } from './components/pages/WeekPlot/WeekPlotPage.tsx'
-import { Reciept } from './components/pages/Reciept/Reciept.tsx'
+import { RecieptPage } from './components/pages/Reciept/RecieptPage.tsx'
 import { ErrorPage } from './components/pages/Error'
 
 import 'swiper/css'
@@ -27,7 +27,7 @@ const App = () => {
         },
         {
           path: 'reciept/:id',
-          element: <Reciept />,
+          element: <RecieptPage />,
         },
       ],
     },

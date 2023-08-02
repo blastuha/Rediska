@@ -7,10 +7,10 @@ import { RecieptsData } from '../../../models'
 import { fetchRecieptById } from '../../../api/fetchRecieptById'
 import { NutritionFacts } from './NutritionFacts'
 import { Ingredients } from './Ingredients/Ingredients'
+import { RecieptSteps } from './RecieptSteps'
 
-export const Reciept: React.FC = () => {
+export const RecieptPage: React.FC = () => {
   const [reciept, setReciept] = useState<RecieptsData | null>(null)
-  console.log(reciept)
   const { id } = useParams()
 
   useEffect(() => {
@@ -27,18 +27,14 @@ export const Reciept: React.FC = () => {
       <p className='pb-8 text-lg'>{reciept?.paragraph}</p>
       <img src={reciept?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />
       <div className='flex justify-between'>
-        <Ingredients reciept={reciept} />
-        <NutritionFacts reciept={reciept} />
+        <div className='flex w-3/6 max-w-lg flex-col pr-10'>
+          <Ingredients reciept={reciept} margins='mb-10' />
+          <NutritionFacts reciept={reciept} />
+        </div>
+        <div className='flex w-3/5 flex-col'>
+          <RecieptSteps reciept={reciept} />
+        </div>
       </div>
-      {reciept?.steps.map((step, i) => {
-        return (
-          <div>
-            <h3 className='pb-4 font-playfair text-2xl font-bold'>Шаг {(i + 1).toString()}</h3>
-            <img src={step.photoURL} alt='firstStepPhoto' />
-            <p>{step.text}</p>
-          </div>
-        )
-      })}
     </main>
   )
 }
