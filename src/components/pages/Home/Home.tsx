@@ -50,7 +50,9 @@ export const Home: React.FC = () => {
       exit={{ opacity: 0, transition: { duration: 0.2 } }}
     >
       <main className='container mx-auto flex-grow pl-4 pr-4'>
-        <HomeSwiper newsData={news} />
+        <div className='mb-4'>
+          <HomeSwiper newsData={news} />
+        </div>
         <HomeSection title='Сюжеты недели'>
           <WeekPlotsGrid weekPlotsData={weekPlots} />
         </HomeSection>

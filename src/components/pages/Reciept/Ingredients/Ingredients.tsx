@@ -25,7 +25,7 @@ export const Ingredients: React.FC<IngredientsProps> = ({ reciept, margins }) =>
         return (
           <li key={i} className={`${styles.liShadow} flex justify-between pb-2 pt-2 text-right`}>
             <span className='mr-16 font-[300] text-[#303030]'>{ingredient[0]}</span>
-            <span className='font-[400] text-[#000000]'>{ingredient[1]}</span>
+            <span className='font-[400] text-[#1F2937]'>{ingredient[1]}</span>
           </li>
         )
       })}

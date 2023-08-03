@@ -20,7 +20,7 @@ export const NutritionFacts: React.FC<NutritionFactsProps> = ({ reciept }) => {
           <li key={i} style={liShadow(reciept, i)}>
             <div className='flex justify-between whitespace-nowrap pb-2 pt-2'>
               <span className='mr-16 font-[300] text-[#303030]'>{fact.name}</span>
-              <span className='font-[400] text-[#000000]'>{fact.value}</span>
+              <span className='font-[400] text-[#1F2937]'>{fact.value}</span>
             </div>
           </li>
         )

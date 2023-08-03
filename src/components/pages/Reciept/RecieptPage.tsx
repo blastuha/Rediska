@@ -24,7 +24,7 @@ export const RecieptPage: React.FC = () => {
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
       <ContentHeading title={reciept?.title} />
-      <p className='pb-8 text-lg'>{reciept?.paragraph}</p>
+      <p className='pb-6 text-lg'>{reciept?.paragraph}</p>
       <img src={reciept?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />
       <div className='flex justify-between'>
         <div className='flex w-3/6 max-w-lg flex-col pr-10'>

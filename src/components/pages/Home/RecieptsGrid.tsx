@@ -7,6 +7,7 @@ type RecieptsGridProps = {
 }
 
 export const RecieptsGrid: React.FC<RecieptsGridProps> = ({ recieptsData }) => {
+  //вынести card
   return (
     <div className='grid grid-cols-3 grid-rows-2 gap-4'>
       {recieptsData.map((reciept) => {
@@ -18,11 +19,11 @@ export const RecieptsGrid: React.FC<RecieptsGridProps> = ({ recieptsData }) => {
                   <img
                     src={reciept.photoURL}
                     alt='picture'
-                    className='transform rounded-lg transition-transform duration-700 group-hover:scale-110'
+                    className='transform rounded-lg transition-transform duration-1000 group-hover:scale-110'
                   />
                 </figure>
-                <div className='flex flex-auto flex-col justify-between pb-4 pt-4'>
-                  <h2 className='card-title text-base-content  transition-colors duration-700 group-hover:text-[#E84A43]'>
+                <div className='pb-4 pt-4'>
+                  <h2 className='card-title font-normal text-base-content transition-colors duration-1000 group-hover:underline'>
                     {reciept.title}
                   </h2>
                 </div>

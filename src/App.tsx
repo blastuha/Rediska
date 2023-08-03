@@ -9,6 +9,7 @@ import { ErrorPage } from './components/pages/Error'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import './styles/global.scss'
+import { CategoriesPage } from './components/pages/Categories/CategoriesPage.tsx'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const App = () => {
         {
           path: 'reciept/:id',
           element: <RecieptPage />,
+        },
+        {
+          path: 'recipes',
+          element: <CategoriesPage />,
         },
       ],
     },

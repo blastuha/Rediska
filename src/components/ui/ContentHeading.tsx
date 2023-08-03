@@ -1,6 +1,7 @@
 import React from 'react'
 import { Date } from './Icons/Date'
 import { Heart } from './Icons/Heart'
+import { Lines } from './Lines'
 
 type ContentHeadingProps = {
   date?: string
