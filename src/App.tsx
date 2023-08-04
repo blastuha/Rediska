@@ -3,13 +3,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Layout } from './components/layout/Layout'
 import { Home } from './components/pages/Home/Home.tsx'
 import { WeekPlotPage } from './components/pages/WeekPlot/WeekPlotPage.tsx'
-import { RecieptPage } from './components/pages/Reciept/RecieptPage.tsx'
+import { RecipePage } from './components/pages/RecipePage/RecipePage.tsx'
 import { ErrorPage } from './components/pages/Error'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import './styles/global.scss'
-import { CategoriesPage } from './components/pages/Categories/CategoriesPage.tsx'
+import { Recipes } from './components/pages/Recipes/Recipes.tsx'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -28,11 +28,11 @@ const App = () => {
         },
         {
           path: 'reciept/:id',
-          element: <RecieptPage />,
+          element: <RecipePage />,
         },
         {
           path: 'recipes',
-          element: <CategoriesPage />,
+          element: <Recipes />,
         },
       ],
     },
