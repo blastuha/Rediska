@@ -9,7 +9,7 @@ import { NutritionFacts } from './NutritionFacts'
 import { Ingredients } from './Ingredients/Ingredients'
 import { RecieptSteps } from './RecieptSteps'
 
-export const RecieptPage: React.FC = () => {
+export const RecipePage: React.FC = () => {
   const [reciept, setReciept] = useState<RecieptsData | null>(null)
   const { id } = useParams()
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { wordCapitalizer } from '../../../../helpers/wordCapitalizer'
 import { RecieptsData } from '../../../../models'
 import styles from './ingredients.module.scss'
+import { LinesBorder } from '../../../ui/LinesBorder'
 
 type IngredientsProps = {
   reciept: RecieptsData | null
@@ -19,16 +20,20 @@ export const Ingredients: React.FC<IngredientsProps> = ({ reciept, margins }) =>
   })
 
   return (
-    <ul className={`h-fit rounded-lg bg-[#F9F9F9] p-6 ${margins ? margins : ''}`}>
-      <h5 className='pb-4 font-playfair text-2xl font-bold'>Ингредиенты</h5>
-      {ingredientsSeparated?.map((ingredient, i) => {
-        return (
-          <li key={i} className={`${styles.liShadow} flex justify-between pb-2 pt-2 text-right`}>
-            <span className='mr-16 font-[300] text-[#303030]'>{ingredient[0]}</span>
-            <span className='font-[400] text-[#1F2937]'>{ingredient[1]}</span>
-          </li>
-        )
-      })}
-    </ul>
+    <LinesBorder margins={margins ? margins : ''}>
+      <ul className='h-fit p-6'>
+        <div className='absolute top-[-22px] bg-white pl-2 pr-2 text-center'>
+          <h5 className='font-playfair text-2xl font-bold'>Ингредиенты</h5>
+        </div>
+        {ingredientsSeparated?.map((ingredient, i) => {
+          return (
+            <li key={i} className={`${styles.liShadow} flex items-end justify-between pb-2 pt-2`}>
+              <span className='mr-8 text-left font-[300] text-[#303030]'>{ingredient[0]}</span>
+              <span className='text-right font-[400] text-[#1F2937]'>{ingredient[1]}</span>
+            </li>
+          )
+        })}
+      </ul>
+    </LinesBorder>
   )
 }
