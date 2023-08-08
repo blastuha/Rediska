@@ -17,6 +17,8 @@ export default {
           xl: '1200px',
         },
       },
+      gridTemplateAreas: {},
+      gridTemplateRows: {},
     },
   },
   plugins: [require('daisyui')],
