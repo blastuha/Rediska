@@ -1,5 +1,4 @@
 import React from 'react'
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { CarouselNextButton } from './CarouselNextButton'
@@ -12,9 +11,13 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-export const Carousel: React.FC = () => {
+type CarouselProps = {
+  blockStyles?: string
+}
+
+export const Carousel: React.FC<CarouselProps> = ({ blockStyles }) => {
   return (
-    <div className='relative'>
+    <div className={`${blockStyles ? blockStyles : ''}`}>
       <Swiper
         slidesPerView={6}
         centeredSlides={false}
@@ -26,7 +29,7 @@ export const Carousel: React.FC = () => {
           <SwiperSlide key={i} className='cursor-pointer'>
             <figure className='flex  flex-col items-center   '>
               <div className='max-h-[200px] max-w-[200px] overflow-hidden rounded-full'>
-                <img className='h-full w-full' src={category.photoURL} alt='pic' />
+                <img className='h-full w-full' src={category.photoURL} alt='categoryPicture' />
               </div>
               <h5 className='p-1.5'>{category.name}</h5>
             </figure>
