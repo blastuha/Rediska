@@ -12,7 +12,7 @@ import { RecieptsData } from '../../../models/'
 
 export const Recipes: React.FC = () => {
   // const [reciepts, setReciepts] = useState<RecieptsData[]>([])
-  const { data, isError, error } = useFetchRecipesQuery()
+  const { data, error, isLoading } = useFetchRecipesQuery()
 
   console.log(data)
 

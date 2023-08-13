@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../api/firebase'
 
 export const recipesApi = createApi({
@@ -14,16 +14,17 @@ export const recipesApi = createApi({
           // const recipesSnapshot = await getDocs(recipesCol)
           // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
           // return recipesList
+          //*-------
           const userRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
           const querySnapshot = await getDocs(userRef)
-          let usersData = []
+          let recipesData = []
           querySnapshot?.forEach((doc) => {
-            usersData.push({
-              id: doc.id,
+            console.log(doc.data())
+            recipesData.push({
               ...doc.data(),
             })
           })
-          return { data: usersData }
+          return { data: recipesData }
         } catch (error) {
           return { error }
         }
