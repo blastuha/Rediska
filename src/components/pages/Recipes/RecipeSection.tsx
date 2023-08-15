@@ -2,7 +2,7 @@ import React from 'react'
 import { RecipesSectionTitle } from './RecipesSectionTitle'
 
 type RecipeSectionProps = {
-  // reciepts: RecieptsData[]
+  // reciepts: RecipeData[]
   children: React.ReactElement
 }
 

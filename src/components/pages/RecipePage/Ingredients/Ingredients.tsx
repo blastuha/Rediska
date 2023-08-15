@@ -1,11 +1,11 @@
 import React from 'react'
 import { wordCapitalizer } from '../../../../helpers/wordCapitalizer'
-import { RecieptsData } from '../../../../models'
-import styles from './ingredients.module.scss'
+import { RecipeData } from '../../../../models'
 import { LinesBorder } from '../../../ui/LinesBorder'
+import styles from './ingredients.module.scss'
 
 type IngredientsProps = {
-  reciept: RecieptsData | null
+  reciept: RecipeData | undefined
   margins?: string | undefined
 }
 

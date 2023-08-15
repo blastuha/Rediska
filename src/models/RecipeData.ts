@@ -1,4 +1,4 @@
-export type RecieptsData = {
+export type RecipeData = {
   photoURL: string
   title: string
   category: string

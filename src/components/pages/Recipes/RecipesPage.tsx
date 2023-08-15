@@ -7,9 +7,9 @@ import { MostPopularCard } from './MostPopularCard.tsx'
 
 import { useFetchRecipesQuery } from '../../../redux/recipes/recipesApi.ts'
 
-import { RecieptsData } from '../../../models/'
+import { RecipeData } from '../../../models/'
 
-export const Recipes: React.FC = () => {
+export const RecipesPage: React.FC = () => {
   const { data: recipesData = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
 
   return (
@@ -18,7 +18,7 @@ export const Recipes: React.FC = () => {
       <RecipeSection>
         <>
           <ul className='col-span-2 grid grid-cols-2 gap-6'>
-            {recipesData.map((recipe: RecieptsData) => {
+            {recipesData.map((recipe: RecipeData) => {
               return <MostPopularCard {...recipe} key={recipe.id} />
             })}
           </ul>

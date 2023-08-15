@@ -1,11 +1,11 @@
 import React from 'react'
-import { RecieptsData } from '../../../models'
+import { RecipeData } from '../../../models'
 
 type RecieptStepsProps = {
-  reciept: RecieptsData | undefined
+  reciept: RecipeData | undefined
 }
 
-export const RecieptSteps: React.FC<RecieptStepsProps> = ({ reciept }) => {
+export const RecipeSteps: React.FC<RecieptStepsProps> = ({ reciept }) => {
   return reciept?.steps.map((step, i) => {
     return (
       <div key={i} className='flex flex-col pb-4 last:pb-0'>

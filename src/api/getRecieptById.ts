@@ -1,4 +1,4 @@
-import { getDoc, doc } from 'firebase/firestore/lite'
+import { getDoc, doc } from 'firebase/firestore'
 import { db } from './firebase'
 
 export const getRecieptById = async (id: string | undefined) => {

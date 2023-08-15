@@ -1,4 +1,6 @@
-import { collection, query, where, getDocs } from 'firebase/firestore/lite'
+// import { collection, query, where, getDocs } from 'firebase/firestore/lite'
+import { collection, getDocs } from 'firebase/firestore'
+
 import { db } from './firebase'
 
 // Получить список квитанций из базы данных

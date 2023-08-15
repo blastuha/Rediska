@@ -1,13 +1,13 @@
 import React from 'react'
-import { RecieptsData } from '../../../models'
+import { RecipeData } from '../../../models'
 import { LinesBorder } from '../../ui/LinesBorder'
 
 type NutritionFactsProps = {
-  reciept: RecieptsData | null
+  reciept: RecipeData | undefined
 }
 
 export const NutritionFacts: React.FC<NutritionFactsProps> = ({ reciept }) => {
-  const liShadow = (reciept: RecieptsData, i: number) => {
+  const liShadow = (reciept: RecipeData, i: number) => {
     return i === reciept.nutritionFacts.length - 1
       ? undefined
       : { boxShadow: 'rgb(54, 54, 54) 0px 1px 1px -1px' }

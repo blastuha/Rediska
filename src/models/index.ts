@@ -1,5 +1,5 @@
 export * from './NewsData'
 export * from './IconProps'
-export * from './Plot'
+export * from './WeekPlot.ts'
 export * from './CategoriesData'
-export * from './RecipetsData'
+export * from './RecipeData.ts'

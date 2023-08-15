@@ -1,4 +1,4 @@
-export type Plot = {
+export type WeekPlot = {
   id: string
   text: string
   photoURL: string

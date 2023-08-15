@@ -3,23 +3,15 @@ import { useParams } from 'react-router-dom'
 
 import { ContentHeading } from '../../ui/ContentHeading'
 
-import { RecieptsData } from '../../../models'
-import { fetchRecieptById } from '../../../api/fetchRecieptById'
 import { NutritionFacts } from './NutritionFacts'
 import { Ingredients } from './Ingredients/Ingredients'
-import { RecieptSteps } from './RecieptSteps'
+import { RecipeSteps } from './RecipeSteps'
+
+import { useFetchRecipesByIdQuery } from '../../../redux/recipes/recipesApi'
 
 export const RecipePage: React.FC = () => {
-  const [reciept, setReciept] = useState<RecieptsData | null>(null)
   const { id } = useParams()
-
-  useEffect(() => {
-    fetchRecieptById(id)
-      .then((res) => {
-        setReciept(res as RecieptsData)
-      })
-      .catch((err) => console.warn('Ошибка при получении рецепта', err))
-  }, [id])
+  const { data: reciept, isLoading } = useFetchRecipesByIdQuery(id)
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
@@ -32,7 +24,7 @@ export const RecipePage: React.FC = () => {
           <NutritionFacts reciept={reciept} />
         </div>
         <div className='flex w-3/5 flex-col'>
-          <RecieptSteps reciept={reciept} />
+          <RecipeSteps reciept={reciept} />
         </div>
       </div>
     </main>

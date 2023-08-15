@@ -5,38 +5,23 @@ import { HomeSwiper } from './HomeSwiper.tsx'
 import { HomeSection } from './HomeSection.tsx'
 import { WeekPlotsGrid } from './WeekPlotsGrid.tsx'
 
-import { fetchReciepts } from '../../../api/fetchReciepts.ts'
 import { fetchNews } from '../../../api/fetchNews.ts'
-import { fetchWeekPlots } from '../../../api/fetchWeekPlots.ts'
 
-import { NewsData, RecieptsData } from '../../../models'
-import { Plot } from '../../../models/Plot.ts'
+import { NewsData } from '../../../models'
 import { CategoriesGrid } from './CategoriesGrid.tsx'
-import { RecieptsGrid } from './RecieptsGrid.tsx'
+import { RecipesGrid } from './RecipesGrid.tsx'
+
+import { useFetchWeekPlotsQuery } from '../../../redux/recipes/recipesApi.ts'
+import { useFetchRecipesQuery } from '../../../redux/recipes/recipesApi.ts'
 
 export const Home: React.FC = () => {
-  // изменить тип recipets
-  const [reciepts, setReciepts] = useState<RecieptsData[]>([])
   const [news, setNews] = useState<NewsData[]>([])
-  const [weekPlots, setWeekPlots] = useState<Plot[]>([])
-
-  console.log(reciepts)
-
-  useEffect(() => {
-    fetchReciepts()
-      .then((res) => setReciepts(res as RecieptsData[]))
-      .catch((err) => console.error('Ошибка получения рецептов', err))
-  }, [])
+  const { data: weekPlots = [], isLoading: isWeekPlotsLoading } = useFetchWeekPlotsQuery(null)
+  const { data: recipes = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
 
   useEffect(() => {
     fetchNews()
       .then((res) => setNews(res as NewsData[]))
-      .catch((err) => console.error('Ошибка получения новостей для swiper', err))
-  }, [])
-
-  useEffect(() => {
-    fetchWeekPlots()
-      .then((res) => setWeekPlots(res as Plot[]))
       .catch((err) => console.error('Ошибка получения новостей для swiper', err))
   }, [])
 
@@ -60,7 +45,7 @@ export const Home: React.FC = () => {
           <CategoriesGrid />
         </HomeSection>
         <HomeSection title='Последние рецепты'>
-          <RecieptsGrid recieptsData={reciepts} />
+          <RecipesGrid recieptsData={recipes} />
         </HomeSection>
       </main>
     </motion.div>

@@ -1,4 +1,4 @@
-import { getDoc, doc } from 'firebase/firestore/lite'
+import { getDoc, doc } from 'firebase/firestore'
 import { db } from './firebase'
 
 export async function getWeekPlotsById(id: string | undefined) {

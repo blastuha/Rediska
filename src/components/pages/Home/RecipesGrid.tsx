@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { RecipeData } from '../../../models'
 
-type RecieptsGridProps = {
+type RecipesGridProps = {
   recieptsData: RecipeData[]
 }
 
-export const RecieptsGrid: React.FC<RecieptsGridProps> = ({ recieptsData }) => {
+export const RecipesGrid: React.FC<RecipesGridProps> = ({ recieptsData }) => {
   //вынести card
   return (
     <div className='grid grid-cols-3 grid-rows-2 gap-4'>
