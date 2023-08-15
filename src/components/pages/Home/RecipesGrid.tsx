@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { RecieptsData } from '../../../models'
+import { RecipeData } from '../../../models'
 
 type RecieptsGridProps = {
-  recieptsData: RecieptsData[]
+  recieptsData: RecipeData[]
 }
 
 export const RecieptsGrid: React.FC<RecieptsGridProps> = ({ recieptsData }) => {
