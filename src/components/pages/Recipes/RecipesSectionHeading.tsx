@@ -1,18 +1,18 @@
 import { Lines } from '../../ui/Lines'
 
-type RecipesSectionTitleProps = {
+type RecipesSectionHeadingProps = {
   title: string
   subtitle: string
   blockStyles: string
 }
 
-export const RecipesSectionTitle: React.FC<RecipesSectionTitleProps> = ({
+export const RecipesSectionHeading: React.FC<RecipesSectionHeadingProps> = ({
   title,
   subtitle,
   blockStyles,
 }) => {
   return (
-    <div className={`${blockStyles}`}>
+    <div className={blockStyles}>
       <h2 className='w-fit overflow-hidden whitespace-nowrap font-playfair text-[50px]'>
         {title}
         <Lines firstLineHeight='h-[2px]' />

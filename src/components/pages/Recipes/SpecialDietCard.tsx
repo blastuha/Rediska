@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom'
 
-type RecipeCardProp = {
+type SpecialDientCardProp = {
   id?: string
   photoURL?: string
   title?: string
 }
 
-export const MostPopularCard: React.FC<RecipeCardProp> = ({ id, photoURL, title }) => {
+export const SpecialDientCard: React.FC<SpecialDientCardProp> = ({ id, photoURL, title }) => {
   return (
-    <Link to={`/reciept/${id ? id : ''}`} key={id}>
-      <li className='group flex max-w-full cursor-pointer flex-row items-center gap-4 rounded-lg'>
-        <figure className=' h-[200px] w-[200px] flex-shrink-0 overflow-hidden rounded-lg '>
+    <li className='group flex max-w-full cursor-pointer flex-col items-center gap-4 rounded-lg'>
+      <Link to={`/reciept/${id ? id : ''}`} key={id}>
+        <figure className=' flex-shrink-1 h-[280px] w-[280px] overflow-hidden rounded-lg '>
           <img
             src={photoURL}
             alt='picture'
@@ -21,7 +21,7 @@ export const MostPopularCard: React.FC<RecipeCardProp> = ({ id, photoURL, title 
         <h2 className=' text-lg font-bold decoration-[0.1rem] transition-colors duration-1000 group-hover:underline'>
           {title}
         </h2>
-      </li>
-    </Link>
+      </Link>
+    </li>
   )
 }

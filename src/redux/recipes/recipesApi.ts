@@ -2,18 +2,20 @@ import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
 
 import { db } from '../../api/firebase'
+
 import { RecipeData } from '../../models/RecipeData.ts'
 import { WeekPlot } from '../../models/WeekPlot.ts'
+import { WidgetNewsData } from '../../models/WidgetNewsData.ts'
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Recipes', 'WeekPlots'],
+  tagTypes: ['Recipes', 'WeekPlots', 'News'],
   endpoints: (build) => ({
     fetchRecipes: build.query({
       async queryFn() {
         try {
-          //*----- почему закомментированный вариант не работает?
+          //*----- почему закомментированный вариант возвращает undefined?
           // const recipesCol = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
           // const recipesSnapshot = await getDocs(recipesCol)
           // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
@@ -23,7 +25,6 @@ export const recipesApi = createApi({
           const querySnapshot = await getDocs(recipesRef)
           const recipesData: RecipeData[] = []
           querySnapshot?.forEach((doc) => {
-            console.log(doc.data())
             recipesData.push(doc.data() as RecipeData)
           })
           return { data: recipesData }
@@ -41,10 +42,25 @@ export const recipesApi = createApi({
           const querySnapshot = await getDocs(weekPlotsRef)
           const weekPlotsData: WeekPlot[] = []
           querySnapshot?.forEach((doc) => {
-            console.log(doc.data())
             weekPlotsData.push(doc.data() as WeekPlot)
           })
           return { data: weekPlotsData }
+        } catch (error) {
+          return { error }
+        }
+      },
+      providesTags: ['WeekPlots'],
+    }),
+    fetchWidgetNews: build.query({
+      async queryFn() {
+        try {
+          const widgetNewsRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/news')
+          const querySnapshot = await getDocs(widgetNewsRef)
+          const widgetNewsData: WidgetNewsData[] = []
+          querySnapshot?.forEach((doc) => {
+            widgetNewsData.push(doc.data() as WidgetNewsData)
+          })
+          return { data: widgetNewsData }
         } catch (error) {
           return { error }
         }
@@ -73,7 +89,35 @@ export const recipesApi = createApi({
         }
       },
     }),
+    fetchWeekPlotById: build.query({
+      async queryFn(id: string | undefined) {
+        try {
+          const weekPlotByIdRef = doc(
+            db,
+            'reciepts',
+            'Q4Dhy8x85wPSOsHSsaim',
+            'weekPlots',
+            id ? id : '',
+          )
+          const weekPlotByIdSnapshot = await getDoc(weekPlotByIdRef)
+          if (weekPlotByIdSnapshot.exists()) {
+            const weekPlotData = weekPlotByIdSnapshot.data() as WeekPlot
+            return { data: weekPlotData }
+          } else {
+            return { data: undefined }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
+    }),
   }),
 })
 
-export const { useFetchRecipesQuery, useFetchRecipesByIdQuery, useFetchWeekPlotsQuery } = recipesApi
+export const {
+  useFetchRecipesQuery,
+  useFetchRecipesByIdQuery,
+  useFetchWeekPlotsQuery,
+  useFetchWidgetNewsQuery,
+  useFetchWeekPlotByIdQuery,
+} = recipesApi

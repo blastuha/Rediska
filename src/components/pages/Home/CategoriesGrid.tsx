@@ -7,7 +7,7 @@ export const CategoriesGrid: React.FC = () => {
     <div className='grid grid-cols-2 gap-6'>
       {categoriesData.map((category, i) => {
         if (i <= 5) {
-          return <CategoriesCard {...category} />
+          return <CategoriesCard {...category} key={i} />
         } else {
           return
         }

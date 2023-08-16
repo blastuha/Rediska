@@ -5,7 +5,7 @@ import { Scrollbar, Autoplay } from 'swiper/modules'
 
 import { SwiperCard } from './SwiperCard.tsx'
 
-import { NewsData } from '../../../models'
+import { WidgetNewsData } from '../../../models'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
@@ -13,10 +13,10 @@ import 'swiper/css/scrollbar'
 SwiperCore.use([Autoplay, Scrollbar])
 
 type SwiperProps = {
-  newsData: NewsData[]
+  widgetNewsData: WidgetNewsData[]
 }
 
-export const HomeSwiper: React.FC<SwiperProps> = ({ newsData }) => {
+export const HomeSwiper: React.FC<SwiperProps> = ({ widgetNewsData }) => {
   return (
     <>
       <Swiper
@@ -30,7 +30,7 @@ export const HomeSwiper: React.FC<SwiperProps> = ({ newsData }) => {
           pauseOnMouseEnter: true,
         }}
       >
-        {newsData.map((item: NewsData) => {
+        {widgetNewsData.map((item: WidgetNewsData) => {
           return (
             <SwiperSlide key={item.id}>
               <SwiperCard {...item} />

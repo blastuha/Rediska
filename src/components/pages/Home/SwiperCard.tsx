@@ -1,8 +1,8 @@
 import React from 'react'
 import { ArrowButton } from '../../ui/ArrowButton.tsx'
-import { NewsData } from '../../../models'
+import { WidgetNewsData } from '../../../models'
 
-export const SwiperCard: React.FC<NewsData> = ({ title, photoURL, smallText }) => {
+export const SwiperCard: React.FC<WidgetNewsData> = ({ title, photoURL, smallText }) => {
   return (
     <div className='flex max-w-full rounded-lg bg-[#E4F1FF]'>
       <div className='w-100 card w-3/5 bg-base-100 shadow-xl'>

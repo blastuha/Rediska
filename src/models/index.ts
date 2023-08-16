@@ -1,4 +1,4 @@
-export * from './NewsData'
+export * from './WidgetNewsData.ts'
 export * from './IconProps'
 export * from './WeekPlot.ts'
 export * from './CategoriesData'

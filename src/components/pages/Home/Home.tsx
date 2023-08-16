@@ -5,25 +5,17 @@ import { HomeSwiper } from './HomeSwiper.tsx'
 import { HomeSection } from './HomeSection.tsx'
 import { WeekPlotsGrid } from './WeekPlotsGrid.tsx'
 
-import { fetchNews } from '../../../api/fetchNews.ts'
-
-import { NewsData } from '../../../models'
 import { CategoriesGrid } from './CategoriesGrid.tsx'
 import { RecipesGrid } from './RecipesGrid.tsx'
 
 import { useFetchWeekPlotsQuery } from '../../../redux/recipes/recipesApi.ts'
 import { useFetchRecipesQuery } from '../../../redux/recipes/recipesApi.ts'
+import { useFetchWidgetNewsQuery } from '../../../redux/recipes/recipesApi.ts'
 
 export const Home: React.FC = () => {
-  const [news, setNews] = useState<NewsData[]>([])
   const { data: weekPlots = [], isLoading: isWeekPlotsLoading } = useFetchWeekPlotsQuery(null)
   const { data: recipes = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
-
-  useEffect(() => {
-    fetchNews()
-      .then((res) => setNews(res as NewsData[]))
-      .catch((err) => console.error('Ошибка получения новостей для swiper', err))
-  }, [])
+  const { data: widgetNews = [], isLoading: isNewsLoading } = useFetchWidgetNewsQuery(null)
 
   return (
     <motion.div
@@ -36,7 +28,7 @@ export const Home: React.FC = () => {
     >
       <main className='container mx-auto flex-grow pl-4 pr-4'>
         <div className='mb-4'>
-          <HomeSwiper newsData={news} />
+          <HomeSwiper widgetNewsData={widgetNews} />
         </div>
         <HomeSection title='Сюжеты недели'>
           <WeekPlotsGrid weekPlotsData={weekPlots} />
@@ -45,7 +37,7 @@ export const Home: React.FC = () => {
           <CategoriesGrid />
         </HomeSection>
         <HomeSection title='Последние рецепты'>
-          <RecipesGrid recieptsData={recipes} />
+          <RecipesGrid recipesData={recipes} />
         </HomeSection>
       </main>
     </motion.div>
