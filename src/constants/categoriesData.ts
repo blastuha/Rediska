@@ -45,4 +45,10 @@ export const categoriesData: CategoriesData[] = [
       'https://images.unsplash.com/photo-1612884610549-ce221d92514a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
     recieptsTotal: '10',
   },
+  {
+    name: 'Завтраки',
+    photoURL:
+      'https://images.unsplash.com/photo-1525351484163-7529414344d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80',
+    recieptsTotal: '10',
+  },
 ]

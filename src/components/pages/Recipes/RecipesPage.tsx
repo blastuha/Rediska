@@ -39,6 +39,25 @@ export const RecipesPage: React.FC = () => {
         sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
         sectionHeading={
           <RecipesSectionHeading
+            title='PICK YOUR PROTEIN'
+            subtitle='Beef, chicken, pork—we`ve got it all.'
+            blockStyles='col-span-3 row-span-1'
+          />
+        }
+      >
+        <RecipesCustomGrid
+          recipesData={recipesData}
+          gridStyles=' col-span-4 grid grid-cols-4 gap-4 text-xl font-extrabold'
+          cardsQuantity={4}
+          firstCardStyles='col-span-4 text-5xl text-center'
+          card={<ProteinCard />}
+          filterWordsArr={['диетический', 'кето', 'веган']}
+        />
+      </RecipesSection>
+      <RecipesSection
+        sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
+        sectionHeading={
+          <RecipesSectionHeading
             title='RECIPES FOR SPECIAL DIETS'
             subtitle='Actually delicious meals for keto, gluten-free, and more.'
             blockStyles='col-span-3 row-span-1'
@@ -50,24 +69,6 @@ export const RecipesPage: React.FC = () => {
           gridStyles='col-span-4 grid grid-cols-4 gap-6'
           cardsQuantity={3}
           card={<SpecialDientCard />}
-        />
-      </RecipesSection>
-      <RecipesSection
-        sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
-        sectionHeading={
-          <RecipesSectionHeading
-            title='PICK YOUR PROTEIN'
-            subtitle='Beef, chicken, pork—we`ve got it all.'
-            blockStyles='col-span-3 row-span-1'
-          />
-        }
-      >
-        <RecipesCustomGrid
-          recipesData={recipesData}
-          gridStyles='col-span-4 grid grid-cols-4 gap-4 text-xl font-extrabold'
-          cardsQuantity={4}
-          firstCardStyles='col-span-4 text-5xl text-center'
-          card={<ProteinCard />}
         />
       </RecipesSection>
     </div>
