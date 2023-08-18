@@ -21,7 +21,7 @@ export const WeekPlotsCard: React.FC<WeekPlotsCardProps> = ({ id, photoURL, titl
             />
           </figure>
           <div className='card-body justify-between p-0'>
-            <h2 className='flex items-center  text-[1.15rem] font-[400] text-base-content transition-colors duration-1000 group-hover:underline'>
+            <h2 className='flex items-center  text-[1.15rem]  text-dark-blue decoration-1 underline-offset-[5px] transition-colors duration-1000 group-hover:underline'>
               {title}
             </h2>
             <div className='card-actions'>

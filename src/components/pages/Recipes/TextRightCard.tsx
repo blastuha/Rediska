@@ -6,7 +6,7 @@ type RecipeCardProp = {
   title?: string
 }
 
-export const MostPopularCard: React.FC<RecipeCardProp> = ({ id, photoURL, title }) => {
+export const TextRightCard: React.FC<RecipeCardProp> = ({ id, photoURL, title }) => {
   return (
     <Link to={`/reciept/${id ? id : ''}`} key={id}>
       <li className='group flex max-w-full cursor-pointer flex-row items-center gap-4 rounded-lg text-dark-blue'>

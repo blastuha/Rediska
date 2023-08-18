@@ -7,7 +7,7 @@ type SpecialDientCardProp = {
   firstCardStyles?: string
 }
 
-export const ProteinCard: React.FC<SpecialDientCardProp> = ({
+export const BgCard: React.FC<SpecialDientCardProp> = ({
   id,
   photoURL,
   title,

@@ -23,7 +23,7 @@ export const RecipesGrid: React.FC<RecipesGridProps> = ({ recipesData }) => {
                   />
                 </figure>
                 <div className='pb-4 pt-4'>
-                  <h2 className='card-title font-normal text-base-content transition-colors duration-1000 group-hover:underline'>
+                  <h2 className='card-title font-normal text-dark-blue decoration-1 underline-offset-[5px] transition-colors duration-1000 group-hover:underline'>
                     {recipe.title}
                   </h2>
                 </div>

@@ -14,15 +14,15 @@ const headerNavigation: HeaderNavigation[] = [
 
 export const HeaderNavList: React.FC = () => {
   return (
-    <ul className='flex'>
+    <ul className='flex  text-dark-blue'>
       {headerNavigation.map((item, i) => {
         return (
           <Link
             to={item.link}
             key={i}
-            className='cursor-pointer self-center border-r border-[#1F2937] pl-4  pr-4 font-inter last:mr-0 last:border-r-0'
+            className='cursor-pointer self-center border-r border-navy-blue pl-4  pr-4 font-inter last:mr-0 last:border-r-0'
           >
-            <li className='hover:text-[#4A6385] hover:underline'>{item.name}</li>
+            <li className='hover:text-navy-blue hover:underline'>{item.name}</li>
           </Link>
         )
       })}

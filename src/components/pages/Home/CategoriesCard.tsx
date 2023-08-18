@@ -8,7 +8,7 @@ type CategoriesCardProp = {
 
 export const CategoriesCard: React.FC<CategoriesCardProp> = ({ photoURL, name, recieptsTotal }) => {
   return (
-    <div className='group card max-w-full bg-base-100 shadow-xl'>
+    <div className='group card max-w-full bg-base-100 text-dark-blue shadow-xl'>
       <figure className='flex max-h-[420px] max-w-full'>
         <img src={photoURL} alt='categoryImg' className='min-h-[420px] max-w-full object-cover' />
       </figure>

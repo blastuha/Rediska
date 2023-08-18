@@ -4,7 +4,7 @@ import { WidgetNewsData } from '../../../models'
 
 export const SwiperCard: React.FC<WidgetNewsData> = ({ title, photoURL, smallText }) => {
   return (
-    <div className='flex max-w-full rounded-lg bg-[#E4F1FF]'>
+    <div className='flex max-w-full rounded-lg bg-light-blue'>
       <div className='w-100 card w-3/5 bg-base-100 shadow-xl'>
         <img src={photoURL} alt='Shoes' className='rounded-l-lg' />
       </div>
