@@ -9,7 +9,7 @@ type RecipeCardProp = {
 export const MostPopularCard: React.FC<RecipeCardProp> = ({ id, photoURL, title }) => {
   return (
     <Link to={`/reciept/${id ? id : ''}`} key={id}>
-      <li className='group flex max-w-full cursor-pointer flex-row items-center gap-4 rounded-lg'>
+      <li className='group flex max-w-full cursor-pointer flex-row items-center gap-4 rounded-lg text-dark-blue'>
         <figure className=' h-[200px] w-[200px] flex-shrink-0 overflow-hidden rounded-lg '>
           <img
             src={photoURL}

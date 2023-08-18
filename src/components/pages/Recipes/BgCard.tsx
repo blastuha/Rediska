@@ -23,7 +23,7 @@ export const ProteinCard: React.FC<SpecialDientCardProp> = ({
         <figure className='min-h-[280px] min-w-[280px]  overflow-hidden  '>
           <img src={photoURL} alt='picture' className='h-full w-full transform  object-cover' />
         </figure>
-        <h2 className='h-fit flex-grow bg-[#E4F1FF] p-4 font-bold text-inherit'>{title}</h2>
+        <h2 className='h-fit flex-grow bg-light-blue p-4 font-bold text-dark-blue'>{title}</h2>
       </Link>
     </li>
   )
