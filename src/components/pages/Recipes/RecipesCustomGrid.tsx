@@ -40,6 +40,7 @@ export const RecipesCustomGrid: React.FC<RecipesGridProps> = ({
         {filteredRecipes.map((recipe: RecipeData, i) => {
           if (i <= cardsQuantity) {
             return React.cloneElement(card, {
+              key: i,
               ...recipe,
               firstCardStyles: firstCardStylesFunc(i),
             })

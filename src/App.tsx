@@ -5,11 +5,12 @@ import { Home } from './components/pages/Home/Home.tsx'
 import { WeekPlotPage } from './components/pages/WeekPlot/WeekPlotPage.tsx'
 import { RecipePage } from './components/pages/RecipePage/RecipePage.tsx'
 import { ErrorPage } from './components/pages/Error'
+import { RecipesPage } from './components/pages/Recipes/RecipesPage.tsx'
+import { CategoryPage } from './components/pages/CategoryPage/CategoryPage.tsx'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import './styles/global.scss'
-import { RecipesPage } from './components/pages/Recipes/RecipesPage.tsx'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const App = () => {
         {
           path: 'recipes',
           element: <RecipesPage />,
+        },
+        {
+          path: 'category/:category',
+          element: <CategoryPage />,
         },
       ],
     },

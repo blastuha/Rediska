@@ -22,7 +22,7 @@ export const Ingredients: React.FC<IngredientsProps> = ({ reciept, margins }) =>
   return (
     <LinesBorder margins={margins ? margins : ''}>
       <ul className='h-fit p-6'>
-        <div className='absolute top-[-22px] bg-white pl-2 pr-2 text-center'>
+        <div className='absolute top-[-22px] bg-[white] pl-2 pr-2 text-center'>
           <h5 className='font-playfair text-2xl font-bold'>Ингредиенты</h5>
         </div>
         {ingredientsSeparated?.map((ingredient, i) => {
