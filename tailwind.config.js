@@ -26,6 +26,7 @@ export default {
       'navy-blue': '#1F2937',
       'blue-gray': '#1C2129',
       'light-blue': '#E4F1FF',
+      'lines-blue': '#005278',
     },
   },
   plugins: [require('daisyui')],

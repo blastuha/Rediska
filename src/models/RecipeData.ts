@@ -8,6 +8,7 @@ export type RecipeData = {
   id: string
   steps: Step[]
   nutritionFacts: NutritionFact[]
+  date: string
 }
 
 export type Step = {

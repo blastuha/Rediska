@@ -1,8 +1,8 @@
 import { Lines } from '../../ui/Lines'
 
 type RecipesSectionHeadingProps = {
-  title: string
-  subtitle: string
+  title?: string
+  subtitle?: string
   blockStyles: string
 }
 

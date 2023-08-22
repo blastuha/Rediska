@@ -15,7 +15,7 @@ export const RecipePage: React.FC = () => {
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
-      <ContentHeading title={reciept?.title} />
+      <ContentHeading title={reciept?.title} date={reciept?.date} />
       <p className='pb-6 text-lg'>{reciept?.paragraph}</p>
       <img src={reciept?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />
       <div className='flex justify-between'>
