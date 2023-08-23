@@ -12,13 +12,13 @@ import { declination } from '../../../helpers/declination'
 import { categoriesData } from '../../../constants'
 
 export const CategoryPage: React.FC = () => {
-  const filterOptions = [
+  const sortOptions = [
     'По дате',
     'По добавлению в избранные',
     'По названию asc',
     'По названию desc',
   ]
-  const [selectedOption, setSelectedOption] = useState(filterOptions[0])
+  const [selectedOption, setSelectedOption] = useState(sortOptions[0])
   console.log(selectedOption)
   const { data: recipesData = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
   const { category } = useParams()
@@ -59,7 +59,7 @@ export const CategoryPage: React.FC = () => {
         <span className='flex items-center rounded-lg border border-lines-blue pl-4 pr-4 text-center font-[500]'>
           {recipesFiltred.length} {recipeQuantity} из категории "{category}"
         </span>
-        <Select options={filterOptions} value={selectedOption} onChange={setSelectedOption} />
+        <Select options={sortOptions} value={selectedOption} onChange={setSelectedOption} />
       </div>
 
       <div className='grid grid-cols-3 grid-rows-2 gap-4'>

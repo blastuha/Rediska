@@ -7,6 +7,7 @@ import { RecipePage } from './components/pages/RecipePage/RecipePage.tsx'
 import { ErrorPage } from './components/pages/Error'
 import { RecipesPage } from './components/pages/Recipes/RecipesPage.tsx'
 import { CategoryPage } from './components/pages/CategoryPage/CategoryPage.tsx'
+import { AuthPage } from './components/pages/AuthPage/AuthPage.tsx'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -38,6 +39,10 @@ const App = () => {
         {
           path: 'category/:category',
           element: <CategoryPage />,
+        },
+        {
+          path: 'auth',
+          element: <AuthPage />,
         },
       ],
     },

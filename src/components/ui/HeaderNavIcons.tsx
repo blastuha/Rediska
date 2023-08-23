@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Heart } from './Icons/Heart'
 import { Search } from './Icons/Search'
 import { Person } from './Icons/Person'
@@ -10,7 +11,9 @@ export const HeaderNavIcons: React.FC = () => {
 
       <Heart styles='w-6 h-6 mr-2' />
 
-      <Person styles='w-6 h-6' />
+      <Link to='auth'>
+        <Person styles='w-6 h-6' />
+      </Link>
     </div>
   )
 }
