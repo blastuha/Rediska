@@ -8,6 +8,7 @@ type FormProps = {
 const Form: FC<FormProps> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
+  const [fullname, setFullname] = useState('')
 
   return (
     <div>
@@ -22,6 +23,12 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
         value={pass}
         onChange={(e) => setPass(e.target.value)}
         placeholder='password'
+      />
+      <input
+        type='text'
+        value={fullname}
+        onChange={(e) => setFullname(e.target.value)}
+        placeholder='fullName'
       />
       <button onClick={() => handleClick(email, pass)}>{title}</button>
     </div>
