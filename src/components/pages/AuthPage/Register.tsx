@@ -1,6 +1,6 @@
 import React from 'react'
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 import { Form } from './Form'
 
@@ -10,11 +10,19 @@ export const Register: React.FC = () => {
   const navigate = useNavigate()
   const { setUser } = useActions()
 
-  const handleRegister = (email: string, password: string) => {
+  const handleRegister = (email: string, password: string, displayName: string) => {
     const auth = getAuth()
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         console.log(user)
+
+        updateProfile(user, { displayName: displayName })
+          .then(() => {
+            console.log('Логин пользователя установлен:', displayName)
+          })
+          .catch((error) => {
+            console.error('Ошибка при обновлении логина пользователя:', error)
+          })
 
         setUser({
           email: user.email,

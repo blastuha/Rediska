@@ -2,13 +2,13 @@ import { FC, useState } from 'react'
 
 type FormProps = {
   title: string
-  handleClick: (email: string, pass: string) => void
+  handleClick: (email: string, pass: string, displayName: string) => void
 }
 
 const Form: FC<FormProps> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
-  const [fullname, setFullname] = useState('')
+  const [displayName, setDisplayName] = useState('')
 
   return (
     <div>
@@ -24,13 +24,16 @@ const Form: FC<FormProps> = ({ title, handleClick }) => {
         onChange={(e) => setPass(e.target.value)}
         placeholder='password'
       />
-      <input
-        type='text'
-        value={fullname}
-        onChange={(e) => setFullname(e.target.value)}
-        placeholder='fullName'
-      />
-      <button onClick={() => handleClick(email, pass)}>{title}</button>
+      {title === 'Register' ? (
+        <input
+          type='text'
+          value={displayName}
+          onChange={(e) => setDisplayName(e.target.value)}
+          placeholder='fullName'
+        />
+      ) : null}
+
+      <button onClick={() => handleClick(email, pass, displayName)}>{title}</button>
     </div>
   )
 }

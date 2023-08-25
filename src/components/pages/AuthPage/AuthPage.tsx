@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { getAuth } from 'firebase/auth'
+
 import { Login } from './Login'
 import { Register } from './Register'
 
@@ -7,10 +9,11 @@ import { useAuth } from '../../../hooks/useAuth'
 export const AuthPage: React.FC = () => {
   const { email, token, id, isAuth } = useAuth()
 
-  // const { email, token, id } = useAppSelector((state) => state.user)
+  const user = getAuth().currentUser?.displayName
 
   useEffect(() => {
     console.log('hookdata', email)
+    console.log('user', user)
   }, [email, token, id])
 
   return (
