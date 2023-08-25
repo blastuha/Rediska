@@ -15,7 +15,7 @@ export const recipesApi = createApi({
     fetchRecipes: build.query({
       async queryFn() {
         try {
-          //*----- почему закомментированный вариант возвращает undefined?
+          //*----- разобраться почему закомментированный вариант возвращает undefined?
           // const recipesCol = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
           // const recipesSnapshot = await getDocs(recipesCol)
           // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
@@ -35,6 +35,7 @@ export const recipesApi = createApi({
       // providesTags: (result, error, id) => [{ type: 'Recipes', id }],
       providesTags: ['Recipes'],
     }),
+
     fetchWeekPlots: build.query({
       async queryFn() {
         try {
@@ -51,6 +52,7 @@ export const recipesApi = createApi({
       },
       providesTags: ['WeekPlots'],
     }),
+
     fetchWidgetNews: build.query({
       async queryFn() {
         try {
@@ -67,6 +69,7 @@ export const recipesApi = createApi({
       },
       providesTags: ['WeekPlots'],
     }),
+
     fetchRecipesById: build.query({
       async queryFn(id: string | undefined) {
         try {
@@ -89,6 +92,7 @@ export const recipesApi = createApi({
         }
       },
     }),
+
     fetchWeekPlotById: build.query({
       async queryFn(id: string | undefined) {
         try {

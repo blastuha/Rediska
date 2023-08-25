@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^10.0.0",
+    "formik": "^2.4.3",
     "framer-motion": "^10.13.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
