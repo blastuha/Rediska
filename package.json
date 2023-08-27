@@ -28,7 +28,8 @@
     "slick": "^1.12.2",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",
-    "swiper": "^10.1.0"
+    "swiper": "^10.1.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

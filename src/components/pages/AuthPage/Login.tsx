@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import { useFormik } from 'formik'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { Form } from './Form'
+
+import { SignInSchema } from '../../../helpers/accountValidation'
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
-
   const auth = getAuth()
+
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched, isSubmitting } =
+    useFormik({
+      initialValues: {
+        email: '',
+        password: '',
+      },
+      validationSchema: SignInSchema,
+      onSubmit: (values) => {
+        console.log('submit', values)
+        handleLogin(values.email, values.password)
+      },
+    })
 
   const handleLogin = (email: string, pass: string) => {
     signInWithEmailAndPassword(auth, email, pass)
@@ -30,54 +43,55 @@ export const Login: React.FC = () => {
         <div className='mb-5 text-center'>
           <h5 className='mb-1 font-dancingScript text-3xl font-bold'>Login</h5>
           <p className='font-inter text-[17px] text-[#9096B2]'>
-            Please login using account detail bellow.
+            Пожалуйста, войдите, используя данные учетной записи.
           </p>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='mb-2 flex justify-between'>
             <label htmlFor='signin-email'>Email</label>
-            <p className='text-red-600 text-xs'>{}</p>
+            <p className='text-xs text-[red]'>{errors.email}</p>
           </div>
           <input
-            className={` 'border-red-600 mb-5 w-full border-[1px] border-lines-blue px-4 py-3 focus-within:outline-none`}
+            className={`mb-5 w-full border-[1px] border-lines-blue px-4 py-3 focus-within:outline-none ${
+              errors.email && touched.email ? 'border-[red] ' : ''
+            }`}
             type='email'
-            // value={}
+            value={values.email}
             id='email'
-            // onChange
-            // onBlur
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
 
           <div className='mb-2 flex justify-between'>
             <label htmlFor='signin-password'>Password</label>
-            <p className='text-red-600 text-xs'>{}</p>
+            <p className='text-xs text-[red]'>{errors.password}</p>
           </div>
           <input
-            className={` 'border-red-600 mb-5 w-full border-[1px] border-lines-blue px-4 py-3 focus-within:outline-none`}
+            className={`mb-5 w-full border-[1px] border-lines-blue px-4 py-3 focus-within:outline-none ${
+              errors.email && touched.email ? 'border-[red] ' : ''
+            }`}
             type='password'
-            // value={}
+            value={values.password}
             id='password'
-            // onChange
-            // onBlur
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
           <p className='font-Lato mb-6 text-[17px] text-[#9096B2]'>Forgot your password?</p>
           <button
             type='submit'
-            className='bg-pink-cc text-white font-Lato flex h-[48px] w-full items-center justify-center rounded-[3px] text-center disabled:opacity-75'
-            // disabled={}
+            className='text-white font-Lato flex h-[48px] w-full items-center justify-center rounded-[3px] bg-[pink] text-center disabled:opacity-75'
+            disabled={isSubmitting}
           >
             Sign In
           </button>
           <div className='mt-5 text-center'>
             <Link to={'/signup'} className='text-base text-[#9096B2] '>
-              Don’t have an Account? Create account
+              Registration
             </Link>
           </div>
         </form>
       </div>
     </motion.div>
   )
-}
-{
-  /* <Form title='Login' handleClick={handleLogin} /> */
 }
