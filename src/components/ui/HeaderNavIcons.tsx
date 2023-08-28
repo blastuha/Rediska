@@ -11,7 +11,7 @@ export const HeaderNavIcons: React.FC = () => {
 
       <Heart styles='w-6 h-6 mr-2' />
 
-      <Link to='auth'>
+      <Link to='signin'>
         <Person styles='w-6 h-6' />
       </Link>
     </div>
