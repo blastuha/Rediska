@@ -5,11 +5,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
+import { useActions } from '../../../hooks/useActions'
+
 import { SignInSchema } from '../../../helpers/accountValidation'
 
 export const Login: React.FC = () => {
   const auth = getAuth()
   const navigate = useNavigate()
+  const { setUser } = useActions()
 
   const { values, handleChange, handleBlur, handleSubmit, errors, touched, isSubmitting } =
     useFormik({
@@ -27,7 +30,9 @@ export const Login: React.FC = () => {
 
   const handleLogin = (email: string, pass: string) => {
     signInWithEmailAndPassword(auth, email, pass)
-      .then((res) => console.log(res))
+      .then(({ user }) => {
+        console.log(user), setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+      })
       .catch((err) => console.error(err))
   }
 
