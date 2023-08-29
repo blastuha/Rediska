@@ -1,19 +1,23 @@
 .h1 {
-  @apply font-dancingScript font-bold text-3xl mb-4 mt-4;
+  @apply mb-4 mt-4 font-playfair text-3xl font-bold;
 }
 
 .h2 {
-  @apply font-inter font-bold text-2xl mb-8 mt-8;
+  @apply mb-8 mt-8 font-playfair text-2xl font-bold;
 }
 
 .p {
-  @apply font-inter text-[16px] mb-5;
+  @apply mb-5 font-inter text-[16px];
 }
 
 .ul {
-  @apply list-disc list-inside mb-4;
+  @apply mb-4 list-inside list-disc;
 }
 
 .li {
-  @apply pt-1 pb-1 ml-8 text-[15px];
+  @apply ml-8 pb-1 pt-1 text-[15px];
+}
+
+.img {
+  @apply block h-auto max-w-full rounded-lg;
 }

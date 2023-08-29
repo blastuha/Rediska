@@ -1,4 +1,4 @@
-export type NewsData = {
+export type WidgetNewsData = {
   photoURL: string
   id: number
   text: string
