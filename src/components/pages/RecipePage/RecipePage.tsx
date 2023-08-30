@@ -7,11 +7,18 @@ import { NutritionFacts } from './NutritionFacts'
 import { Ingredients } from './Ingredients/Ingredients'
 import { RecipeSteps } from './RecipeSteps'
 
+import { getFirebaseData } from '../../../helpers/getFirebaseData'
+
 import { useFetchRecipesByIdQuery } from '../../../redux/recipes/recipesApi'
+import { RecipeData } from '../../../models'
 
 export const RecipePage: React.FC = () => {
   const { id } = useParams()
   const { data: reciept, isLoading } = useFetchRecipesByIdQuery(id)
+
+  // const addToFavourites = (item: RecipeData) => {
+  //   getFirebaseData('favourites')
+  // }
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>

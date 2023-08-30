@@ -1,5 +1,8 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
+
+import { Heart } from '../../ui/Icons/Heart'
 import { RecipeData } from '../../../models'
 
 type RecipesGridProps = {
@@ -22,7 +25,7 @@ export const RecipesGrid: React.FC<RecipesGridProps> = ({ recipesData }) => {
                     className='transform rounded-lg transition-transform duration-1000 group-hover:scale-110'
                   />
                 </figure>
-                <div className='pb-4 pt-4'>
+                <div className='flex justify-between pb-4 pt-4'>
                   <h2 className='card-title font-normal text-dark-blue decoration-1 underline-offset-[5px] transition-colors duration-1000 group-hover:underline'>
                     {recipe.title}
                   </h2>

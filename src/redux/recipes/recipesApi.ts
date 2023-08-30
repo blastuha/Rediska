@@ -21,9 +21,12 @@ export const recipesApi = createApi({
           // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
           // return recipesList
           //*-------
+
+          const recipesData: RecipeData[] = []
+
           const recipesRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
           const querySnapshot = await getDocs(recipesRef)
-          const recipesData: RecipeData[] = []
+
           querySnapshot?.forEach((doc) => {
             recipesData.push(doc.data() as RecipeData)
           })
@@ -39,9 +42,11 @@ export const recipesApi = createApi({
     fetchWeekPlots: build.query({
       async queryFn() {
         try {
+          const weekPlotsData: WeekPlot[] = []
+
           const weekPlotsRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/weekPlots')
           const querySnapshot = await getDocs(weekPlotsRef)
-          const weekPlotsData: WeekPlot[] = []
+
           querySnapshot?.forEach((doc) => {
             weekPlotsData.push(doc.data() as WeekPlot)
           })
@@ -56,9 +61,11 @@ export const recipesApi = createApi({
     fetchWidgetNews: build.query({
       async queryFn() {
         try {
+          const widgetNewsData: WidgetNewsData[] = []
+
           const widgetNewsRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/news')
           const querySnapshot = await getDocs(widgetNewsRef)
-          const widgetNewsData: WidgetNewsData[] = []
+
           querySnapshot?.forEach((doc) => {
             widgetNewsData.push(doc.data() as WidgetNewsData)
           })

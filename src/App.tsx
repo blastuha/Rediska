@@ -26,13 +26,13 @@ const App = () => {
   const { setUser } = useActions()
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const authStatusChecker = onAuthStateChanged(auth, (user) => {
+      if (user && !user.isAnonymous) {
         setUser({ email: user.email, id: user.uid, token: user.refreshToken })
         console.log('user.email', user.email)
       }
     })
-    return unsub
+    return authStatusChecker
   }, [auth, setUser])
 
   const router = createBrowserRouter([
