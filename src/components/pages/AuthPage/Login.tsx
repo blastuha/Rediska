@@ -1,39 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useFormik } from 'formik'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, AuthError } from 'firebase/auth'
 
 import { useActions } from '../../../hooks/useActions'
 
 import { SignInSchema } from '../../../helpers/accountValidation'
 
 export const Login: React.FC = () => {
+  const [error, setError] = useState<AuthError | null>(null)
+
+  console.log(error)
+
   const auth = getAuth()
-  const navigate = useNavigate()
   const { setUser } = useActions()
 
-  const { values, handleChange, handleBlur, handleSubmit, errors, touched, isSubmitting } =
-    useFormik({
-      initialValues: {
-        email: '',
-        password: '',
-      },
-      validationSchema: SignInSchema,
-      onSubmit: (values) => {
-        console.log('submit', values)
-        handleLogin(values.email, values.password)
-        navigate('/')
-      },
-    })
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: SignInSchema,
+    onSubmit: (values) => {
+      console.log('submit', values)
+      handleLogin(values.email, values.password)
+    },
+  })
 
   const handleLogin = (email: string, pass: string) => {
     signInWithEmailAndPassword(auth, email, pass)
       .then(({ user }) => {
         console.log(user), setUser({ email: user.email, id: user.uid, token: user.refreshToken })
       })
-      .catch((err) => console.error(err))
+      .catch((err: AuthError) => setError(err))
   }
 
   return (
@@ -50,9 +51,10 @@ export const Login: React.FC = () => {
         <div className='mx-auto mb-16 flex flex-col p-14 shadow-[0_0_25px_10px_#f8f8fb]'>
           <div className='mb-5 text-center'>
             <h5 className='mb-1 font-dancingScript text-3xl font-bold'>Login</h5>
-            <p className='font-inter text-[17px] text-[#9096B2]'>
+            <p className='mb-6 font-inter text-[17px] text-[#9096B2]'>
               Пожалуйста, войдите, используя данные учетной записи.
             </p>
+            <p className='text-[red]'>{error ? 'Вы ввели неверный email или password' : ''}</p>
           </div>
 
           <form onSubmit={handleSubmit}>
@@ -91,7 +93,7 @@ export const Login: React.FC = () => {
             <button
               type='submit'
               className='text-white font-Lato flex h-[48px] w-full items-center justify-center rounded-[3px] bg-[pink] text-center disabled:opacity-75'
-              disabled={isSubmitting}
+              disabled={values.email && values.password && !errors.email ? false : true}
             >
               Вход
             </button>

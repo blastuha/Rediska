@@ -19,13 +19,8 @@ type CarouselProps = {
 export const Carousel: React.FC<CarouselProps> = ({ blockStyles }) => {
   return (
     <div className={`${blockStyles ? blockStyles : ''}`}>
-      <Swiper
-        slidesPerView={6}
-        centeredSlides={false}
-        spaceBetween={10}
-        className='static box-border'
-      >
-        <CarouselPrevButton />
+      <CarouselPrevButton />
+      <Swiper slidesPerView={6} centeredSlides={false} spaceBetween={10}>
         {categoriesData.map((category, i) => (
           <SwiperSlide className='cursor-pointer'>
             <Link to={`/category/${category.name}`} key={i}>
@@ -38,8 +33,8 @@ export const Carousel: React.FC<CarouselProps> = ({ blockStyles }) => {
             </Link>
           </SwiperSlide>
         ))}
-        <CarouselNextButton />
       </Swiper>
+      <CarouselNextButton />
     </div>
   )
 }
