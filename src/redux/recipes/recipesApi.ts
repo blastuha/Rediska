@@ -1,6 +1,8 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
 
+import { auth } from '../../api/firebase'
+
 import { db } from '../../api/firebase'
 
 import { RecipeData } from '../../models/RecipeData.ts'
@@ -10,7 +12,7 @@ import { WidgetNewsData } from '../../models/WidgetNewsData.ts'
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Recipes', 'WeekPlots', 'News'],
+  tagTypes: ['Recipes', 'WeekPlots', 'News', 'Favourites'],
   endpoints: (build) => ({
     fetchRecipes: build.query({
       async queryFn() {
@@ -122,6 +124,30 @@ export const recipesApi = createApi({
         }
       },
     }),
+
+    fetchFavourites: build.query({
+      async queryFn() {
+        try {
+          const favouritesData = []
+
+          if (auth.currentUser) {
+            const recipesRef = collection(db, `users`)
+            const querySnapshot = await getDocs(recipesRef)
+
+            querySnapshot?.forEach((doc) => {
+              favouritesData.push(doc.data())
+            })
+
+            return { data: favouritesData }
+          } else {
+            return { data: [] }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
+      // providesTags: ['Favourites'],
+    }),
   }),
 })
 
@@ -131,4 +157,5 @@ export const {
   useFetchWeekPlotsQuery,
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
+  useFetchFavouritesQuery,
 } = recipesApi
