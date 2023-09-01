@@ -5,9 +5,10 @@ import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { RecipeData } from '../../models/RecipeData.ts'
-import { WeekPlot } from '../../models/WeekPlot.ts'
-import { WidgetNewsData } from '../../models/WidgetNewsData.ts'
+import { RecipeData } from '../../models/'
+import { WeekPlot } from '../../models/'
+import { WidgetNewsData } from '../../models/'
+import { FavouritesData } from './../../models/'
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
@@ -128,25 +129,24 @@ export const recipesApi = createApi({
     fetchFavourites: build.query({
       async queryFn() {
         try {
-          const favouritesData = []
-
           if (auth.currentUser) {
+            let favouritesData: FavouritesData = { favourites: [] }
             const recipesRef = collection(db, `users`)
             const querySnapshot = await getDocs(recipesRef)
 
             querySnapshot?.forEach((doc) => {
-              favouritesData.push(doc.data())
+              console.log('doc', doc.data())
+              favouritesData = doc.data() as FavouritesData
             })
-
-            return { data: favouritesData }
-          } else {
-            return { data: [] }
+            return { data: favouritesData?.favourites }
           }
+
+          return { data: [] }
         } catch (error) {
           return { error }
         }
       },
-      // providesTags: ['Favourites'],
+      providesTags: ['Favourites'],
     }),
   }),
 })

@@ -6,7 +6,6 @@ import { setDoc, updateDoc, doc, arrayUnion, getDoc, arrayRemove } from 'firebas
 import { auth, db } from '../../../api/firebase'
 
 import { ContentHeading } from '../../ui/ContentHeading'
-
 import { NutritionFacts } from './NutritionFacts'
 import { Ingredients } from './Ingredients/Ingredients'
 import { RecipeSteps } from './RecipeSteps'
@@ -17,18 +16,15 @@ import {
 } from '../../../redux/recipes/recipesApi'
 
 import { RecipeData } from '../../../models'
+import { Favourite } from '../../../models'
 
 export const RecipePage: React.FC = () => {
   const { id } = useParams()
   const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
-  const { data: favouritesData } = useFetchFavouritesQuery(null)
+  const { data: favourites } = useFetchFavouritesQuery(undefined)
   const user = auth.currentUser
 
-  const test = favouritesData?.forEach((item) => console.log(item.favourites))
-  // console.log('test', test)
-
-  // const test = favouritesData?.forEach((item) => console.log('item', item, typeof item))
-  // console.log('favouritesData', typeof favouritesData)
+  console.log('1', favourites)
 
   const addToFavourites = async (item: RecipeData) => {
     if (user) {
@@ -54,8 +50,10 @@ export const RecipePage: React.FC = () => {
     }
   }
 
+  // favourites?.forEach((item) => console.log('item', item))
+
   // const isInFavourites = (id: string | undefined) => {
-  //   favouritesData?.find((item) => item.id === id)
+  //   favourites?.find((item) => item.)
   // }
 
   // console.log(isInFavourites(recipe?.id))
