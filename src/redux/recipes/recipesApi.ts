@@ -10,6 +10,8 @@ import { WeekPlot } from '../../models/'
 import { WidgetNewsData } from '../../models/'
 import { FavouritesData } from './../../models/'
 
+import { getFavourites } from '../../api/getFavourites'
+
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
@@ -130,15 +132,7 @@ export const recipesApi = createApi({
       async queryFn() {
         try {
           if (auth.currentUser) {
-            let favouritesData: FavouritesData = { favourites: [] }
-            const recipesRef = collection(db, `users`)
-            const querySnapshot = await getDocs(recipesRef)
-
-            querySnapshot?.forEach((doc) => {
-              console.log('doc', doc.data())
-              favouritesData = doc.data() as FavouritesData
-            })
-            return { data: favouritesData?.favourites }
+            return { data: await getFavourites() }
           }
 
           return { data: [] }

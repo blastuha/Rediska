@@ -1,29 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { RecipeData } from '../../models'
 
-export interface CounterState {
-  value: number
+type RecipesState = {
+  favourites: RecipeData[]
 }
 
-const initialState: CounterState = {
-  value: 0,
+const initialState: RecipesState = {
+  favourites: [],
 }
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const recipesSlice = createSlice({
+  name: 'recipes',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    setFavourites: (state, action: PayloadAction<RecipeData[]>) => {
+      state.favourites = action.payload
     },
-    decrement: (state) => {
-      state.value -= 1
+    addToFavourite: (state, action: PayloadAction<RecipeData>) => {
+      state.favourites.push(action.payload)
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
+    removeFromFavourite: (state, action) => {
+      state.favourites = state.favourites.filter((item) => item !== action.payload)
     },
   },
 })
 
-// Action creators are generated for each case reducer function
-export const counterActions = counterSlice.actions
+export const recipesActions = recipesSlice.actions

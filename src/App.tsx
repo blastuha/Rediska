@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { User, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 
 import { Layout } from './components/layout/Layout'
@@ -17,23 +17,30 @@ import { UserPage } from './components/pages/UserPage/UserPage.tsx'
 import { useActions } from './hooks/useActions.ts'
 import { useAuth } from './hooks/useAuth.ts'
 
+import { getUserData } from './helpers/getUserData.ts'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 
 const App = () => {
+  const [test, setTest] = useState(null)
   const auth = getAuth()
   const { isAuth } = useAuth()
-  const { setUser } = useActions()
+  const { setUser, setFavourites } = useActions()
 
   useEffect(() => {
-    const authStatusChecker = onAuthStateChanged(auth, (user) => {
+    const authStateChanged = (user: User | null) => {
       if (user && !user.isAnonymous) {
-        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
-        console.log('user.email', user.email)
+        ;(async () => {
+          const usersData = await getUserData(user.uid)
+          setFavourites(usersData.favourites)
+          setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+        })().catch((err) => console.error(err))
       }
-    })
-    return authStatusChecker
-  }, [auth, setUser])
+    }
+
+    onAuthStateChanged(auth, authStateChanged)
+  }, [auth, setUser, setFavourites])
 
   const router = createBrowserRouter([
     {

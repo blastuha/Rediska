@@ -15,18 +15,35 @@ import {
   useFetchFavouritesQuery,
 } from '../../../redux/recipes/recipesApi'
 
+import { useAppSelector } from '../../../hooks/useAppSelector'
+import { useActions } from '../../../hooks/useActions'
+import { useFavourites } from '../../../hooks/useFavourites'
+import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
+
+import { isInFavourites } from '../../../helpers/isInFavourites'
+import { getFavourites } from '../../../api/getFavourites'
+
 import { RecipeData } from '../../../models'
-import { Favourite } from '../../../models'
 
 export const RecipePage: React.FC = () => {
+  const [favouritesLocal, setFavouritesLocal] = useState([])
+  const favourites = useAppSelector((state) => state.recipes.favourites)
+  const { addToFavourite, removeFromFavourite, setFavourites } = useActions()
+
   const { id } = useParams()
+
   const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
-  const { data: favourites } = useFetchFavouritesQuery(undefined)
+  // const { data: favData } = useFetchFavouritesQuery(undefined)
+
+  const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesLocal)
+
   const user = auth.currentUser
 
-  console.log('1', favourites)
+  console.log('favouritesLocal', favouritesLocal)
 
+  //обновление данных в firebase
   const addToFavourites = async (item: RecipeData) => {
+    setFavouritesLocal((prevState) => [...prevState, recipe])
     if (user) {
       const ref = doc(db, 'users', user.uid)
       const userSnapshot = await getDoc(ref)
@@ -37,10 +54,14 @@ export const RecipePage: React.FC = () => {
         await setDoc(ref, { favourites: [item] })
       }
     }
+    // addToFavourite(recipe)
+    // setFavourites(await getFavourites())
   }
 
+  //обновление данных в firebase
   const removeFromFavourites = async (item: RecipeData) => {
-    if (user) {
+    setFavouritesLocal(favouritesLocal.filter((item) => item.id !== recipe?.id))
+    if (user && item) {
       const ref = doc(db, 'users', user.uid)
       const userSnapshot = await getDoc(ref)
 
@@ -48,24 +69,18 @@ export const RecipePage: React.FC = () => {
         await updateDoc(ref, { favourites: arrayRemove(item) })
       }
     }
+    setFavourites(await getFavourites())
+    // removeFromFavourite(recipe)
+    console.log('removed from fav', favourites)
   }
-
-  // favourites?.forEach((item) => console.log('item', item))
-
-  // const isInFavourites = (id: string | undefined) => {
-  //   favourites?.find((item) => item.)
-  // }
-
-  // console.log(isInFavourites(recipe?.id))
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
       <ContentHeading
         recipe={recipe}
-        title={recipe?.title}
-        date={recipe?.date}
         addToFavourites={addToFavourites}
         removeFromFavourites={removeFromFavourites}
+        isRecipeInFavourites={isRecipeInFavourites}
       />
       <p className='pb-6 text-lg'>{recipe?.paragraph}</p>
       <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />
