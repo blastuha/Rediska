@@ -4,5 +4,9 @@ export const isInFavourites = (
   id: string | undefined,
   favouritesArray: RecipeData[] | undefined,
 ) => {
-  return favouritesArray?.findIndex((item) => item.id === id)
+  if (favouritesArray) {
+    return favouritesArray?.findIndex((item) => item.id === id)
+  } else {
+    return -1
+  }
 }

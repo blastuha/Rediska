@@ -1,16 +1,24 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  setDoc,
+  arrayRemove,
+} from 'firebase/firestore'
 
 import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { RecipeData } from '../../models/'
+import { getFavourites } from '../../api/getFavourites'
+
+import { FavouritesData, RecipeData } from '../../models/'
 import { WeekPlot } from '../../models/'
 import { WidgetNewsData } from '../../models/'
-import { FavouritesData } from './../../models/'
-
-import { getFavourites } from '../../api/getFavourites'
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
@@ -40,7 +48,6 @@ export const recipesApi = createApi({
           return { error }
         }
       },
-      // providesTags: (result, error, id) => [{ type: 'Recipes', id }],
       providesTags: ['Recipes'],
     }),
 
@@ -79,7 +86,7 @@ export const recipesApi = createApi({
           return { error }
         }
       },
-      providesTags: ['WeekPlots'],
+      providesTags: ['News'],
     }),
 
     fetchRecipesById: build.query({
@@ -140,7 +147,53 @@ export const recipesApi = createApi({
           return { error }
         }
       },
-      providesTags: ['Favourites'],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Favourites' as const, id })),
+              { type: 'Favourites', id: 'LIST' },
+            ]
+          : [{ type: 'Favourites', id: 'LIST' }],
+    }),
+
+    addRecipe: build.mutation({
+      async queryFn(recipe) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'users', auth.currentUser.uid)
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, { favourites: arrayUnion(recipe) })
+            } else {
+              await setDoc(ref, { favourites: [recipe] })
+            }
+          }
+          return { data: 'Рецепт успешно добавлен в избранное' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['Favourites'],
+    }),
+
+    removeRecipe: build.mutation({
+      async queryFn(recipe) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'users', auth.currentUser.uid)
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, { favourites: arrayRemove(recipe) })
+            }
+          }
+          return { data: 'Рецепт успешно удален из избранных' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['Favourites'],
     }),
   }),
 })
@@ -152,4 +205,6 @@ export const {
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
   useFetchFavouritesQuery,
+  useAddRecipeMutation,
+  useRemoveRecipeMutation,
 } = recipesApi

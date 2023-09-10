@@ -19,28 +19,51 @@ import { useAuth } from './hooks/useAuth.ts'
 
 import { getUserData } from './helpers/getUserData.ts'
 
+import { RecipeData } from './models/RecipeData.ts'
+
+import { useFetchFavouritesQuery } from './redux/recipes/recipesApi.ts'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { FavouritesData } from './models/FavouritesData.ts'
 
 const App = () => {
-  const [test, setTest] = useState(null)
+  const { data: favData } = useFetchFavouritesQuery(undefined)
+  console.log('favData', favData)
   const auth = getAuth()
   const { isAuth } = useAuth()
   const { setUser, setFavourites } = useActions()
 
   useEffect(() => {
     const authStateChanged = (user: User | null) => {
-      if (user && !user.isAnonymous) {
-        ;(async () => {
-          const usersData = await getUserData(user.uid)
-          setFavourites(usersData.favourites)
-          setUser({ email: user.email, id: user.uid, token: user.refreshToken })
-        })().catch((err) => console.error(err))
+      if (user && !user.isAnonymous && favData) {
+        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+        setFavourites(favData?.favourites)
+      } else {
+        setFavourites([])
       }
     }
 
     onAuthStateChanged(auth, authStateChanged)
-  }, [auth, setUser, setFavourites])
+  }, [favData, auth, setFavourites, setUser])
+
+  // useEffect(() => {
+  //   const authStateChanged = (user: User | null) => {
+  //     if (user && !user.isAnonymous) {
+  //       ;(async () => {
+  //         const usersData = await getUserData(user.uid)
+  //         if (usersData?.favourites) {
+  //           setFavourites(usersData.favourites as RecipeData[])
+  //         } else {
+  //           setFavourites([])
+  //         }
+  //         setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+  //       })().catch((err) => console.error(err))
+  //     }
+  //   }
+
+  //   onAuthStateChanged(auth, authStateChanged)
+  // }, [auth, setUser, setFavourites])
 
   const router = createBrowserRouter([
     {

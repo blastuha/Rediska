@@ -21,7 +21,7 @@ export const recipesSlice = createSlice({
       state.favourites.push(action.payload)
     },
     removeFromFavourite: (state, action) => {
-      state.favourites = state.favourites.filter((item) => item !== action.payload)
+      state.favourites = state.favourites.filter((item) => item.id !== action.payload.id)
     },
   },
 })

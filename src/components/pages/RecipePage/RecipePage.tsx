@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 import { useParams } from 'react-router-dom'
-import { setDoc, updateDoc, doc, arrayUnion, getDoc, arrayRemove } from 'firebase/firestore'
-
-import { auth, db } from '../../../api/firebase'
 
 import { ContentHeading } from '../../ui/ContentHeading'
 import { NutritionFacts } from './NutritionFacts'
@@ -12,66 +9,38 @@ import { RecipeSteps } from './RecipeSteps'
 
 import {
   useFetchRecipesByIdQuery,
-  useFetchFavouritesQuery,
+  useAddRecipeMutation,
+  useRemoveRecipeMutation,
 } from '../../../redux/recipes/recipesApi'
 
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import { useActions } from '../../../hooks/useActions'
-import { useFavourites } from '../../../hooks/useFavourites'
 import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
-
-import { isInFavourites } from '../../../helpers/isInFavourites'
-import { getFavourites } from '../../../api/getFavourites'
 
 import { RecipeData } from '../../../models'
 
 export const RecipePage: React.FC = () => {
-  const [favouritesLocal, setFavouritesLocal] = useState([])
-  const favourites = useAppSelector((state) => state.recipes.favourites)
-  const { addToFavourite, removeFromFavourite, setFavourites } = useActions()
+  const favouritesArr = useAppSelector((state) => state.recipes.favourites)
+  const { addToFavourite, removeFromFavourite } = useActions()
+
+  console.log('favouritesArr', favouritesArr)
 
   const { id } = useParams()
 
   const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
-  // const { data: favData } = useFetchFavouritesQuery(undefined)
+  const [addRecipeToFav] = useAddRecipeMutation()
+  const [removeRecipeFromFav] = useRemoveRecipeMutation()
 
-  const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesLocal)
+  const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
 
-  const user = auth.currentUser
-
-  console.log('favouritesLocal', favouritesLocal)
-
-  //обновление данных в firebase
-  const addToFavourites = async (item: RecipeData) => {
-    setFavouritesLocal((prevState) => [...prevState, recipe])
-    if (user) {
-      const ref = doc(db, 'users', user.uid)
-      const userSnapshot = await getDoc(ref)
-
-      if (userSnapshot.exists()) {
-        await updateDoc(ref, { favourites: arrayUnion(item) })
-      } else {
-        await setDoc(ref, { favourites: [item] })
-      }
-    }
-    // addToFavourite(recipe)
-    // setFavourites(await getFavourites())
+  const addToFavourites = async (recipe: RecipeData) => {
+    addToFavourite(recipe)
+    await addRecipeToFav(recipe)
   }
 
-  //обновление данных в firebase
-  const removeFromFavourites = async (item: RecipeData) => {
-    setFavouritesLocal(favouritesLocal.filter((item) => item.id !== recipe?.id))
-    if (user && item) {
-      const ref = doc(db, 'users', user.uid)
-      const userSnapshot = await getDoc(ref)
-
-      if (userSnapshot.exists()) {
-        await updateDoc(ref, { favourites: arrayRemove(item) })
-      }
-    }
-    setFavourites(await getFavourites())
-    // removeFromFavourite(recipe)
-    console.log('removed from fav', favourites)
+  const removeFromFavourites = async (recipe: RecipeData) => {
+    removeFromFavourite(recipe)
+    await removeRecipeFromFav(recipe)
   }
 
   return (
