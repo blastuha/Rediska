@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -17,10 +17,12 @@ type CarouselProps = {
 }
 
 export const Carousel: React.FC<CarouselProps> = ({ blockStyles }) => {
+  const swiperRef = useRef(null)
+
   return (
     <div className={`${blockStyles ? blockStyles : ''}`}>
-      <CarouselPrevButton />
-      <Swiper slidesPerView={6} centeredSlides={false} spaceBetween={10}>
+      <CarouselPrevButton swiperRef={swiperRef} />
+      <Swiper ref={swiperRef} slidesPerView={6} centeredSlides={false} spaceBetween={10}>
         {categoriesData.map((category, i) => (
           <SwiperSlide className='cursor-pointer'>
             <Link to={`/category/${category.name}`} key={i}>
@@ -34,7 +36,7 @@ export const Carousel: React.FC<CarouselProps> = ({ blockStyles }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <CarouselNextButton />
+      <CarouselNextButton swiperRef={swiperRef} />
     </div>
   )
 }

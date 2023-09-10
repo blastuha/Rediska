@@ -16,7 +16,7 @@ export const RecipesPage: React.FC = () => {
 
   return (
     <div className='container mx-auto flex-grow'>
-      <Carousel blockStyles='relative mb-10 mt-0' />
+      <Carousel blockStyles='relative mb-10 mt-0 ' />
       <RecipesSection
         sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
         sectionHeading={

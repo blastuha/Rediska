@@ -14,8 +14,6 @@ import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { getFavourites } from '../../api/getFavourites'
-
 import { FavouritesData, RecipeData } from '../../models/'
 import { WeekPlot } from '../../models/'
 import { WidgetNewsData } from '../../models/'
@@ -135,26 +133,26 @@ export const recipesApi = createApi({
       },
     }),
 
-    fetchFavourites: build.query({
-      async queryFn() {
-        try {
-          if (auth.currentUser) {
-            return { data: await getFavourites() }
-          }
+    // fetchFavourites: build.query({
+    //   async queryFn() {
+    //     try {
+    //       if (auth.currentUser) {
+    //         return { data: await getFavourites() }
+    //       }
 
-          return { data: [] }
-        } catch (error) {
-          return { error }
-        }
-      },
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: 'Favourites' as const, id })),
-              { type: 'Favourites', id: 'LIST' },
-            ]
-          : [{ type: 'Favourites', id: 'LIST' }],
-    }),
+    //       return { data: [] }
+    //     } catch (error) {
+    //       return { error }
+    //     }
+    //   },
+    //   providesTags: (result) =>
+    //     result
+    //       ? [
+    //           ...result.map(({ id }) => ({ type: 'Favourites' as const, id })),
+    //           { type: 'Favourites', id: 'LIST' },
+    //         ]
+    //       : [{ type: 'Favourites', id: 'LIST' }],
+    // }),
 
     addRecipe: build.mutation({
       async queryFn(recipe) {
@@ -204,7 +202,7 @@ export const {
   useFetchWeekPlotsQuery,
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
-  useFetchFavouritesQuery,
+  // useFetchFavouritesQuery,
   useAddRecipeMutation,
   useRemoveRecipeMutation,
 } = recipesApi

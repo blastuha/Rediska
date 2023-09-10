@@ -20,27 +20,34 @@ import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
 import { RecipeData } from '../../../models'
 
 export const RecipePage: React.FC = () => {
+  const { id } = useParams()
   const favouritesArr = useAppSelector((state) => state.recipes.favourites)
+  const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
+  const [addRecipeToFav] = useAddRecipeMutation()
+  const [removeRecipeFromFav] = useRemoveRecipeMutation()
+  const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
   const { addToFavourite, removeFromFavourite } = useActions()
 
   console.log('favouritesArr', favouritesArr)
 
-  const { id } = useParams()
-
-  const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
-  const [addRecipeToFav] = useAddRecipeMutation()
-  const [removeRecipeFromFav] = useRemoveRecipeMutation()
-
-  const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
-
   const addToFavourites = async (recipe: RecipeData) => {
     addToFavourite(recipe)
-    await addRecipeToFav(recipe)
+    try {
+      await addRecipeToFav(recipe)
+    } catch (err) {
+      console.error('Ошибка добавления в избранное', err)
+      removeFromFavourite(recipe)
+    }
   }
 
   const removeFromFavourites = async (recipe: RecipeData) => {
     removeFromFavourite(recipe)
-    await removeRecipeFromFav(recipe)
+    try {
+      await removeRecipeFromFav(recipe)
+    } catch (err) {
+      console.error('Ошибка удаления из избранных', err)
+      addToFavourite
+    }
   }
 
   return (
