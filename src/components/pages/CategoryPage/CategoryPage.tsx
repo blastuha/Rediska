@@ -14,7 +14,7 @@ import { categoriesData } from '../../../constants'
 export const CategoryPage: React.FC = () => {
   const sortOptions = [
     'По дате',
-    'По добавлению в избранные',
+    // 'По добавлению в избранные',
     'По названию asc',
     'По названию desc',
   ]

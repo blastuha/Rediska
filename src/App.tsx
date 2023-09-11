@@ -11,8 +11,9 @@ import { RecipesPage } from './components/pages/Recipes/RecipesPage.tsx'
 import { CategoryPage } from './components/pages/CategoryPage/CategoryPage.tsx'
 import { Login } from './components/pages/AuthPage/Login.tsx'
 import { Register } from './components/pages/AuthPage/Register.tsx'
-import { PrivateRoute } from './router/PrivateRouter.tsx'
 import { UserPage } from './components/pages/UserPage/UserPage.tsx'
+import { FavouritesPage } from './components/pages/FavouritesPage/FavouritesPage.tsx'
+import { PrivateRoute } from './router/PrivateRouter.tsx'
 
 import { useActions } from './hooks/useActions.ts'
 import { useAuth } from './hooks/useAuth.ts'
@@ -72,6 +73,10 @@ const App = () => {
         {
           path: 'category/:category',
           element: <CategoryPage />,
+        },
+        {
+          path: 'favourites',
+          element: <FavouritesPage />,
         },
         {
           path: 'user',

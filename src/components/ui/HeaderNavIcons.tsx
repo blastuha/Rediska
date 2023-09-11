@@ -9,7 +9,9 @@ export const HeaderNavIcons: React.FC = () => {
     <div className='flex cursor-pointer self-center'>
       <Search styles='w-6 h-6 mr-2' />
 
-      <Heart styles='w-6 h-6 mr-2' />
+      <Link to='favourites'>
+        <Heart styles='w-6 h-6 mr-2' />
+      </Link>
 
       <Link to='user'>
         <Person styles='w-6 h-6' />

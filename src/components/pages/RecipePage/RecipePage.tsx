@@ -7,48 +7,20 @@ import { NutritionFacts } from './NutritionFacts'
 import { Ingredients } from './Ingredients/Ingredients'
 import { RecipeSteps } from './RecipeSteps'
 
-import {
-  useFetchRecipesByIdQuery,
-  useAddRecipeMutation,
-  useRemoveRecipeMutation,
-} from '../../../redux/recipes/recipesApi'
+import { useFetchRecipesByIdQuery } from '../../../redux/recipes/recipesApi'
 
 import { useAppSelector } from '../../../hooks/useAppSelector'
-import { useActions } from '../../../hooks/useActions'
 import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
-
-import { RecipeData } from '../../../models'
+import { useFavouritesActions } from '../../../hooks/useFavouritesActions'
 
 export const RecipePage: React.FC = () => {
   const { id } = useParams()
   const favouritesArr = useAppSelector((state) => state.recipes.favourites)
   const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
-  const [addRecipeToFav] = useAddRecipeMutation()
-  const [removeRecipeFromFav] = useRemoveRecipeMutation()
   const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
-  const { addToFavourite, removeFromFavourite } = useActions()
+  const { addToFavourites, removeFromFavourites } = useFavouritesActions()
 
   console.log('favouritesArr', favouritesArr)
-
-  const addToFavourites = async (recipe: RecipeData) => {
-    addToFavourite(recipe)
-    try {
-      await addRecipeToFav(recipe)
-    } catch (err) {
-      console.error('Ошибка добавления в избранное', err)
-      removeFromFavourite(recipe)
-    }
-  }
-
-  const removeFromFavourites = async (recipe: RecipeData) => {
-    removeFromFavourite(recipe)
-    try {
-      await removeRecipeFromFav(recipe)
-    } catch (err) {
-      console.error('Ошибка удаления из избранных', err)
-      addToFavourite
-    }
-  }
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>

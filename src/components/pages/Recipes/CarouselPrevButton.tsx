@@ -4,7 +4,7 @@ export const CarouselPrevButton: React.FC<{
   return (
     <button
       className='absolute left-[-4%] top-[50%] z-[99999] translate-y-[-50%]'
-      onClick={() => swiperRef.current?.swiper?.slideNext()}
+      onClick={() => swiperRef.current?.swiper?.slidePrev()}
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
