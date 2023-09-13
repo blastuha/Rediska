@@ -38,3 +38,13 @@ ul::-webkit-scrollbar-thumb {
 ul:hover::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.4); /* Цвет ползунка при наведении */
 }
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
