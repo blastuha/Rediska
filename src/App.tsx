@@ -13,6 +13,8 @@ import { Login } from './components/pages/AuthPage/Login.tsx'
 import { Register } from './components/pages/AuthPage/Register.tsx'
 import { UserPage } from './components/pages/UserPage/UserPage.tsx'
 import { FavouritesPage } from './components/pages/FavouritesPage/FavouritesPage.tsx'
+import { ForgotPassword } from './components/pages/AuthPage/ForgotPassword.tsx'
+import { NewsPage } from './components/pages/NewsPage/NewsPage.tsx'
 import { PrivateRoute } from './router/PrivateRouter.tsx'
 
 import { useActions } from './hooks/useActions.ts'
@@ -63,6 +65,10 @@ const App = () => {
           element: <WeekPlotPage />,
         },
         {
+          path: 'newsPage/:id',
+          element: <NewsPage />,
+        },
+        {
           path: 'reciept/:id',
           element: <RecipePage />,
         },
@@ -76,7 +82,11 @@ const App = () => {
         },
         {
           path: 'favourites',
-          element: <FavouritesPage />,
+          element: (
+            <PrivateRoute isAuth={isAuth}>
+              <FavouritesPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: 'user',
@@ -93,6 +103,10 @@ const App = () => {
         {
           path: 'signup',
           element: <Register />,
+        },
+        {
+          path: 'forgot',
+          element: <ForgotPassword />,
         },
       ],
     },

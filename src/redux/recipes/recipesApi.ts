@@ -133,6 +133,23 @@ export const recipesApi = createApi({
       },
     }),
 
+    fetchWidgetNewsById: build.query({
+      async queryFn(id: string | undefined) {
+        try {
+          const newByIdRef = doc(db, 'reciepts', 'Q4Dhy8x85wPSOsHSsaim', 'news', id ? id : '')
+          const newByIdSnapshot = await getDoc(newByIdRef)
+          if (newByIdSnapshot.exists()) {
+            const newData = newByIdSnapshot.data() as WidgetNewsData
+            return { data: newData }
+          } else {
+            return { data: undefined }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
+    }),
+
     // fetchFavourites: build.query({
     //   async queryFn() {
     //     try {
@@ -202,6 +219,7 @@ export const {
   useFetchWeekPlotsQuery,
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
+  useFetchWidgetNewsByIdQuery,
   // useFetchFavouritesQuery,
   useAddRecipeMutation,
   useRemoveRecipeMutation,

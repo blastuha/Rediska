@@ -8,7 +8,6 @@ import { Ingredients } from './Ingredients/Ingredients'
 import { RecipeSteps } from './RecipeSteps'
 
 import { useFetchRecipesByIdQuery } from '../../../redux/recipes/recipesApi'
-
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
 import { useFavouritesActions } from '../../../hooks/useFavouritesActions'
@@ -20,12 +19,10 @@ export const RecipePage: React.FC = () => {
   const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
   const { addToFavourites, removeFromFavourites } = useFavouritesActions()
 
-  console.log('favouritesArr', favouritesArr)
-
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
       <ContentHeading
-        recipe={recipe}
+        data={recipe}
         addToFavourites={addToFavourites}
         removeFromFavourites={removeFromFavourites}
         isRecipeInFavourites={isRecipeInFavourites}

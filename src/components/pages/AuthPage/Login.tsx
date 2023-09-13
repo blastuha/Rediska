@@ -12,8 +12,6 @@ import { SignInSchema } from '../../../helpers/accountValidation'
 export const Login: React.FC = () => {
   const [error, setError] = useState<AuthError | null>(null)
 
-  console.log(error)
-
   const auth = getAuth()
   const { setUser } = useActions()
 
@@ -54,17 +52,17 @@ export const Login: React.FC = () => {
             <p className='mb-6 font-inter text-[17px] text-[#9096B2]'>
               Пожалуйста, войдите, используя данные учетной записи.
             </p>
-            <p className='text-[red]'>{error ? 'Вы ввели неверный email или password' : ''}</p>
+            <p className='text-[#fc4848]'>{error ? 'Вы ввели неверный email или password' : ''}</p>
           </div>
 
           <form onSubmit={handleSubmit}>
             <div className='mb-2 flex justify-between'>
               <label htmlFor='signin-email'>Email</label>
-              <p className='text-xs text-[red]'>{touched.email && errors.email}</p>
+              <p className='text-xs text-[#fc4848]'>{touched.email && errors.email}</p>
             </div>
             <input
               className={`mb-5 w-full border-[1px] px-4 py-3 focus-within:outline-none ${
-                errors.email && touched.email ? 'border-[red] ' : 'border-lines-blue'
+                errors.email && touched.email ? 'border-[#fc4848] ' : 'border-lines-blue'
               }`}
               type='email'
               value={values.email}
@@ -75,11 +73,11 @@ export const Login: React.FC = () => {
 
             <div className='mb-2 flex justify-between'>
               <label htmlFor='signin-password'>Password</label>
-              <p className='text-xs text-[red]'>{touched.password && errors.password}</p>
+              <p className='text-xs text-[#fc4848]'>{touched.password && errors.password}</p>
             </div>
             <input
               className={`mb-5 w-full border-[1px] px-4 py-3 focus-within:outline-none ${
-                errors.password && touched.password ? 'border-[red] ' : ' border-lines-blue'
+                errors.password && touched.password ? 'border-[#fc4848] ' : ' border-lines-blue'
               }`}
               type='password'
               value={values.password}
@@ -87,9 +85,11 @@ export const Login: React.FC = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <p className='font-Lato mb-6 cursor-pointer text-[17px] text-[#9096B2]  hover:underline'>
-              Забыл пароль?
-            </p>
+            <Link to='/forgot'>
+              <p className='font-Lato mb-6 cursor-pointer text-[17px] text-[#9096B2]  hover:underline'>
+                Забыл пароль?
+              </p>
+            </Link>
             <button
               type='submit'
               className='text-white font-Lato flex h-[48px] w-full items-center justify-center rounded-[3px] bg-[pink] text-center disabled:opacity-75'
