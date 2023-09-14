@@ -42,6 +42,7 @@ export const RecipesCustomGrid: React.FC<RecipesGridProps> = ({
             return React.cloneElement(card, {
               key: i,
               ...recipe,
+              recipe,
               firstCardStyles: firstCardStylesFunc(i),
             })
           } else {

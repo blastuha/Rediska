@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { User, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 
 import { Layout } from './components/layout/Layout'
@@ -11,11 +11,18 @@ import { RecipesPage } from './components/pages/Recipes/RecipesPage.tsx'
 import { CategoryPage } from './components/pages/CategoryPage/CategoryPage.tsx'
 import { Login } from './components/pages/AuthPage/Login.tsx'
 import { Register } from './components/pages/AuthPage/Register.tsx'
-import { PrivateRoute } from './router/PrivateRouter.tsx'
 import { UserPage } from './components/pages/UserPage/UserPage.tsx'
+import { FavouritesPage } from './components/pages/FavouritesPage/FavouritesPage.tsx'
+import { ForgotPassword } from './components/pages/AuthPage/ForgotPassword.tsx'
+import { NewsPage } from './components/pages/NewsPage/NewsPage.tsx'
+import { PrivateRoute } from './router/PrivateRouter.tsx'
 
 import { useActions } from './hooks/useActions.ts'
 import { useAuth } from './hooks/useAuth.ts'
+
+import { getUserData } from './helpers/getUserData.ts'
+
+import { RecipeData } from './models/RecipeData.ts'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -23,17 +30,25 @@ import 'swiper/css/navigation'
 const App = () => {
   const auth = getAuth()
   const { isAuth } = useAuth()
-  const { setUser } = useActions()
+  const { setUser, setFavourites } = useActions()
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
-        console.log('user.email', user.email)
+    const authStateChanged = (user: User | null) => {
+      if (user && !user.isAnonymous) {
+        ;(async () => {
+          const usersData = await getUserData(user.uid)
+          if (usersData?.favourites) {
+            setFavourites(usersData.favourites as RecipeData[])
+          } else {
+            setFavourites([])
+          }
+          setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+        })().catch((err) => console.error(err))
       }
-    })
-    return unsub
-  }, [auth, setUser])
+    }
+
+    onAuthStateChanged(auth, authStateChanged)
+  }, [auth, setUser, setFavourites])
 
   const router = createBrowserRouter([
     {
@@ -50,6 +65,10 @@ const App = () => {
           element: <WeekPlotPage />,
         },
         {
+          path: 'newsPage/:id',
+          element: <NewsPage />,
+        },
+        {
           path: 'reciept/:id',
           element: <RecipePage />,
         },
@@ -60,6 +79,14 @@ const App = () => {
         {
           path: 'category/:category',
           element: <CategoryPage />,
+        },
+        {
+          path: 'favourites',
+          element: (
+            <PrivateRoute isAuth={isAuth}>
+              <FavouritesPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: 'user',
@@ -76,6 +103,10 @@ const App = () => {
         {
           path: 'signup',
           element: <Register />,
+        },
+        {
+          path: 'forgot',
+          element: <ForgotPassword />,
         },
       ],
     },

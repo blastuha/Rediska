@@ -20,7 +20,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
-
-getAuth().onAuthStateChanged((user) => {
-  console.log('state changed', user)
-})
+export const auth = getAuth()

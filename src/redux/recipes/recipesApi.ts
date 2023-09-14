@@ -1,16 +1,28 @@
+import { RecipeData } from './../../models/RecipeData'
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  setDoc,
+  arrayRemove,
+} from 'firebase/firestore'
+
+import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { RecipeData } from '../../models/RecipeData.ts'
-import { WeekPlot } from '../../models/WeekPlot.ts'
-import { WidgetNewsData } from '../../models/WidgetNewsData.ts'
+import { FavouritesData, RecipeData } from '../../models/'
+import { WeekPlot } from '../../models/'
+import { WidgetNewsData } from '../../models/'
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Recipes', 'WeekPlots', 'News'],
+  tagTypes: ['Recipes', 'WeekPlots', 'News', 'Favourites'],
   endpoints: (build) => ({
     fetchRecipes: build.query({
       async queryFn() {
@@ -21,9 +33,12 @@ export const recipesApi = createApi({
           // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
           // return recipesList
           //*-------
+
+          const recipesData: RecipeData[] = []
+
           const recipesRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
           const querySnapshot = await getDocs(recipesRef)
-          const recipesData: RecipeData[] = []
+
           querySnapshot?.forEach((doc) => {
             recipesData.push(doc.data() as RecipeData)
           })
@@ -32,16 +47,17 @@ export const recipesApi = createApi({
           return { error }
         }
       },
-      // providesTags: (result, error, id) => [{ type: 'Recipes', id }],
       providesTags: ['Recipes'],
     }),
 
     fetchWeekPlots: build.query({
       async queryFn() {
         try {
+          const weekPlotsData: WeekPlot[] = []
+
           const weekPlotsRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/weekPlots')
           const querySnapshot = await getDocs(weekPlotsRef)
-          const weekPlotsData: WeekPlot[] = []
+
           querySnapshot?.forEach((doc) => {
             weekPlotsData.push(doc.data() as WeekPlot)
           })
@@ -56,9 +72,11 @@ export const recipesApi = createApi({
     fetchWidgetNews: build.query({
       async queryFn() {
         try {
+          const widgetNewsData: WidgetNewsData[] = []
+
           const widgetNewsRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/news')
           const querySnapshot = await getDocs(widgetNewsRef)
-          const widgetNewsData: WidgetNewsData[] = []
+
           querySnapshot?.forEach((doc) => {
             widgetNewsData.push(doc.data() as WidgetNewsData)
           })
@@ -67,7 +85,7 @@ export const recipesApi = createApi({
           return { error }
         }
       },
-      providesTags: ['WeekPlots'],
+      providesTags: ['News'],
     }),
 
     fetchRecipesById: build.query({
@@ -115,6 +133,123 @@ export const recipesApi = createApi({
         }
       },
     }),
+
+    fetchWidgetNewsById: build.query({
+      async queryFn(id: string | undefined) {
+        try {
+          const newByIdRef = doc(db, 'reciepts', 'Q4Dhy8x85wPSOsHSsaim', 'news', id ? id : '')
+          const newByIdSnapshot = await getDoc(newByIdRef)
+          if (newByIdSnapshot.exists()) {
+            const newData = newByIdSnapshot.data() as WidgetNewsData
+            return { data: newData }
+          } else {
+            return { data: undefined }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
+    }),
+
+    // fetchFavourites: build.query({
+    //   async queryFn() {
+    //     try {
+    //       if (auth.currentUser) {
+    //         return { data: await getFavourites() }
+    //       }
+
+    //       return { data: [] }
+    //     } catch (error) {
+    //       return { error }
+    //     }
+    //   },
+    //   providesTags: (result) =>
+    //     result
+    //       ? [
+    //           ...result.map(({ id }) => ({ type: 'Favourites' as const, id })),
+    //           { type: 'Favourites', id: 'LIST' },
+    //         ]
+    //       : [{ type: 'Favourites', id: 'LIST' }],
+    // }),
+
+    addRecipe: build.mutation({
+      async queryFn(recipe: RecipeData) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'users', auth.currentUser.uid)
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, { favourites: arrayUnion(recipe) })
+            } else {
+              await setDoc(ref, { favourites: [recipe] })
+            }
+          }
+          return { data: 'Рецепт успешно добавлен в избранное' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['Favourites'],
+    }),
+
+    removeRecipe: build.mutation({
+      async queryFn(recipe: RecipeData) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'users', auth.currentUser.uid)
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, { favourites: arrayRemove(recipe) })
+            }
+          }
+          return { data: 'Рецепт успешно удален из избранных' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['Favourites'],
+    }),
+
+    addRecipeToCounter: build.mutation({
+      async queryFn(object) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, {
+                recipesInFavourites: arrayUnion(object),
+              })
+            } else {
+              await setDoc(ref, { recipesInFavourites: [object] })
+            }
+          }
+          return { data: 'Рецепт успешно добавлен в избранное' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['Favourites'],
+    }),
+
+    fetchFavouritesCounter: build.query({
+      async queryFn() {
+        try {
+          const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
+          const docSnapshot = await getDoc(ref)
+          if (docSnapshot.exists()) {
+            const data = docSnapshot.data()
+            return { data: data.recipesInFavourites }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
+      // providesTags: ['favouritesCounter'],
+    }),
   }),
 })
 
@@ -124,4 +259,10 @@ export const {
   useFetchWeekPlotsQuery,
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
+  useFetchWidgetNewsByIdQuery,
+  // useFetchFavouritesQuery,
+  useAddRecipeMutation,
+  useRemoveRecipeMutation,
+  useAddRecipeToCounterMutation,
+  useFetchFavouritesCounterQuery,
 } = recipesApi

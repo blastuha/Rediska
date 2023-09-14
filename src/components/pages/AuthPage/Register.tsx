@@ -76,11 +76,11 @@ export const Register: React.FC = () => {
           <form onSubmit={handleSubmit}>
             <div className='mb-2 flex justify-between'>
               <label htmlFor='signin-email'>Email</label>
-              <p className='text-xs text-[red]'>{touched.email && errors.email}</p>
+              <p className='text-xs text-[#fc4848]'>{touched.email && errors.email}</p>
             </div>
             <input
               className={`mb-5 w-full border-[1px] px-4 py-3 focus-within:outline-none ${
-                errors.email && touched.email ? 'border-[red] ' : 'border-lines-blue'
+                errors.email && touched.email ? 'border-[#fc4848] ' : 'border-lines-blue'
               }`}
               type='email'
               value={values.email}
@@ -91,11 +91,13 @@ export const Register: React.FC = () => {
 
             <div className='mb-2 flex justify-between'>
               <label htmlFor='signin-email'>Username</label>
-              <p className='text-xs text-[red]'>{touched.displayName && errors.displayName}</p>
+              <p className='text-xs text-[#fc4848]'>{touched.displayName && errors.displayName}</p>
             </div>
             <input
               className={`mb-5 w-full border-[1px] px-4 py-3 focus-within:outline-none ${
-                errors.displayName && touched.displayName ? 'border-[red] ' : 'border-lines-blue'
+                errors.displayName && touched.displayName
+                  ? 'border-[#fc4848] '
+                  : 'border-lines-blue'
               }`}
               type='text'
               value={values.displayName}
@@ -106,11 +108,11 @@ export const Register: React.FC = () => {
 
             <div className='mb-2 flex justify-between'>
               <label htmlFor='signin-password'>Password</label>
-              <p className='text-xs text-[red]'>{touched.password && errors.password}</p>
+              <p className='text-xs text-[#fc4848]'>{touched.password && errors.password}</p>
             </div>
             <input
               className={`mb-5 w-full border-[1px] px-4 py-3 focus-within:outline-none ${
-                errors.password && touched.password ? 'border-[red] ' : ' border-lines-blue'
+                errors.password && touched.password ? 'border-[#fc4848] ' : ' border-lines-blue'
               }`}
               type='password'
               value={values.password}
@@ -121,11 +123,11 @@ export const Register: React.FC = () => {
 
             <div className='mb-2 flex justify-between'>
               <label htmlFor='signin-password'>Repeat Password</label>
-              <p className='text-xs text-[red]'>{touched.cPassword && errors.cPassword}</p>
+              <p className='text-xs text-[#fc4848]'>{touched.cPassword && errors.cPassword}</p>
             </div>
             <input
               className={`mb-5 w-full border-[1px] px-4 py-3 focus-within:outline-none ${
-                errors.cPassword && touched.cPassword ? 'border-[red] ' : ' border-lines-blue'
+                errors.cPassword && touched.cPassword ? 'border-[#fc4848] ' : ' border-lines-blue'
               }`}
               type='password'
               value={values.cPassword}
@@ -133,10 +135,6 @@ export const Register: React.FC = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-
-            <p className='font-Lato mb-6 cursor-pointer text-[17px] text-[#9096B2]  hover:underline'>
-              Забыл пароль?
-            </p>
 
             <button
               type='submit'

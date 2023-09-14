@@ -2,7 +2,7 @@ import React from 'react'
 import { ArrowButton } from '../../ui/ArrowButton.tsx'
 import { WidgetNewsData } from '../../../models'
 
-export const SwiperCard: React.FC<WidgetNewsData> = ({ title, photoURL, smallText }) => {
+export const SwiperCard: React.FC<WidgetNewsData> = ({ title, photoURL, smallText, id }) => {
   return (
     <div className='flex max-w-full rounded-lg bg-light-blue'>
       <div className='w-100 card w-3/5 bg-base-100 shadow-xl'>
@@ -14,7 +14,7 @@ export const SwiperCard: React.FC<WidgetNewsData> = ({ title, photoURL, smallTex
         </h1>
         <p className='max-h-1/3 line-clamp-5 font-medium'>{smallText}</p>
         <div className='absolute bottom-4 right-10'>
-          <ArrowButton />
+          <ArrowButton id={id} />
         </div>
       </div>
     </div>

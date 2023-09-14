@@ -19,3 +19,22 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+/* Скрыть дефолтный скроллбар */
+ul::-webkit-scrollbar {
+  width: 8px; /* Задаём ширину полосы прокрутки */
+}
+
+ul::-webkit-scrollbar-track {
+  background: transparent; /* Сделать фон полосы прокрутки прозрачным */
+}
+
+/* Стиль ползунка скроллбара */
+ul::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* Цвет ползунка */
+  border-radius: 4px; /* Скругление углов */
+}
+
+ul:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4); /* Цвет ползунка при наведении */
+}

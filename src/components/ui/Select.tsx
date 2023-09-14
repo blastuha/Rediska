@@ -9,12 +9,12 @@ type SelectProps = {
 export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
   return (
     <select
-      className='select w-full max-w-xs border-lines-blue focus:outline-lines-blue'
+      className='select w-full max-w-xs border-lines-blue outline-none focus:outline-none'
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >
       {options.map((option) => (
-        <option key={option} value={option}>
+        <option key={option} value={option} className=''>
           {option}
         </option>
       ))}

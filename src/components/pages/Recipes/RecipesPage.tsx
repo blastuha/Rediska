@@ -8,7 +8,7 @@ import { RecipesSectionHeading } from './RecipesSectionHeading.tsx'
 import { TextRightCard } from './TextRightCard.tsx'
 
 import { useFetchRecipesQuery } from '../../../redux/recipes/recipesApi.ts'
-import { SpecialDientCard } from './TextBottomCard.tsx'
+import { SpecialDietCard } from './SpecialDietCard.tsx'
 import { BgCard } from './BgCard.tsx'
 
 export const RecipesPage: React.FC = () => {
@@ -16,7 +16,7 @@ export const RecipesPage: React.FC = () => {
 
   return (
     <div className='container mx-auto flex-grow'>
-      <Carousel blockStyles='relative mb-10 mt-0' />
+      <Carousel blockStyles='relative mb-10 mt-0 ' />
       <RecipesSection
         sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
         sectionHeading={
@@ -70,7 +70,7 @@ export const RecipesPage: React.FC = () => {
           recipesData={recipesData}
           gridStyles='col-span-3 grid grid-cols-4 gap-6'
           cardsQuantity={3}
-          card={<SpecialDientCard />}
+          card={<SpecialDietCard />}
         />
       </RecipesSection>
 

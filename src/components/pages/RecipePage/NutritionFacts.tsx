@@ -17,7 +17,7 @@ export const NutritionFacts: React.FC<NutritionFactsProps> = ({ reciept }) => {
     <LinesBorder>
       <ul className='h-fit rounded-lg p-6'>
         <div className='absolute top-[-22px] bg-[white] pl-2 pr-2 text-center'>
-          <h5 className='font-playfair text-2xl font-bold'>Ингредиенты</h5>
+          <h5 className='font-playfair text-2xl font-bold'>Nutrition Facts</h5>
         </div>
         {reciept?.nutritionFacts.map((fact, i) => {
           return (
