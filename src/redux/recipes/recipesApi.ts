@@ -22,7 +22,7 @@ import { WidgetNewsData } from '../../models/'
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Recipes', 'WeekPlots', 'News', 'Favourites'],
+  tagTypes: ['Recipes', 'WeekPlots', 'News', 'Favourites', 'FavouritesCounter'],
   endpoints: (build) => ({
     fetchRecipes: build.query({
       async queryFn() {
@@ -232,7 +232,28 @@ export const recipesApi = createApi({
           return { error: err }
         }
       },
-      invalidatesTags: ['Favourites'],
+      invalidatesTags: ['FavouritesCounter'],
+    }),
+
+    removeRecipeFromCounter: build.mutation({
+      async queryFn(object) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, {
+                recipesInFavourites: arrayRemove(object),
+              })
+            }
+          }
+          return { data: 'Рецепт успешно удален из избранного' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['FavouritesCounter'],
     }),
 
     fetchFavouritesCounter: build.query({
@@ -248,7 +269,7 @@ export const recipesApi = createApi({
           return { error }
         }
       },
-      // providesTags: ['favouritesCounter'],
+      providesTags: ['FavouritesCounter'],
     }),
   }),
 })
@@ -264,5 +285,6 @@ export const {
   useAddRecipeMutation,
   useRemoveRecipeMutation,
   useAddRecipeToCounterMutation,
+  useRemoveRecipeFromCounterMutation,
   useFetchFavouritesCounterQuery,
 } = recipesApi

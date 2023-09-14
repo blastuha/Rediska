@@ -34,7 +34,7 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
         </div>
         {addToFavourites && (
           <div className='flex'>
-            {isRecipeInFavourites && isRecipeInFavourites >= 0 ? (
+            {typeof isRecipeInFavourites !== 'undefined' && isRecipeInFavourites >= 0 ? (
               <div
                 onClick={
                   data && removeFromFavourites
@@ -53,7 +53,7 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
                 <Heart styles='w-6 h-6 mr-2 cursor-pointer' />
               </div>
             )}
-            <span>{favouritesCounter} </span>
+            <span>{favouritesCounter}</span>
           </div>
         )}
       </div>
