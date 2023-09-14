@@ -20,15 +20,13 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
   removeFromFavourites,
   isRecipeInFavourites,
   data,
+  favouritesCounter,
 }) => {
-  console.log('data', data)
+  console.log('isRecipeInFavourites', isRecipeInFavourites)
 
   return (
     <div className='flex flex-col'>
-      <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>
-        {/* {recipe ? recipe?.title : plot?.title} */}
-        {data?.title}
-      </h1>
+      <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{data?.title}</h1>
       <div className='flex'>
         <div className='mr-6 flex'>
           <Date styles='w-6 h-6 mr-2 cursor-pointer' />
@@ -36,7 +34,7 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
         </div>
         {addToFavourites && (
           <div className='flex'>
-            {isRecipeInFavourites !== undefined && isRecipeInFavourites >= 0 ? (
+            {isRecipeInFavourites && isRecipeInFavourites >= 0 ? (
               <div
                 onClick={
                   data && removeFromFavourites
@@ -55,7 +53,7 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
                 <Heart styles='w-6 h-6 mr-2 cursor-pointer' />
               </div>
             )}
-            <span>Quantity of likes</span>
+            <span>{favouritesCounter} </span>
           </div>
         )}
       </div>

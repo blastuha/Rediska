@@ -11,6 +11,7 @@ import { useFetchRecipesByIdQuery } from '../../../redux/recipes/recipesApi'
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
 import { useFavouritesActions } from '../../../hooks/useFavouritesActions'
+import { useFetchFavouritesCounterQuery } from '../../../redux/recipes/recipesApi'
 
 export const RecipePage: React.FC = () => {
   const { id } = useParams()
@@ -18,6 +19,11 @@ export const RecipePage: React.FC = () => {
   const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
   const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
   const { addToFavourites, removeFromFavourites } = useFavouritesActions()
+  const { data: favouritesCounterArr } = useFetchFavouritesCounterQuery(undefined)
+
+  const favouritesCounter = favouritesCounterArr.filter(
+    (item) => item.recipeId === recipe?.id,
+  ).length
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
@@ -26,6 +32,7 @@ export const RecipePage: React.FC = () => {
         addToFavourites={addToFavourites}
         removeFromFavourites={removeFromFavourites}
         isRecipeInFavourites={isRecipeInFavourites}
+        favouritesCounter={favouritesCounter}
       />
       <p className='pb-6 text-lg'>{recipe?.paragraph}</p>
       <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />

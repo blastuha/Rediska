@@ -14,7 +14,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
       onChange={(e) => onChange(e.target.value)}
     >
       {options.map((option) => (
-        <option key={option} value={option}>
+        <option key={option} value={option} className=''>
           {option}
         </option>
       ))}

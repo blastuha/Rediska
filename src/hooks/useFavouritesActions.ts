@@ -1,20 +1,31 @@
 import { useAddRecipeMutation } from '../redux/recipes/recipesApi'
 import { useRemoveRecipeMutation } from '../redux/recipes/recipesApi'
+import { useAddRecipeToCounterMutation } from '../redux/recipes/recipesApi'
+
+import { getAuth } from 'firebase/auth'
+
 import { useActions } from './useActions'
+
 import { RecipeData } from '../models'
 
 export const useFavouritesActions = () => {
   const [addRecipeToFav] = useAddRecipeMutation()
   const [removeRecipeFromFav] = useRemoveRecipeMutation()
   const { addToFavourite, removeFromFavourite } = useActions()
+  const [addToFavCounter] = useAddRecipeToCounterMutation()
+
+  const currentUserId = getAuth().currentUser?.uid
 
   const addToFavourites = async (recipe: RecipeData) => {
-    addToFavourite(recipe)
-    try {
-      await addRecipeToFav(recipe)
-    } catch (err) {
-      console.error('Ошибка добавления в избранное', err)
-      removeFromFavourite(recipe)
+    if (currentUserId) {
+      addToFavourite(recipe)
+      try {
+        await addRecipeToFav(recipe)
+        await addToFavCounter({ userId: currentUserId, recipeId: recipe.id })
+      } catch (err) {
+        console.error('Ошибка добавления в избранное', err)
+        removeFromFavourite(recipe)
+      }
     }
   }
 

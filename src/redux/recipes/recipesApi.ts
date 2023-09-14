@@ -1,3 +1,4 @@
+import { RecipeData } from './../../models/RecipeData'
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import {
   collection,
@@ -172,7 +173,7 @@ export const recipesApi = createApi({
     // }),
 
     addRecipe: build.mutation({
-      async queryFn(recipe) {
+      async queryFn(recipe: RecipeData) {
         try {
           if (auth.currentUser) {
             const ref = doc(db, 'users', auth.currentUser.uid)
@@ -193,7 +194,7 @@ export const recipesApi = createApi({
     }),
 
     removeRecipe: build.mutation({
-      async queryFn(recipe) {
+      async queryFn(recipe: RecipeData) {
         try {
           if (auth.currentUser) {
             const ref = doc(db, 'users', auth.currentUser.uid)
@@ -210,6 +211,45 @@ export const recipesApi = createApi({
       },
       invalidatesTags: ['Favourites'],
     }),
+
+    addRecipeToCounter: build.mutation({
+      async queryFn(object) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, {
+                recipesInFavourites: arrayUnion(object),
+              })
+            } else {
+              await setDoc(ref, { recipesInFavourites: [object] })
+            }
+          }
+          return { data: 'Рецепт успешно добавлен в избранное' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['Favourites'],
+    }),
+
+    fetchFavouritesCounter: build.query({
+      async queryFn() {
+        try {
+          const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
+          const docSnapshot = await getDoc(ref)
+          if (docSnapshot.exists()) {
+            const data = docSnapshot.data()
+            return { data: data.recipesInFavourites }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
+      // providesTags: ['favouritesCounter'],
+    }),
   }),
 })
 
@@ -223,4 +263,6 @@ export const {
   // useFetchFavouritesQuery,
   useAddRecipeMutation,
   useRemoveRecipeMutation,
+  useAddRecipeToCounterMutation,
+  useFetchFavouritesCounterQuery,
 } = recipesApi
