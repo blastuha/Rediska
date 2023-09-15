@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import { useFetchRecipesQuery } from '../../../redux/recipes/recipesApi'
+import { useFetchRecipesInFavouriteQuery } from '../../../redux/recipes/recipesApi'
 
 import { RecipesSectionHeading } from '../Recipes/RecipesSectionHeading'
 import { Select } from '../../ui/Select'
@@ -14,14 +15,20 @@ import { categoriesData } from '../../../constants'
 export const CategoryPage: React.FC = () => {
   const sortOptions = [
     'По дате',
-    // 'По добавлению в избранные',
+    'По добавленным в избранные',
     'По названию asc',
     'По названию desc',
   ]
   const [selectedOption, setSelectedOption] = useState(sortOptions[0])
-  console.log(selectedOption)
   const { data: recipesData = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
+  const { data: favouritesData = [] } = useFetchRecipesInFavouriteQuery(null)
   const { category } = useParams()
+
+  const countFavourites = (recipeId: string) => {
+    return favouritesData.filter((fav) => fav.recipeId === recipeId).length
+  }
+
+  console.log('recipesData', recipesData)
 
   const recipesFiltred = recipesData.filter((recipe) => {
     return recipe.category === category
@@ -73,6 +80,9 @@ export const CategoryPage: React.FC = () => {
             }
             if (selectedOption === 'По названию desc') {
               if (a.title > b.title) return -1
+            }
+            if (selectedOption === 'По добавленным в избранные') {
+              return countFavourites(b.id) - countFavourites(a.id)
             }
             return 0
           })
