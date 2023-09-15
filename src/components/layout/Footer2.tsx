@@ -1,0 +1,83 @@
+import React, { FC, ReactElement } from 'react'
+import { AiFillInstagram } from 'react-icons/ai'
+import { GrFacebookOption, GrTwitter } from 'react-icons/gr'
+import { Link } from 'react-router-dom'
+
+export const Footer2: FC = (): ReactElement => {
+  return (
+    <footer>
+      <div className='flex items-center bg-[#F9F9F9] py-12'>
+        <div className='container mx-auto'>
+          <div className='grid grid-cols-1 gap-y-8 text-center sm:grid-cols-2 sm:text-start lg:grid-cols-3'>
+            <div className='w-full'>
+              <ul>
+                <li className='text-black mb-5 font-dancingScript text-4xl font-bold '>Rediska</li>
+                <li>
+                  <a href='mailto:MiladSadeghi2323@gmail.com' className='mb-1 block text-[#7F7F7F]'>
+                    shevnin.boris2@gmail.com
+                  </a>
+                  <a
+                    href='https://t.me/wsxxsw'
+                    rel='noreferrer'
+                    target='_blank'
+                    className='text-base text-[#7F7F7F]'
+                  >
+                    tg: @blasterblast
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div>
+                <h5 className='mb-6 font-dancingScript text-2xl font-semibold'>Social Media</h5>
+                <ul className='font-inter text-[#7F7F7F]'>
+                  <li className='footer-li'>
+                    <Link to='/'>Instagram</Link>
+                  </li>
+                  <li className='footer-li'>
+                    <Link to='/'>YouTube</Link>
+                  </li>
+                  <li className='footer-li'>
+                    <Link to='/'>Telegram</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className='flex flex-col items-center sm:items-start lg:items-center'>
+              <div>
+                <h5 className='mb-6 font-dancingScript text-2xl font-semibold'>Pages</h5>
+                <ul className='font-inter text-[#7F7F7F]'>
+                  <li className='footer-li'>
+                    <Link to='/'>Главная</Link>
+                  </li>
+                  <li className='footer-li'>
+                    <Link to='/reciepts'>Рецепты</Link>
+                  </li>
+                  <li className='footer-li'>
+                    <Link to='/about'>О нас</Link>
+                  </li>
+                  <li className='footer-li'>
+                    <Link to='/signin'>Вход</Link>
+                  </li>
+                  <li className='footer-li'>
+                    <Link to='/signup'>Регистрация</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='bg-[#F9F9F9] py-2'>
+        <div className='container mx-auto flex flex-wrap justify-between'>
+          <p className='font-dancingScript text-lg text-[#9DA0AE]'>Rediska - All Rights Reserved</p>
+          <div className='flex items-center'>
+            <AiFillInstagram className='text-white mr-4 rounded-full bg-navy-blue p-1 text-2xl' />
+            <GrFacebookOption className='text-white mr-4 rounded-full bg-navy-blue p-1 text-2xl' />
+            <GrTwitter className='text-white mr-4 rounded-full bg-navy-blue p-1 text-2xl' />
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
