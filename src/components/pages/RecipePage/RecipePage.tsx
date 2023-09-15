@@ -12,7 +12,7 @@ import { useAppSelector } from '../../../hooks/useAppSelector'
 import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
 import { useFavouritesActions } from '../../../hooks/useFavouritesActions'
 import { useFavouritesCounter } from '../../../hooks/useFavouritesCounter'
-import { useFetchFavouritesCounterQuery } from '../../../redux/recipes/recipesApi'
+import { useFetchRecipesInFavouriteQuery } from '../../../redux/recipes/recipesApi'
 
 export const RecipePage: React.FC = () => {
   const { id } = useParams()
@@ -22,9 +22,6 @@ export const RecipePage: React.FC = () => {
   const favouritesCounter = useFavouritesCounter(recipe?.id)
   const { addToFavourites, removeFromFavourites, optimisticFavouritesCounter } =
     useFavouritesActions(favouritesCounter)
-
-  console.log('optimisticFavouritesCounter', optimisticFavouritesCounter)
-  console.log('favouritesCounter', favouritesCounter)
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>

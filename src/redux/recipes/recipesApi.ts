@@ -1,4 +1,3 @@
-import { RecipeData } from './../../models/RecipeData'
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import {
   collection,
@@ -15,9 +14,11 @@ import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { FavouritesData, RecipeData } from '../../models/'
-import { WeekPlot } from '../../models/'
-import { WidgetNewsData } from '../../models/'
+import { FavouritesData, RecipeData, WeekPlot, WidgetNewsData, RecipeFavObj } from '../../models/'
+
+export type Test = {
+  recipesInFavourites: RecipeFavObj[]
+}
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
@@ -190,7 +191,7 @@ export const recipesApi = createApi({
           return { error: err }
         }
       },
-      invalidatesTags: ['Favourites'],
+      // invalidatesTags: ['Favourites'],
     }),
 
     removeRecipe: build.mutation({
@@ -209,11 +210,11 @@ export const recipesApi = createApi({
           return { error: err }
         }
       },
-      invalidatesTags: ['Favourites'],
+      // invalidatesTags: ['Favourites'],
     }),
 
     addRecipeToCounter: build.mutation({
-      async queryFn(object) {
+      async queryFn(recipeFavObj: RecipeFavObj) {
         try {
           if (auth.currentUser) {
             const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
@@ -221,10 +222,10 @@ export const recipesApi = createApi({
 
             if (userSnapshot.exists()) {
               await updateDoc(ref, {
-                recipesInFavourites: arrayUnion(object),
+                recipesInFavourites: arrayUnion(recipeFavObj),
               })
             } else {
-              await setDoc(ref, { recipesInFavourites: [object] })
+              await setDoc(ref, { recipesInFavourites: [recipeFavObj] })
             }
           }
           return { data: 'Рецепт успешно добавлен в избранное' }
@@ -236,7 +237,7 @@ export const recipesApi = createApi({
     }),
 
     removeRecipeFromCounter: build.mutation({
-      async queryFn(object) {
+      async queryFn(recipeFavObj: RecipeFavObj) {
         try {
           if (auth.currentUser) {
             const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
@@ -244,7 +245,7 @@ export const recipesApi = createApi({
 
             if (userSnapshot.exists()) {
               await updateDoc(ref, {
-                recipesInFavourites: arrayRemove(object),
+                recipesInFavourites: arrayRemove(recipeFavObj),
               })
             }
           }
@@ -256,14 +257,17 @@ export const recipesApi = createApi({
       invalidatesTags: ['FavouritesCounter'],
     }),
 
-    fetchFavouritesCounter: build.query({
+    fetchRecipesInFavourite: build.query({
       async queryFn() {
         try {
           const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
           const docSnapshot = await getDoc(ref)
           if (docSnapshot.exists()) {
-            const data = docSnapshot.data()
+            const data = docSnapshot.data() as Test
+            console.log('DATA', data)
             return { data: data.recipesInFavourites }
+          } else {
+            return { data: [] }
           }
         } catch (error) {
           return { error }
@@ -286,5 +290,5 @@ export const {
   useRemoveRecipeMutation,
   useAddRecipeToCounterMutation,
   useRemoveRecipeFromCounterMutation,
-  useFetchFavouritesCounterQuery,
+  useFetchRecipesInFavouriteQuery,
 } = recipesApi
