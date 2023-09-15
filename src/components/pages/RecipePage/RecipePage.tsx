@@ -19,8 +19,12 @@ export const RecipePage: React.FC = () => {
   const favouritesArr = useAppSelector((state) => state.recipes.favourites)
   const { data: recipe, isLoading } = useFetchRecipesByIdQuery(id)
   const isRecipeInFavourites = useIsRecipeInFavourites(recipe?.id, favouritesArr)
-  const { addToFavourites, removeFromFavourites } = useFavouritesActions()
   const favouritesCounter = useFavouritesCounter(recipe?.id)
+  const { addToFavourites, removeFromFavourites, optimisticFavouritesCounter } =
+    useFavouritesActions(favouritesCounter)
+
+  console.log('optimisticFavouritesCounter', optimisticFavouritesCounter)
+  console.log('favouritesCounter', favouritesCounter)
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
@@ -29,7 +33,7 @@ export const RecipePage: React.FC = () => {
         addToFavourites={addToFavourites}
         removeFromFavourites={removeFromFavourites}
         isRecipeInFavourites={isRecipeInFavourites}
-        favouritesCounter={favouritesCounter}
+        favouritesCounter={optimisticFavouritesCounter}
       />
       <p className='pb-6 text-lg'>{recipe?.paragraph}</p>
       <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />

@@ -6,6 +6,7 @@ export const useFavouritesCounter = (recipeId) => {
   const [favouritesCounter, setFavouritesCounter] = useState(0)
 
   console.log('favouritesCounterArr', favouritesCounterArr)
+  console.log('recipeId', recipeId)
 
   useEffect(() => {
     if (favouritesCounterArr) {
