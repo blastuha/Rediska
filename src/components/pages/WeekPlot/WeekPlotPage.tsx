@@ -13,7 +13,7 @@ export const WeekPlotPage: React.FC = () => {
   return (
     <div className='flex-grow'>
       <div className='container mx-auto pl-4 pr-4'>
-        <ContentHeading data={plot} />
+        <ContentHeading data={plot} title={plot?.title} date={plot?.date} />
         <MarkDown content={plot?.text} />
       </div>
     </div>

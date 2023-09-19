@@ -11,7 +11,7 @@ type ContentHeadingProps = {
   title?: string
   isRecipeInFavourites?: number | undefined
   data?: RecipeData | WeekPlot | WidgetNewsData
-  favouritesCounter: number
+  favouritesCounter?: number
   addToFavourites?: (item: RecipeData) => Promise<void>
   removeFromFavourites?: (item: RecipeData) => Promise<void>
 }
@@ -21,15 +21,17 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
   removeFromFavourites,
   isRecipeInFavourites,
   data,
+  date,
   favouritesCounter,
+  title,
 }) => {
   return (
     <div className='flex flex-col'>
-      <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{data?.title}</h1>
+      <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{title}</h1>
       <div className='flex'>
         <div className='mr-6 flex'>
           <Date styles='w-6 h-6 mr-2 cursor-pointer' />
-          <span>{data?.date}</span>
+          <span>{date}</span>
         </div>
         {addToFavourites && (
           <div className='flex'>

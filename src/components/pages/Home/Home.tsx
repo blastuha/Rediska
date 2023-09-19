@@ -37,10 +37,10 @@ export const Home: React.FC = () => {
 
         <HomeSection>
           <Widget
-            photoURL='https://hips.hearstapps.com/hmg-prod/images/key-lime-pie-mousse-index-64d3a4ed8c3f1.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*'
-            title='75 Cheap Dinner Recipes That Are Practically Easier Than Ordering Delivery'
-            paragraph='Ditch takeout and boring meals for good.'
-            link='/'
+            photoURL='https://www.gastronom.ru/binfiles/images/20230721/b4ff2f1d.jpg'
+            title='Пять интересных и очень-очень быстрых блюд на всю неделю'
+            paragraph='Откажитесь от еды на вынос и скучной еды навсегда'
+            link='/selectionOfRecipes'
           />
         </HomeSection>
 

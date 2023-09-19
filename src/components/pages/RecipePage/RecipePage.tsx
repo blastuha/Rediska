@@ -27,6 +27,8 @@ export const RecipePage: React.FC = () => {
     <main className='container mx-auto flex-grow pl-4 pr-4'>
       <ContentHeading
         data={recipe}
+        date={recipe?.date}
+        title={recipe?.title}
         addToFavourites={addToFavourites}
         removeFromFavourites={removeFromFavourites}
         isRecipeInFavourites={isRecipeInFavourites}

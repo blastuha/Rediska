@@ -10,8 +10,8 @@ type WidgetProps = {
 
 export const Widget: React.FC<WidgetProps> = ({ title, paragraph, photoURL, link }) => {
   return (
-    <Link to={link} className='flex flex-col'>
-      <div className='h-3/4 w-full bg-base'>
+    <Link to={link} className='flex flex-col overflow-hidden rounded-lg'>
+      <div className='bg-base h-3/4 w-full '>
         <img src={photoURL} alt='widgetPic' />
       </div>
       <div className='h-1/4 w-full bg-light-blue p-10'>

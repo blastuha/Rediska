@@ -15,6 +15,7 @@ import { UserPage } from './components/pages/UserPage/UserPage.tsx'
 import { FavouritesPage } from './components/pages/FavouritesPage/FavouritesPage.tsx'
 import { ForgotPassword } from './components/pages/AuthPage/ForgotPassword.tsx'
 import { NewsPage } from './components/pages/NewsPage/NewsPage.tsx'
+import { SelectionOfRecipes } from './components/pages/SelectionOfRecipes/SelectionOfRecipes.tsx'
 import { PrivateRoute } from './router/PrivateRouter.tsx'
 
 import { useActions } from './hooks/useActions.ts'
@@ -87,6 +88,10 @@ const App = () => {
               <FavouritesPage />
             </PrivateRoute>
           ),
+        },
+        {
+          path: 'selectionOfRecipes',
+          element: <SelectionOfRecipes />,
         },
         {
           path: 'user',
