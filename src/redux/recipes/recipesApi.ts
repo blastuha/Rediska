@@ -14,16 +14,25 @@ import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { FavouritesData, RecipeData, WeekPlot, WidgetNewsData, RecipeFavObj } from '../../models/'
-
-export type Test = {
-  recipesInFavourites: RecipeFavObj[]
-}
+import {
+  RecipeData,
+  WeekPlot,
+  WidgetNewsData,
+  RecipesInFavourites,
+  SelectionOfRecipes,
+} from '../../models/'
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Recipes', 'WeekPlots', 'News', 'Favourites', 'FavouritesCounter'],
+  tagTypes: [
+    'Recipes',
+    'WeekPlots',
+    'News',
+    'Favourites',
+    'FavouritesCounter',
+    'SelectionOfRecipes',
+  ],
   endpoints: (build) => ({
     fetchRecipes: build.query({
       async queryFn() {
@@ -263,8 +272,7 @@ export const recipesApi = createApi({
           const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
           const docSnapshot = await getDoc(ref)
           if (docSnapshot.exists()) {
-            const data = docSnapshot.data() as Test
-            console.log('DATA', data)
+            const data = docSnapshot.data() as RecipesInFavourites
             return { data: data.recipesInFavourites }
           } else {
             return { data: [] }
@@ -274,6 +282,29 @@ export const recipesApi = createApi({
         }
       },
       providesTags: ['FavouritesCounter'],
+    }),
+
+    fetchSelectionOfRecipesById: build.query({
+      async queryFn(id: string | undefined) {
+        try {
+          const selectionOfRecipeRef = doc(
+            db,
+            'reciepts',
+            'Q4Dhy8x85wPSOsHSsaim',
+            'selectionOfRecipes',
+            id ? id : '',
+          )
+          const selectionOfRecipeSnapshot = await getDoc(selectionOfRecipeRef)
+          if (selectionOfRecipeSnapshot.exists()) {
+            const data = selectionOfRecipeSnapshot.data() as SelectionOfRecipes
+            return { data: data }
+          } else {
+            return { data: undefined }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
     }),
   }),
 })
@@ -291,4 +322,5 @@ export const {
   useAddRecipeToCounterMutation,
   useRemoveRecipeFromCounterMutation,
   useFetchRecipesInFavouriteQuery,
+  useFetchSelectionOfRecipesByIdQuery,
 } = recipesApi

@@ -10,6 +10,7 @@ const customRenderers: Components = {
   p: (props) => <p className={styles.p}>{props.children}</p>,
   //  классы для списков
   ul: (props) => <ul className={styles.ul}>{props.children}</ul>,
+  ol: (props) => <ol className={styles.ol}>{props.children}</ol>,
   li: (props) => (
     <li className={styles.li}>
       <span className='text-[16px]'>{props.children}</span>
@@ -21,7 +22,7 @@ const customRenderers: Components = {
 }
 
 export const MarkDown: React.FC<{ content: string | undefined }> = ({ content }) => {
-  //заменяем \\ на пробел, чтобы корректно отображались li в ul (иначе будет один li на весь ul)
+  //заменяем \\ на символ новой строки, чтобы корректно отображались li в ul (иначе будет один li на весь ul)
   const formattedContent = content?.replace(/\\+/g, '\n')
   const markdownBlocks = formattedContent?.split('\\')
   return markdownBlocks?.map((block, index) => (

@@ -14,8 +14,24 @@
   @apply mb-4 list-inside list-disc;
 }
 
-.li {
+.ol {
+  @apply mb-4 ml-8 list-inside list-decimal;
+}
+
+.ul .li {
   @apply ml-8  text-[26px];
+}
+
+.ol .li {
+  @apply mb-4 ml-8 text-[16px];
+}
+
+.ol .li span {
+  @apply pl-2;
+}
+
+.ol .li::marker {
+  @apply text-[16px];
 }
 
 .img {
