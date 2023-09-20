@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 
 import { HomeSwiper } from './HomeSwiper.tsx'
 import { HomeSection } from './HomeSection.tsx'
 import { WeekPlotsGrid } from './WeekPlotsGrid.tsx'
 import { Widget } from '../../ui/Widget.tsx'
-import { CategoriesGrid } from './CategoriesGrid.tsx'
 import { RecipesGrid } from './RecipesGrid.tsx'
 
 import { useFetchWeekPlotsQuery } from '../../../redux/recipes/recipesApi.ts'
@@ -37,7 +36,7 @@ export const Home: React.FC = () => {
 
         <HomeSection>
           <Widget
-            photoURL='https://www.gastronom.ru/binfiles/images/20230721/b4ff2f1d.jpg'
+            photoURL='https://www.gastronom.ru/binfiles/images/20230919/b664260d.jpg'
             title='Пять интересных и очень-очень быстрых блюд на всю неделю'
             paragraph='Откажитесь от еды на вынос и скучной еды навсегда'
             link='/selectionOfRecipes'

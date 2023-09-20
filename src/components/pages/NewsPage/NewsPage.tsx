@@ -18,7 +18,7 @@ export const NewsPage: React.FC = () => {
   return (
     <div className='flex-grow'>
       <div className='container mx-auto pl-4 pr-4'>
-        <ContentHeading data={news} />
+        <ContentHeading data={news} date={news?.date} title={news?.title} />
         <MarkDown content={news?.text} />
       </div>
     </div>
