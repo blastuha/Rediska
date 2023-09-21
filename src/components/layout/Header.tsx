@@ -5,6 +5,7 @@ import { HeaderNavList } from '../ui/HeaderNavList'
 import { HeaderNavIcons } from '../ui/HeaderNavIcons'
 import { Lines } from '../ui/Lines'
 import { Search } from '../ui/Search'
+import { useWindowWidth } from '../../hooks/useWindowWidth'
 
 const fadeInOut = {
   hidden: { opacity: 0 },
@@ -13,6 +14,9 @@ const fadeInOut = {
 
 export const Header: React.FC = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false)
+  const windowWidth = useWindowWidth()
+
+  console.log(windowWidth)
 
   return (
     <header className='mb-10 pb-3 pt-3'>
@@ -47,8 +51,11 @@ export const Header: React.FC = () => {
             }}
           >
             <Logo />
-            <HeaderNavList />
-            <HeaderNavIcons onSearchVisible={() => setIsSearchVisible(true)} />
+            {windowWidth >= 576 && <HeaderNavList />}
+            <HeaderNavIcons
+              onSearchVisible={() => setIsSearchVisible(true)}
+              windowWidth={windowWidth}
+            />
           </motion.div>
         )}
       </AnimatePresence>
