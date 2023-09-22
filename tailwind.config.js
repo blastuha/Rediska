@@ -29,7 +29,8 @@ export default {
       'line-gray': '#e0e0e0',
     },
     screens: {
-      s: '320px',
+      xs: '320px',
+      s: '470px',
       sm: '576px',
       md: '768px',
       lg: '992px',

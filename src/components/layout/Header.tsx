@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+
 import { Logo } from '../ui/Logo'
 import { HeaderNavList } from '../ui/HeaderNavList'
 import { HeaderNavIcons } from '../ui/HeaderNavIcons'
 import { Lines } from '../ui/Lines'
 import { Search } from '../ui/Search'
+import { MobileNavList } from '../ui/Mobile/MobileNavList'
+
 import { useWindowWidth } from '../../hooks/useWindowWidth'
 
 const fadeInOut = {
@@ -14,12 +17,17 @@ const fadeInOut = {
 
 export const Header: React.FC = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const windowWidth = useWindowWidth()
+
+  const handleMobileNav = () => {
+    setIsMobileNavOpen(!isMobileNavOpen)
+  }
 
   console.log(windowWidth)
 
   return (
-    <header className='mb-10 pb-3 pt-3'>
+    <header className={`pb-3 pt-3 xs:mb-0 s:mb-2 md:mb-10`}>
       <AnimatePresence mode='wait'>
         {isSearchVisible ? (
           <motion.div
@@ -45,9 +53,9 @@ export const Header: React.FC = () => {
             exit='hidden'
             variants={fadeInOut}
             transition={{
-              duration: 0.3,
+              duration: 0.9,
               ease: 'easeInOut',
-              delay: 0.1,
+              delay: 0.2,
             }}
           >
             <Logo />
@@ -55,11 +63,15 @@ export const Header: React.FC = () => {
             <HeaderNavIcons
               onSearchVisible={() => setIsSearchVisible(true)}
               windowWidth={windowWidth}
+              handleMobileNav={handleMobileNav}
             />
           </motion.div>
         )}
       </AnimatePresence>
       <Lines firstLineHeight='h-[1px]' />
+      <AnimatePresence>
+        {isMobileNavOpen && <MobileNavList handleMobileNav={handleMobileNav} />}
+      </AnimatePresence>
     </header>
   )
 }

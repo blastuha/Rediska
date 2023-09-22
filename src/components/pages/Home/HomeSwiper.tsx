@@ -29,11 +29,13 @@ export const HomeSwiper: React.FC<SwiperProps> = ({ widgetNewsData }) => {
         //   disableOnInteraction: false,
         //   pauseOnMouseEnter: true,
         // }}
-        className='flex s:h-[640px] sm:h-[660px] md:h-[700px] lg:h-full'
+        // className='flex xs:h-fit  s:h-[640px] sm:h-[660px] md:h-[700px] lg:h-full'
+        // className='flex xs:min-h-max '
+        className='flex h-full '
       >
         {widgetNewsData.map((item: WidgetNewsData) => {
           return (
-            <SwiperSlide key={item.id} className='h-full'>
+            <SwiperSlide key={item.id} className='!h-auto '>
               <SwiperCard {...item} />
             </SwiperSlide>
           )
