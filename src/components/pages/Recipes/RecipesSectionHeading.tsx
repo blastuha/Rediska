@@ -13,7 +13,7 @@ export const RecipesSectionHeading: React.FC<RecipesSectionHeadingProps> = ({
 }) => {
   return (
     <div className={blockStyles}>
-      <h2 className='w-fit overflow-hidden whitespace-nowrap font-playfair text-[50px] text-dark-blue'>
+      <h2 className='w-fit overflow-hidden whitespace-nowrap font-playfair  text-dark-blue xs:text-[20px] lg:text-[50px]'>
         {title}
         <Lines firstLineHeight='h-[2px]' />
       </h2>

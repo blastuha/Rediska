@@ -17,7 +17,7 @@ export const BgCard: React.FC<SpecialDientCardProp> = ({
     <li
       className={`${
         firstCardStyles ? firstCardStyles : ''
-      }  flex w-full cursor-pointer flex-col items-center gap-4 rounded-lg drop-shadow-sm`}
+      }  flex w-full cursor-pointer flex-col items-center gap-4 overflow-hidden rounded-lg drop-shadow-sm`}
     >
       <Link to={`/reciept/${id ? id : ''}`} key={id} className=' flex h-full w-full flex-col'>
         <figure className='min-h-[280px] min-w-[280px]  overflow-hidden  '>

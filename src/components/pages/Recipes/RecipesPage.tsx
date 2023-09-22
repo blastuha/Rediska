@@ -14,8 +14,10 @@ import { BgCard } from './BgCard.tsx'
 export const RecipesPage: React.FC = () => {
   const { data: recipesData = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
 
+  console.log('XXX', window.innerWidth)
+
   return (
-    <div className='container mx-auto flex-grow'>
+    <div className='container mx-auto flex-grow pl-4 pr-4'>
       <Carousel blockStyles='relative mb-10 mt-0 ' />
       <RecipesSection
         sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
@@ -48,9 +50,9 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles=' col-span-3 grid grid-cols-4 gap-4 text-xl font-extrabold'
+          gridStyles=' col-span-3 grid xs:grid-cols-2 md:grid-cols-4 gap-4 text-xl font-extrabold'
           cardsQuantity={4}
-          firstCardStyles='col-span-4 text-5xl text-center'
+          firstCardStyles='xs:col-span-2 md:col-span-4 text-5xl text-center'
           card={<BgCard />}
           filterWordsArr={['диетический', 'кето', 'веган']}
         />
@@ -68,7 +70,7 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles='col-span-3 grid grid-cols-4 gap-6'
+          gridStyles='col-span-3 grid xs:grid-cols-2 lg:grid-cols-4 gap-6'
           cardsQuantity={3}
           card={<SpecialDietCard />}
         />
@@ -86,7 +88,7 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles='col-span-3 grid grid-cols-3 gap-4'
+          gridStyles='grid lg:col-span-3 lg:grid-cols-2 gap-4 sm:col-span-3 sm:cols-1'
           cardsQuantity={11}
           card={<TextRightCard />}
           filterWordsArr={['десерт', 'крамбл', 'маффин']}

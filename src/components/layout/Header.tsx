@@ -70,7 +70,9 @@ export const Header: React.FC = () => {
       </AnimatePresence>
       <Lines firstLineHeight='h-[1px]' />
       <AnimatePresence>
-        {isMobileNavOpen && <MobileNavList handleMobileNav={handleMobileNav} />}
+        {isMobileNavOpen && windowWidth < 576 && (
+          <MobileNavList handleMobileNav={handleMobileNav} />
+        )}
       </AnimatePresence>
     </header>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { filterRecipesByKeywords } from '../../../helpers/filterRecipesByKeywords'
 import { RecipeData } from '../../../models/'
 
 type RecipesGridProps = {
@@ -20,19 +21,11 @@ export const RecipesCustomGrid: React.FC<RecipesGridProps> = ({
   firstCardStyles,
   filterWordsArr,
 }) => {
+  const filteredRecipes = filterRecipesByKeywords(recipesData, filterWordsArr)
+
   const firstCardStylesFunc = (index: number) => {
     return index === 0 ? firstCardStyles : null
   }
-
-  // Проверяем, содержит ли заголовок рецепта хотя бы одно из слов из массива words
-  //* вынести в хелпер
-  const filteredRecipes = recipesData.filter((recipe) => {
-    if (filterWordsArr) {
-      return filterWordsArr?.some((word) => recipe.title.toLowerCase().includes(word))
-    } else {
-      return true
-    }
-  })
 
   return (
     <>
