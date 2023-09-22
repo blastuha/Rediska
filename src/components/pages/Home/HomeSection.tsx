@@ -8,7 +8,7 @@ type HomeSectionProps = {
 
 export const HomeSection: React.FC<HomeSectionProps> = ({ children, title }) => {
   return (
-    <section className='mb-14'>
+    <section className='xs:mb-6 md:mb-14'>
       {title ? <SectionTitle title={title} /> : null}
       {children}
     </section>

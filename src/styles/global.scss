@@ -11,6 +11,7 @@ body {
   font-family: 'Inter';
   font-size: 16px;
   color: '#0A1524';
+  overflow-x: hidden;
 }
 
 input:-webkit-autofill,
@@ -26,7 +27,7 @@ ul::-webkit-scrollbar {
 }
 
 ul::-webkit-scrollbar-track {
-  background: transparent; /* Сделать фон полосы прокрутки прозрачным */
+  background: transparent; /* фон полосы прокрутки прозрачный */
 }
 
 /* Стиль ползунка скроллбара */

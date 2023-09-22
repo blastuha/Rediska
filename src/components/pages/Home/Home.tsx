@@ -20,7 +20,7 @@ export const Home: React.FC = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{
-        opacity: '100%',
+        opacity: 1,
         transition: { duration: 0.3 },
       }}
       exit={{ opacity: 0, transition: { duration: 0.2 } }}
@@ -34,7 +34,7 @@ export const Home: React.FC = () => {
           <WeekPlotsGrid weekPlotsData={weekPlots} />
         </HomeSection>
 
-        <HomeSection>
+        <HomeSection title='Подборки'>
           <Widget
             photoURL='https://www.gastronom.ru/binfiles/images/20230919/b664260d.jpg'
             title='Пять интересных и очень-очень быстрых блюд на всю неделю'

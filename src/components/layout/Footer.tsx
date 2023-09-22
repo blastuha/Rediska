@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export const Footer: FC = (): ReactElement => {
   return (
     <footer>
-      <div className='mt-14 flex items-center bg-[#F9F9F9] py-12'>
+      <div className='flex items-center bg-[#F9F9F9] py-12 xs:mt-8 md:mt-14'>
         <div className='container mx-auto'>
           <div className='grid grid-cols-1 gap-y-8 text-center sm:grid-cols-2 sm:text-start lg:grid-cols-3'>
             <div className='w-full'>

@@ -10,7 +10,7 @@ type WeekPlotsCardProps = {
 export const WeekPlotsCard: React.FC<WeekPlotsCardProps> = ({ id, photoURL, title }) => {
   return (
     <Link to={`weekPlot/${id ? id : ''}`}>
-      <div className='flex h-full'>
+      <div className='flex h-full items-center justify-center'>
         <div className='group relative  flex w-96 cursor-pointer flex-col  justify-between bg-base-100'>
           <figure className=' mb-3 overflow-hidden rounded-lg'>
             <img
@@ -20,7 +20,7 @@ export const WeekPlotsCard: React.FC<WeekPlotsCardProps> = ({ id, photoURL, titl
             />
           </figure>
           <div className='card-body justify-between p-0'>
-            <h2 className='flex items-center  text-[1.15rem]  text-dark-blue decoration-1 underline-offset-[5px] transition-colors duration-1000 group-hover:underline'>
+            <h2 className='flex items-center  text-dark-blue decoration-1  underline-offset-[5px] transition-colors duration-1000 group-hover:underline xs:text-[1rem] xs:leading-tight md:text-[1.15rem]  md:leading-normal'>
               {title}
             </h2>
           </div>
