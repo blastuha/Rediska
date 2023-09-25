@@ -24,13 +24,12 @@ export const Header: React.FC = () => {
     setIsMobileNavOpen(!isMobileNavOpen)
   }
 
-  console.log(windowWidth)
-
   return (
     <header className={`pb-3 pt-3 xs:mb-0 s:mb-2 md:mb-10`}>
       <AnimatePresence mode='wait'>
         {isSearchVisible ? (
           <motion.div
+            className=' pl-4 pr-4'
             key='search'
             initial='hidden'
             animate='visible'
@@ -53,13 +52,13 @@ export const Header: React.FC = () => {
             exit='hidden'
             variants={fadeInOut}
             transition={{
-              duration: 0.9,
+              duration: 0.3,
               ease: 'easeInOut',
-              delay: 0.2,
+              delay: 0.1,
             }}
           >
             <Logo />
-            {windowWidth >= 576 && <HeaderNavList />}
+            {windowWidth >= 768 && <HeaderNavList />}
             <HeaderNavIcons
               onSearchVisible={() => setIsSearchVisible(true)}
               windowWidth={windowWidth}
@@ -70,7 +69,7 @@ export const Header: React.FC = () => {
       </AnimatePresence>
       <Lines firstLineHeight='h-[1px]' />
       <AnimatePresence>
-        {isMobileNavOpen && windowWidth < 576 && (
+        {isMobileNavOpen && windowWidth < 768 && !isSearchVisible && (
           <MobileNavList handleMobileNav={handleMobileNav} />
         )}
       </AnimatePresence>

@@ -14,13 +14,11 @@ import { BgCard } from './BgCard.tsx'
 export const RecipesPage: React.FC = () => {
   const { data: recipesData = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
 
-  console.log('XXX', window.innerWidth)
-
   return (
     <div className='container mx-auto flex-grow pl-4 pr-4'>
-      <Carousel blockStyles='relative mb-10 mt-0 ' />
+      <Carousel blockStyles='relative  xs:mb-6  md:mb-10 mt-0 ' />
       <RecipesSection
-        sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
+        sectionStyles='grid h-fit grid-cols-3 gap-4 md:mb-16 xs:mb-10'
         sectionHeading={
           <RecipesSectionHeading
             title='MOST POPULAR'
@@ -31,15 +29,15 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles='col-span-2 grid grid-cols-2 gap-4'
+          gridStyles='grid md:col-span-3 md:grid-cols-2 gap-4 xs:col-span-3 xs:grid-cols-1 '
           cardsQuantity={7}
-          adBlock={<h2 className='col-start-3 col-end-3'>Рекламный блок</h2>}
           card={<TextRightCard />}
+          sort='mostPopular'
         />
       </RecipesSection>
 
       <RecipesSection
-        sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
+        sectionStyles='grid h-fit grid-cols-3 gap-4 md:mb-16 xs:mb-10'
         sectionHeading={
           <RecipesSectionHeading
             title='PICK YOUR PROTEIN'
@@ -50,16 +48,16 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles=' col-span-3 grid xs:grid-cols-2 md:grid-cols-4 gap-4 text-xl font-extrabold'
+          gridStyles=' col-span-3 grid xs:grid-cols-2 md:grid-cols-4 xs:gap-2 gap-4 text-xl font-extrabold'
           cardsQuantity={4}
-          firstCardStyles='xs:col-span-2 md:col-span-4 text-5xl text-center'
+          firstCardStyles='xs:col-span-2 md:col-span-4  xs:text-2xl md:text-3xl lg:text-5xl text-center'
           card={<BgCard />}
           filterWordsArr={['диетический', 'кето', 'веган']}
         />
       </RecipesSection>
 
       <RecipesSection
-        sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
+        sectionStyles='grid h-fit grid-cols-3 gap-4 md:mb-16 xs:mb-10'
         sectionHeading={
           <RecipesSectionHeading
             title='RECIPES FOR SPECIAL DIETS'
@@ -70,14 +68,14 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles='col-span-3 grid xs:grid-cols-2 lg:grid-cols-4 gap-6'
+          gridStyles='col-span-3 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'
           cardsQuantity={3}
           card={<SpecialDietCard />}
         />
       </RecipesSection>
 
       <RecipesSection
-        sectionStyles='grid h-fit grid-cols-3 gap-4 mb-16'
+        sectionStyles='grid h-fit grid-cols-3 gap-4 md:mb-16 xs:mb-10'
         sectionHeading={
           <RecipesSectionHeading
             title='MORE DELISH RECIPES'
@@ -88,7 +86,7 @@ export const RecipesPage: React.FC = () => {
       >
         <RecipesCustomGrid
           recipesData={recipesData}
-          gridStyles='grid lg:col-span-3 lg:grid-cols-2 gap-4 sm:col-span-3 sm:cols-1'
+          gridStyles='grid md:col-span-3 md:grid-cols-2 gap-4 xs:col-span-3 xs:grid-cols-1'
           cardsQuantity={11}
           card={<TextRightCard />}
           filterWordsArr={['десерт', 'крамбл', 'маффин']}

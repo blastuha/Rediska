@@ -25,7 +25,7 @@ export const UserPage: React.FC = () => {
       <div className='flex max-h-[400px] flex-col justify-between overflow-hidden border-r border-line-gray pr-10'>
         <img src={pot} alt='chef_pic' className='mb-6 h-3/4' />
         <p className='h-1/4 text-center text-lg'>
-          Пока здесь ничего нет, но скоро здесь появятся рецепты, которые добавит
+          Пока здесь ничего нет, но скоро появится функционал добавления собственного рецепта от
           <span className='font-bold'> {currentUser?.displayName}</span>
         </p>
       </div>

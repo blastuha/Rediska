@@ -21,24 +21,24 @@ export const HeaderNavIcons: React.FC<HeaderNavIconsProp> = ({
       <div onClick={onSearchVisible} className='mr-2 '>
         <Search
           styles={`w-${
-            windowWidth >= 576 ? 6 : 7
-          } h-6hover:scale-110 transition-all duration-300 ease-in`}
+            windowWidth >= 768 ? 6 : 7
+          } h-6 hover:scale-110 transition-all duration-300 ease-in`}
         />
       </div>
 
-      {windowWidth >= 576 && (
+      {windowWidth >= 768 && (
         <Link to='favourites'>
           <Heart styles='w-6 h-6 mr-2 hover:scale-110 transition-all duration-300 ease-in' />
         </Link>
       )}
 
-      {windowWidth >= 576 && (
+      {windowWidth >= 768 && (
         <Link to='user'>
           <Person styles='w-6 h-6 hover:scale-110 transition-all duration-300 ease-in' />
         </Link>
       )}
 
-      {windowWidth < 576 && <BurgerMenu handleMobileNav={handleMobileNav} />}
+      {windowWidth < 768 && <BurgerMenu handleMobileNav={handleMobileNav} />}
     </div>
   )
 }

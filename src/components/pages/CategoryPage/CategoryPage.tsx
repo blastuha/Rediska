@@ -28,8 +28,6 @@ export const CategoryPage: React.FC = () => {
     return favouritesData.filter((fav) => fav.recipeId === recipeId).length
   }
 
-  console.log('recipesData', recipesData)
-
   const recipesFiltred = recipesData.filter((recipe) => {
     return recipe.category === category
   })
