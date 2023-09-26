@@ -24,13 +24,11 @@ export const HomeSwiper: React.FC<SwiperProps> = ({ widgetNewsData }) => {
           hide: true,
         }}
         modules={[Scrollbar]}
-        // autoplay={{
-        //   delay: 2000,
-        //   disableOnInteraction: false,
-        //   pauseOnMouseEnter: true,
-        // }}
-        // className='flex xs:h-fit  s:h-[640px] sm:h-[660px] md:h-[700px] lg:h-full'
-        // className='flex xs:min-h-max '
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
         className='flex h-full '
       >
         {widgetNewsData.map((item: WidgetNewsData) => {

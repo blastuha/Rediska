@@ -9,7 +9,7 @@ type HeaderNavigation = {
 const headerNavigation: HeaderNavigation[] = [
   { name: 'Главная', link: '/' },
   { name: 'Рецепты', link: '/recipes' },
-  { name: 'О проекте', link: '/hits' },
+  { name: 'О проекте', link: '/about' },
 ]
 
 export const HeaderNavList: React.FC = () => {

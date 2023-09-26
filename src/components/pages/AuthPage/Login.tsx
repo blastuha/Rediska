@@ -49,7 +49,7 @@ export const Login: React.FC = () => {
         <div className='mx-auto mb-16 flex flex-col p-14 shadow-[0_0_25px_10px_#f8f8fb]'>
           <div className='mb-5 text-center'>
             <h5 className='mb-1 font-dancingScript text-3xl font-bold'>Login</h5>
-            <p className='mb-6 font-inter text-[17px] text-[#9096B2]'>
+            <p className='mb-6 font-inter text-[#9096B2] xs:text-[0.9rem] sm:text-[1rem]'>
               Пожалуйста, войдите, используя данные учетной записи.
             </p>
             <p className='text-[#fc4848]'>{error ? 'Вы ввели неверный email или password' : ''}</p>
