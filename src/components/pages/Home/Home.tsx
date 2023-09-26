@@ -43,11 +43,6 @@ export const Home: React.FC = () => {
           />
         </HomeSection>
 
-        {/* 
-        <HomeSection title='Популярные категории'>
-          <CategoriesGrid />
-        </HomeSection> */}
-
         <HomeSection title='Последние рецепты'>
           <RecipesGrid recipesData={recipes} />
         </HomeSection>

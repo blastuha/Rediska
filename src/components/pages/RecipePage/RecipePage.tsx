@@ -12,7 +12,6 @@ import { useAppSelector } from '../../../hooks/useAppSelector'
 import { useIsRecipeInFavourites } from '../../../hooks/useIsRecipeInFavourites'
 import { useFavouritesActions } from '../../../hooks/useFavouritesActions'
 import { useFavouritesCounter } from '../../../hooks/useFavouritesCounter'
-import { useFetchRecipesInFavouriteQuery } from '../../../redux/recipes/recipesApi'
 
 export const RecipePage: React.FC = () => {
   const { id } = useParams()

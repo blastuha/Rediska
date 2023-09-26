@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFetchRecipesInFavouriteQuery } from '../../../redux/recipes/recipesApi'
-import { filterRecipesByKeywords } from '../../../helpers/filterRecipesByKeywords'
+import { filterRecipesByKeywords, countFavouritesById } from '../../../helpers/'
 import { RecipeData } from '../../../models/'
 
 type RecipesGridProps = {
@@ -29,13 +29,12 @@ export const RecipesCustomGrid: React.FC<RecipesGridProps> = ({
     return index === 0 ? firstCardStyles : null
   }
 
-  const countFavourites = (recipeId: string) => {
-    return favouritesData.filter((fav) => fav.recipeId === recipeId).length
-  }
-
   const filtredSortedArr =
     sort === 'mostPopular'
-      ? [...filteredRecipes]?.sort((a, b) => countFavourites(b.id) - countFavourites(a.id))
+      ? [...filteredRecipes]?.sort(
+          (a, b) =>
+            countFavouritesById(b.id, favouritesData) - countFavouritesById(a.id, favouritesData),
+        )
       : filteredRecipes
 
   return (

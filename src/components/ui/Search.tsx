@@ -18,15 +18,6 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
-
-    // if (event.target.value) {
-    //   const results = recipes.filter((recipe) =>
-    //     recipe.title.toLowerCase().includes(event.target.value.toLowerCase()),
-    //   )
-    //   setFilteredRecipes(results)
-    // } else {
-    //   setFilteredRecipes([])
-    // }
   }
 
   useEffect(() => {
@@ -66,8 +57,8 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
         <ul className='max-h-[460px] overflow-y-scroll'>
           {filteredRecipes.map((recipe) => {
             return (
-              <Link to={`reciept/${recipe.id}`}>
-                <li key={recipe.id} className='flex pb-4'>
+              <Link to={`reciept/${recipe.id}`} key={recipe.id}>
+                <li className='flex pb-4'>
                   <figure className='mr-4 h-[100px] max-w-[170px] overflow-hidden rounded-lg'>
                     <img
                       src={recipe.photoURL}

@@ -84,7 +84,7 @@ const App = () => {
         {
           path: 'favourites',
           element: (
-            <PrivateRoute isAuth={isAuth}>
+            <PrivateRoute>
               <FavouritesPage />
             </PrivateRoute>
           ),
@@ -96,7 +96,7 @@ const App = () => {
         {
           path: 'user',
           element: (
-            <PrivateRoute isAuth={isAuth}>
+            <PrivateRoute>
               <UserPage />
             </PrivateRoute>
           ),

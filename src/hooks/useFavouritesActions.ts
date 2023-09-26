@@ -10,7 +10,8 @@ import { useActions } from './useActions'
 
 import { RecipeData } from '../models'
 
-export const useFavouritesActions = (favouritesCounter: number) => {
+export const useFavouritesActions = (favouritesCounter?: number) => {
+  favouritesCounter = favouritesCounter || 0
   const [addRecipeToFav] = useAddRecipeMutation()
   const { addToFavourite, removeFromFavourite } = useActions()
   const [addToRecipeCounter] = useAddRecipeToCounterMutation()
@@ -22,7 +23,7 @@ export const useFavouritesActions = (favouritesCounter: number) => {
   const currentUserId = getAuth().currentUser?.uid
 
   useEffect(() => {
-    setOptimisticFavouritesCounter(favouritesCounter)
+    setOptimisticFavouritesCounter(favouritesCounter || 0)
   }, [favouritesCounter])
 
   const addToFavourites = async (recipe: RecipeData) => {
