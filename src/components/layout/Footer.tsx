@@ -48,19 +48,18 @@ export const Footer: FC = (): ReactElement => {
                 <h5 className='mb-6 font-dancingScript text-2xl font-semibold'>Pages</h5>
                 <ul className='font-inter text-[#7F7F7F]'>
                   <li className='footer-li'>
-                    <Link to='/'>Главная</Link>
+                    <Link to='instagram.com' target='_blank'>
+                      Главная
+                    </Link>
                   </li>
                   <li className='footer-li'>
-                    <Link to='/reciepts'>Рецепты</Link>
+                    <Link to='/recipes'>Рецепты</Link>
                   </li>
                   <li className='footer-li'>
-                    <Link to='/about'>О нас</Link>
+                    <Link to='/about'>О проекте</Link>
                   </li>
                   <li className='footer-li'>
-                    <Link to='/signin'>Вход</Link>
-                  </li>
-                  <li className='footer-li'>
-                    <Link to='/signup'>Регистрация</Link>
+                    <Link to='/user'>Личный кабинет</Link>
                   </li>
                 </ul>
               </div>

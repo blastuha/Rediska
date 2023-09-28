@@ -6,10 +6,13 @@ import { FavouritesCard } from './FavouritesCard'
 
 import { useAppSelector } from '../../../hooks/useAppSelector'
 import { useFavouritesActions } from '../../../hooks/useFavouritesActions'
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 
 export const FavouritesPage: React.FC = () => {
   const favouritesArr = useAppSelector((state) => state.recipes.favourites)
   const { removeFromFavourites } = useFavouritesActions()
+
+  useScrollToTop()
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>

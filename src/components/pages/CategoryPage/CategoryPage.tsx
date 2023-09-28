@@ -8,8 +8,8 @@ import { useFetchRecipesInFavouriteQuery } from '../../../redux/recipes/recipesA
 import { RecipesSectionHeading } from '../Recipes/RecipesSectionHeading'
 import { Select } from '../../ui/Select'
 
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 import { declination, countFavouritesById } from '../../../helpers/'
-
 import { categoriesData, sortOptions } from '../../../constants'
 
 export const CategoryPage: React.FC = () => {
@@ -43,6 +43,8 @@ export const CategoryPage: React.FC = () => {
     .join('')
 
   const recipeQuantity = declination(recipesFiltred.length, ['рецепт', 'рецепта', 'рецептов'])
+
+  useScrollToTop()
 
   return (
     <div className='container mx-auto flex-grow pl-4 pr-4'>

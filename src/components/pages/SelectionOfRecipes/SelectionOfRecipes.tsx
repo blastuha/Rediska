@@ -2,12 +2,12 @@ import React from 'react'
 import { ContentHeading } from '../../ui/ContentHeading'
 import { MarkDown } from '../../ui/MarkDown/MarkDown'
 import { useFetchSelectionOfRecipesByIdQuery } from '../../../redux/recipes/recipesApi'
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 
 export const SelectionOfRecipes = () => {
   const { data: selectionOfRecipes, isLoading } =
     useFetchSelectionOfRecipesByIdQuery('HW1oQrycB8lZiQNURo3i')
-
-  console.log(selectionOfRecipes)
+  useScrollToTop()
 
   return (
     <main className='container mx-auto flex-grow pl-4 pr-4'>

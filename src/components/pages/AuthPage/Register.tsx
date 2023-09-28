@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase
 import { useNavigate, Link } from 'react-router-dom'
 
 import { useActions } from '../../../hooks/useActions'
-
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 import { SignUpSchema } from '../../../helpers/accountValidation'
 
 export const Register: React.FC = () => {
@@ -29,8 +29,6 @@ export const Register: React.FC = () => {
       },
     })
 
-  console.log('touched.displayName', touched)
-
   const handleRegister = (email: string, password: string, displayName: string) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
@@ -53,6 +51,8 @@ export const Register: React.FC = () => {
       })
       .catch(console.error)
   }
+
+  useScrollToTop()
 
   return (
     <div className='container mx-auto flex-grow'>

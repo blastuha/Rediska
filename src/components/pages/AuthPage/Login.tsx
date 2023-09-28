@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { getAuth, signInWithEmailAndPassword, AuthError } from 'firebase/auth'
 
 import { useActions } from '../../../hooks/useActions'
-
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 import { SignInSchema } from '../../../helpers/accountValidation'
 
 export const Login: React.FC = () => {
@@ -34,6 +34,8 @@ export const Login: React.FC = () => {
       })
       .catch((err: AuthError) => setError(err))
   }
+
+  useScrollToTop()
 
   return (
     <div className='container mx-auto flex-grow'>

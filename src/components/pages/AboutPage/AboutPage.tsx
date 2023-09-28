@@ -1,7 +1,10 @@
 import React from 'react'
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 import me from '../../../assets/me.png'
 
 export const AboutPage: React.FC = () => {
+  useScrollToTop()
+
   return (
     <div className='container mx-auto flex max-w-[900px]  flex-grow flex-col pl-4 pr-4'>
       <div className='mb-16 flex flex-col items-center'>

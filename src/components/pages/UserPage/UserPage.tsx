@@ -4,6 +4,7 @@ import { signOut } from 'firebase/auth'
 
 import { auth } from '../../../api/firebase'
 import { useActions } from '../../../hooks/useActions'
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
 
 import avatar from '../../../assets/avatar.png'
 import pot from '../../../assets/pot.svg'
@@ -19,6 +20,8 @@ export const UserPage: React.FC = () => {
       })
       .catch((err) => console.error(err))
   }
+
+  useScrollToTop()
 
   return (
     <div className='container mx-auto flex  flex-grow flex-col-reverse pl-4 pr-4 md:flex-row'>
