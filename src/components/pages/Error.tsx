@@ -3,7 +3,6 @@ import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
 
 export const ErrorPage: React.FC = () => {
   const error = useRouteError()
-  console.error(error)
 
   if (isRouteErrorResponse(error)) {
     return (

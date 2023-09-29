@@ -1,20 +1,17 @@
-// Import the functions you need from the SDKs you need
+/// <reference types="vite/client" />
+
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyDgOb9IQZo7IT83kHX7qTJUr07OB6RtKPQ',
-  authDomain: 'rediska-ba630.firebaseapp.com',
-  projectId: 'rediska-ba630',
-  storageBucket: 'rediska-ba630.appspot.com',
-  messagingSenderId: '686050445238',
-  appId: '1:686050445238:web:afac17696d4f0723fce317',
-  measurementId: 'G-J7JL53T0XY',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN as string,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID as string,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET as string,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID as string,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID as string,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID as string,
 }
 
 // Initialize Firebase
