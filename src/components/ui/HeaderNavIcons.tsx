@@ -9,12 +9,14 @@ type HeaderNavIconsProp = {
   onSearchVisible: () => void
   handleMobileNav: () => void
   windowWidth: number
+  isMobileNavOpen: boolean
 }
 
 export const HeaderNavIcons: React.FC<HeaderNavIconsProp> = ({
   onSearchVisible,
   windowWidth,
   handleMobileNav,
+  isMobileNavOpen,
 }) => {
   return (
     <div className='flex cursor-pointer self-center '>
@@ -38,7 +40,9 @@ export const HeaderNavIcons: React.FC<HeaderNavIconsProp> = ({
         </Link>
       )}
 
-      {windowWidth < 768 && <BurgerMenu handleMobileNav={handleMobileNav} />}
+      {windowWidth < 768 && (
+        <BurgerMenu handleMobileNav={handleMobileNav} isMobileNavOpen={isMobileNavOpen} />
+      )}
     </div>
   )
 }

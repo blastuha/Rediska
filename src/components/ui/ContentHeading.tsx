@@ -27,7 +27,9 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
 }) => {
   return (
     <div className='flex flex-col'>
-      <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{title}</h1>
+      <h1 className='mb-6 font-playfair font-bold leading-none xs:text-[2rem] md:text-[3rem]'>
+        {title}
+      </h1>
       <div className='flex'>
         <div className='mr-6 flex'>
           <Date styles='w-6 h-6 mr-2 cursor-pointer' />

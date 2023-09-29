@@ -36,7 +36,6 @@ export const RecipePage: React.FC = () => {
           }}
           exit={{ opacity: 0, transition: { duration: 1 } }}
         >
-          {' '}
           <ContentHeading
             data={recipe}
             date={recipe?.date}
@@ -46,14 +45,14 @@ export const RecipePage: React.FC = () => {
             isRecipeInFavourites={isRecipeInFavourites}
             favouritesCounter={optimisticFavouritesCounter}
           />
-          <p className='pb-6 text-lg'>{recipe?.paragraph}</p>
+          <p className='pb-6 xs:text-[1rem] md:text-lg'>{recipe?.paragraph}</p>
           <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />
-          <div className='flex justify-between'>
-            <div className='flex w-3/6 max-w-lg flex-col pr-10'>
+          <div className='flex justify-between xs:flex-col md:flex-row'>
+            <div className='flex max-w-lg flex-col xs:mb-6 md:mb-0 md:w-3/6 md:pr-10'>
               <Ingredients reciept={recipe} margins='mb-10' />
               <NutritionFacts reciept={recipe} />
             </div>
-            <div className='flex w-3/5 flex-col'>
+            <div className='flex flex-col md:w-3/5'>
               <RecipeSteps reciept={recipe} />
             </div>
           </div>

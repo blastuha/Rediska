@@ -13,7 +13,7 @@ const customRenderers: Components = {
   ol: (props) => <ol className={styles.ol}>{props.children}</ol>,
   li: (props) => (
     <li className={styles.li}>
-      <span className='text-[16px]'>{props.children}</span>
+      <span className='xs:text-[0.9rem] md:text-[1rem]'>{props.children}</span>
       {/* {props.children} */}
     </li>
   ),

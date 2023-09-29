@@ -3,11 +3,11 @@
 }
 
 .h2 {
-  @apply mb-8 mt-8 font-playfair text-2xl font-bold;
+  @apply font-playfair font-bold xs:mb-4 xs:mt-4 xs:text-[1.4rem] md:mb-8 md:mt-8 md:text-2xl;
 }
 
 .p {
-  @apply mb-5 font-inter text-[16px];
+  @apply mb-5 font-inter xs:text-[0.9rem] md:text-[1rem];
 }
 
 .ul {
@@ -19,11 +19,11 @@
 }
 
 .ul .li {
-  @apply ml-8  text-[26px];
+  @apply ml-8  xs:text-[0.9rem] md:text-[1rem];
 }
 
 .ol .li {
-  @apply mb-4 ml-8 text-[16px];
+  @apply mb-4 ml-8 xs:text-[0.9rem] md:text-[1rem];
 }
 
 .ol .li span {
@@ -31,7 +31,7 @@
 }
 
 .ol .li::marker {
-  @apply text-[16px];
+  @apply xs:text-[0.9rem] md:text-[1rem];
 }
 
 .img {

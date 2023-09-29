@@ -63,6 +63,7 @@ export const Header: React.FC = () => {
               onSearchVisible={() => setIsSearchVisible(true)}
               windowWidth={windowWidth}
               handleMobileNav={handleMobileNav}
+              isMobileNavOpen={isMobileNavOpen}
             />
           </motion.div>
         )}
