@@ -1,8 +1,11 @@
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 
 import { Date } from './Icons/Date'
 import { Heart } from './Icons/Heart'
 import { HeartFilled } from './Icons/HeartFilled'
+
+import { useAuth } from '../../hooks/useAuth'
 
 import { RecipeData, WeekPlot, WidgetNewsData } from '../../models'
 
@@ -25,8 +28,23 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
   favouritesCounter,
   title,
 }) => {
+  const { isAuth } = useAuth()
+
+  const notify = () =>
+    toast.error('Требуется авторизация!', {
+      position: 'top-right',
+      autoClose: 1100,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    })
+
   return (
     <div className='flex flex-col'>
+      <ToastContainer />
       <h1 className='mb-6 font-playfair font-bold leading-none xs:text-[2rem] md:text-[3rem]'>
         {title}
       </h1>
@@ -48,11 +66,7 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
                 <HeartFilled styles='w-6 h-6 mr-2 cursor-pointer' />
               </div>
             ) : (
-              <div
-                onClick={
-                  data && addToFavourites ? () => addToFavourites(data as RecipeData) : undefined
-                }
-              >
+              <div onClick={data && isAuth ? () => addToFavourites(data as RecipeData) : notify}>
                 <Heart styles='w-6 h-6 mr-2 cursor-pointer' />
               </div>
             )}

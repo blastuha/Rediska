@@ -11,6 +11,7 @@ import { RecipeData } from './models/RecipeData.ts'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   const auth = getAuth()

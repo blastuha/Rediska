@@ -23,6 +23,8 @@ export const RecipePage: React.FC = () => {
   const { addToFavourites, removeFromFavourites, optimisticFavouritesCounter } =
     useFavouritesActions(favouritesCounter)
 
+  console.log('recipe', recipe)
+
   useScrollToTop()
 
   return (
@@ -45,8 +47,8 @@ export const RecipePage: React.FC = () => {
             isRecipeInFavourites={isRecipeInFavourites}
             favouritesCounter={optimisticFavouritesCounter}
           />
-          <p className='pb-6 xs:text-[1rem] md:text-lg'>{recipe?.paragraph}</p>
-          <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 rounded-lg' />
+          <p className='pb-6 text-[1rem] xs:text-[1rem]'>{recipe?.paragraph}</p>
+          <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 w-full rounded-lg' />
           <div className='flex justify-between xs:flex-col md:flex-row'>
             <div className='flex max-w-lg flex-col xs:mb-6 md:mb-0 md:w-3/6 md:pr-10'>
               <Ingredients reciept={recipe} margins='mb-10' />
