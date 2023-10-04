@@ -53,8 +53,8 @@ export const RecipesPage: React.FC = () => {
             sectionStyles='grid h-fit grid-cols-3 gap-4 md:mb-16 xs:mb-10'
             sectionHeading={
               <RecipesSectionHeading
-                title='PICK YOUR PROTEIN'
-                subtitle='Beef, chicken, pork—we`ve got it all.'
+                title='VEGAN KETO CUISINE'
+                subtitle='Plant-powered and low-carb delights await.'
                 blockStyles='col-span-3 row-span-1'
               />
             }
