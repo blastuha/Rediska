@@ -4,10 +4,10 @@ import { Arrow } from './Icons/Arrow'
 
 export const ArrowButton: React.FC<{ id: string }> = ({ id }) => {
   return (
-    <button className='btn btn-circle btn-outline'>
-      <Link to={`/newsPage/${id}`}>
+    <Link to={`/newsPage/${id}`}>
+      <button className='btn btn-circle btn-outline'>
         <Arrow />
-      </Link>
-    </button>
+      </button>
+    </Link>
   )
 }

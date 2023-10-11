@@ -1,8 +1,11 @@
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 
 import { Date } from './Icons/Date'
 import { Heart } from './Icons/Heart'
 import { HeartFilled } from './Icons/HeartFilled'
+
+import { useAuth } from '../../hooks/useAuth'
 
 import { RecipeData, WeekPlot, WidgetNewsData } from '../../models'
 
@@ -11,6 +14,7 @@ type ContentHeadingProps = {
   title?: string
   isRecipeInFavourites?: number | undefined
   data?: RecipeData | WeekPlot | WidgetNewsData
+  favouritesCounter?: number
   addToFavourites?: (item: RecipeData) => Promise<void>
   removeFromFavourites?: (item: RecipeData) => Promise<void>
 }
@@ -20,21 +24,38 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
   removeFromFavourites,
   isRecipeInFavourites,
   data,
+  date,
   favouritesCounter,
+  title,
 }) => {
-  console.log('isRecipeInFavourites', isRecipeInFavourites)
+  const { isAuth } = useAuth()
+
+  const notify = () =>
+    toast.error('Требуется авторизация!', {
+      position: 'top-right',
+      autoClose: 1100,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    })
 
   return (
     <div className='flex flex-col'>
-      <h1 className='mb-6 font-playfair text-[50px] font-bold leading-none'>{data?.title}</h1>
+      <ToastContainer />
+      <h1 className='mb-6 font-playfair font-bold leading-none xs:text-[2rem] md:text-[3rem]'>
+        {title}
+      </h1>
       <div className='flex'>
         <div className='mr-6 flex'>
           <Date styles='w-6 h-6 mr-2 cursor-pointer' />
-          <span>{data?.date}</span>
+          <span>{date}</span>
         </div>
         {addToFavourites && (
           <div className='flex'>
-            {isRecipeInFavourites && isRecipeInFavourites >= 0 ? (
+            {typeof isRecipeInFavourites !== 'undefined' && isRecipeInFavourites >= 0 ? (
               <div
                 onClick={
                   data && removeFromFavourites
@@ -45,15 +66,11 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
                 <HeartFilled styles='w-6 h-6 mr-2 cursor-pointer' />
               </div>
             ) : (
-              <div
-                onClick={
-                  data && addToFavourites ? () => addToFavourites(data as RecipeData) : undefined
-                }
-              >
+              <div onClick={data && isAuth ? () => addToFavourites(data as RecipeData) : notify}>
                 <Heart styles='w-6 h-6 mr-2 cursor-pointer' />
               </div>
             )}
-            <span>{favouritesCounter} </span>
+            <span>{favouritesCounter}</span>
           </div>
         )}
       </div>

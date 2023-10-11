@@ -1,6 +1,5 @@
 import ReactMarkdown, { Components } from 'react-markdown'
 import styles from './MarkDown.module.scss'
-//! Перенести в WeekPlotPage
 
 const customRenderers: Components = {
   //  классы для заголовков
@@ -11,15 +10,21 @@ const customRenderers: Components = {
   p: (props) => <p className={styles.p}>{props.children}</p>,
   //  классы для списков
   ul: (props) => <ul className={styles.ul}>{props.children}</ul>,
-  li: (props) => <li className={styles.li}>{props.children}</li>,
+  ol: (props) => <ol className={styles.ol}>{props.children}</ol>,
+  li: (props) => (
+    <li className={styles.li}>
+      <span className='xs:text-[0.9rem] md:text-[1rem]'>{props.children}</span>
+      {/* {props.children} */}
+    </li>
+  ),
   //  классы для images
   img: (props) => <img className={styles.img} src={props.src} alt={props.alt} />,
 }
 
 export const MarkDown: React.FC<{ content: string | undefined }> = ({ content }) => {
-  // Разделяем содержимое на блоки Markdown
-  const markdownBlocks = content?.split('\\')
-
+  //заменяем \\ на символ новой строки, чтобы корректно отображались li в ul (иначе будет один li на весь ul)
+  const formattedContent = content?.replace(/\\+/g, '\n')
+  const markdownBlocks = formattedContent?.split('\\')
   return markdownBlocks?.map((block, index) => (
     <ReactMarkdown key={index} components={customRenderers}>
       {block}

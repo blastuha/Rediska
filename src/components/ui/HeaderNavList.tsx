@@ -9,20 +9,23 @@ type HeaderNavigation = {
 const headerNavigation: HeaderNavigation[] = [
   { name: 'Главная', link: '/' },
   { name: 'Рецепты', link: '/recipes' },
-  { name: 'О нас', link: '/hits' },
+  { name: 'О проекте', link: '/about' },
 ]
 
 export const HeaderNavList: React.FC = () => {
   return (
-    <ul className='flex  text-dark-blue'>
+    <ul className='flex  text-[#444]'>
       {headerNavigation.map((item, i) => {
         return (
           <Link
             to={item.link}
             key={i}
-            className='cursor-pointer self-center border-r border-navy-blue pl-4  pr-4 font-inter last:mr-0 last:border-r-0'
+            className='group mb-[-4px] cursor-pointer self-center border-r  border-navy-blue pl-4 pr-4 font-inter last:mr-0 last:border-r-0'
           >
-            <li className='hover:text-navy-blue hover:underline'>{item.name}</li>
+            <li className='transition-colors duration-150 ease-in group-hover:border-b group-hover:text-lines-blue'>
+              {item.name}
+            </li>
+            <div className='mt-[2px] group-hover:border-b group-hover:text-lines-blue'></div>
           </Link>
         )
       })}

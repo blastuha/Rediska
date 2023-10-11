@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useFetchRecipesQuery } from '../../redux/recipes/recipesApi'
+import { useDebounce } from '../../hooks/useDebounce'
 
 import { RecipeData } from '../../models'
 
@@ -11,22 +12,22 @@ type SearchProp = {
 
 export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
   const [searchValue, setSearchValue] = useState('')
-  const [filteredRecipes, setFilteredRecipes] = useState<RecipeData[]>([])
-
+  const debouncedSearchValue = useDebounce(searchValue, 300)
   const { data: recipes = [] } = useFetchRecipesQuery(null)
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
-
-    if (event.target.value) {
-      const results = recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(event.target.value.toLowerCase()),
-      )
-      setFilteredRecipes(results)
-    } else {
-      setFilteredRecipes([])
-    }
   }
+
+  const filteredRecipes: RecipeData[] = useMemo(() => {
+    if (debouncedSearchValue) {
+      return recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(debouncedSearchValue.toLowerCase()),
+      )
+    } else {
+      return []
+    }
+  }, [recipes, debouncedSearchValue])
 
   return (
     <div className='container mx-auto pb-[12px]'>
@@ -54,25 +55,20 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
         <ul className='max-h-[460px] overflow-y-scroll'>
           {filteredRecipes.map((recipe) => {
             return (
-              <Link to={`reciept/${recipe.id}`}>
-                <li key={recipe.id} className='flex pb-4'>
-                  <figure className='mr-4 h-[100px] max-w-[170px] overflow-hidden'>
+              <Link to={`reciept/${recipe.id}`} key={recipe.id} onClick={onSearchClose}>
+                <li className='flex pb-4'>
+                  <figure className='mr-4 h-[100px] max-w-[170px] overflow-hidden rounded-lg xs:w-2/5'>
                     <img
                       src={recipe.photoURL}
                       alt='recipe_pic'
                       className='h-full w-full object-cover'
                     />
                   </figure>
-                  <span className='flex items-center'>{recipe.title}</span>
+                  <span className='flex items-center xs:w-3/5'>{recipe.title}</span>
                 </li>
               </Link>
             )
           })}
-          <Link to='/search' className='flex justify-center p-2'>
-            <button className='btn max-w-[200px] border-0 bg-light-blue p-2 text-[12px] hover:bg-line-gray'>
-              Open Search Page
-            </button>
-          </Link>
         </ul>
       )}
     </div>

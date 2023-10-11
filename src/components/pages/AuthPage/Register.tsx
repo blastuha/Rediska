@@ -4,9 +4,9 @@ import { useFormik } from 'formik'
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 import { useNavigate, Link } from 'react-router-dom'
 
-import { SignUpSchema } from '../../../helpers/accountValidation'
-
 import { useActions } from '../../../hooks/useActions'
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
+import { SignUpSchema } from '../../../helpers/accountValidation'
 
 export const Register: React.FC = () => {
   const auth = getAuth()
@@ -28,8 +28,6 @@ export const Register: React.FC = () => {
         navigate('/')
       },
     })
-
-  console.log('touched.displayName', touched)
 
   const handleRegister = (email: string, password: string, displayName: string) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -54,6 +52,8 @@ export const Register: React.FC = () => {
       .catch(console.error)
   }
 
+  useScrollToTop()
+
   return (
     <div className='container mx-auto flex-grow'>
       <motion.div
@@ -68,7 +68,7 @@ export const Register: React.FC = () => {
         <div className='mx-auto mb-16 flex flex-col p-14 shadow-[0_0_25px_10px_#f8f8fb]'>
           <div className='mb-5 text-center'>
             <h5 className='mb-1 font-dancingScript text-3xl font-bold'>Registration</h5>
-            <p className='font-inter text-[17px] text-[#9096B2]'>
+            <p className='font-inter text-[#9096B2] xs:text-[0.9rem] sm:text-[1rem]'>
               Пожалуйста, введите данные Вашей будущей учетной записи.
             </p>
           </div>

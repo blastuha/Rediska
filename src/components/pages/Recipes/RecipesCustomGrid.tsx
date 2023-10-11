@@ -1,43 +1,46 @@
 import React from 'react'
+import { useFetchRecipesInFavouriteQuery } from '../../../redux/recipes/recipesApi'
+import { filterRecipesByKeywords, countFavouritesById } from '../../../helpers/'
 import { RecipeData } from '../../../models/'
 
 type RecipesGridProps = {
   recipesData: RecipeData[]
   gridStyles: string
   cardsQuantity: number
-  adBlock?: React.ReactElement
   card: React.ReactElement
   firstCardStyles?: string
   filterWordsArr?: string[]
+  sort?: string
 }
 
 export const RecipesCustomGrid: React.FC<RecipesGridProps> = ({
   recipesData,
   gridStyles,
-  adBlock,
   cardsQuantity,
   card,
   firstCardStyles,
   filterWordsArr,
+  sort,
 }) => {
+  const { data: favouritesData = [] } = useFetchRecipesInFavouriteQuery(null)
+  const filteredRecipes = filterRecipesByKeywords(recipesData, filterWordsArr)
+
   const firstCardStylesFunc = (index: number) => {
     return index === 0 ? firstCardStyles : null
   }
 
-  // Проверяем, содержит ли заголовок рецепта хотя бы одно из слов из массива words
-  //* вынести в хелпер
-  const filteredRecipes = recipesData.filter((recipe) => {
-    if (filterWordsArr) {
-      return filterWordsArr?.some((word) => recipe.title.toLowerCase().includes(word))
-    } else {
-      return true
-    }
-  })
+  const filtredSortedArr =
+    sort === 'mostPopular'
+      ? [...filteredRecipes]?.sort(
+          (a, b) =>
+            countFavouritesById(b.id, favouritesData) - countFavouritesById(a.id, favouritesData),
+        )
+      : filteredRecipes
 
   return (
     <>
       <ul className={gridStyles}>
-        {filteredRecipes.map((recipe: RecipeData, i) => {
+        {filtredSortedArr.map((recipe: RecipeData, i) => {
           if (i <= cardsQuantity) {
             return React.cloneElement(card, {
               key: i,
@@ -50,7 +53,6 @@ export const RecipesCustomGrid: React.FC<RecipesGridProps> = ({
           }
         })}
       </ul>
-      {adBlock}
     </>
   )
 }

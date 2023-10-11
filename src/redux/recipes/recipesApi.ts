@@ -1,4 +1,3 @@
-import { RecipeData } from './../../models/RecipeData'
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import {
   collection,
@@ -15,25 +14,30 @@ import { auth } from '../../api/firebase'
 
 import { db } from '../../api/firebase'
 
-import { FavouritesData, RecipeData } from '../../models/'
-import { WeekPlot } from '../../models/'
-import { WidgetNewsData } from '../../models/'
+import {
+  RecipeData,
+  WeekPlot,
+  WidgetNewsData,
+  RecipesInFavourites,
+  SelectionOfRecipes,
+  RecipeFavObj,
+} from '../../models/'
 
 export const recipesApi = createApi({
   reducerPath: 'recipesApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Recipes', 'WeekPlots', 'News', 'Favourites'],
+  tagTypes: [
+    'Recipes',
+    'WeekPlots',
+    'News',
+    'Favourites',
+    'FavouritesCounter',
+    'SelectionOfRecipes',
+  ],
   endpoints: (build) => ({
     fetchRecipes: build.query({
       async queryFn() {
         try {
-          //*----- разобраться почему закомментированный вариант возвращает undefined?
-          // const recipesCol = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
-          // const recipesSnapshot = await getDocs(recipesCol)
-          // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
-          // return recipesList
-          //*-------
-
           const recipesData: RecipeData[] = []
 
           const recipesRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
@@ -151,27 +155,6 @@ export const recipesApi = createApi({
       },
     }),
 
-    // fetchFavourites: build.query({
-    //   async queryFn() {
-    //     try {
-    //       if (auth.currentUser) {
-    //         return { data: await getFavourites() }
-    //       }
-
-    //       return { data: [] }
-    //     } catch (error) {
-    //       return { error }
-    //     }
-    //   },
-    //   providesTags: (result) =>
-    //     result
-    //       ? [
-    //           ...result.map(({ id }) => ({ type: 'Favourites' as const, id })),
-    //           { type: 'Favourites', id: 'LIST' },
-    //         ]
-    //       : [{ type: 'Favourites', id: 'LIST' }],
-    // }),
-
     addRecipe: build.mutation({
       async queryFn(recipe: RecipeData) {
         try {
@@ -190,7 +173,7 @@ export const recipesApi = createApi({
           return { error: err }
         }
       },
-      invalidatesTags: ['Favourites'],
+      // invalidatesTags: ['Favourites'],
     }),
 
     removeRecipe: build.mutation({
@@ -209,11 +192,11 @@ export const recipesApi = createApi({
           return { error: err }
         }
       },
-      invalidatesTags: ['Favourites'],
+      // invalidatesTags: ['Favourites'],
     }),
 
     addRecipeToCounter: build.mutation({
-      async queryFn(object) {
+      async queryFn(recipeFavObj: RecipeFavObj) {
         try {
           if (auth.currentUser) {
             const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
@@ -221,10 +204,10 @@ export const recipesApi = createApi({
 
             if (userSnapshot.exists()) {
               await updateDoc(ref, {
-                recipesInFavourites: arrayUnion(object),
+                recipesInFavourites: arrayUnion(recipeFavObj),
               })
             } else {
-              await setDoc(ref, { recipesInFavourites: [object] })
+              await setDoc(ref, { recipesInFavourites: [recipeFavObj] })
             }
           }
           return { data: 'Рецепт успешно добавлен в избранное' }
@@ -232,23 +215,69 @@ export const recipesApi = createApi({
           return { error: err }
         }
       },
-      invalidatesTags: ['Favourites'],
+      invalidatesTags: ['FavouritesCounter'],
     }),
 
-    fetchFavouritesCounter: build.query({
+    removeRecipeFromCounter: build.mutation({
+      async queryFn(recipeFavObj: RecipeFavObj) {
+        try {
+          if (auth.currentUser) {
+            const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
+            const userSnapshot = await getDoc(ref)
+
+            if (userSnapshot.exists()) {
+              await updateDoc(ref, {
+                recipesInFavourites: arrayRemove(recipeFavObj),
+              })
+            }
+          }
+          return { data: 'Рецепт успешно удален из избранного' }
+        } catch (err) {
+          return { error: err }
+        }
+      },
+      invalidatesTags: ['FavouritesCounter'],
+    }),
+
+    fetchRecipesInFavourite: build.query({
       async queryFn() {
         try {
           const ref = doc(db, 'favouritesCounter', 'R5UQ2gkTB5C2NYoGy7bD')
           const docSnapshot = await getDoc(ref)
           if (docSnapshot.exists()) {
-            const data = docSnapshot.data()
+            const data = docSnapshot.data() as RecipesInFavourites
             return { data: data.recipesInFavourites }
+          } else {
+            return { data: [] }
           }
         } catch (error) {
           return { error }
         }
       },
-      // providesTags: ['favouritesCounter'],
+      providesTags: ['FavouritesCounter'],
+    }),
+
+    fetchSelectionOfRecipesById: build.query({
+      async queryFn(id: string | undefined) {
+        try {
+          const selectionOfRecipeRef = doc(
+            db,
+            'reciepts',
+            'Q4Dhy8x85wPSOsHSsaim',
+            'selectionOfRecipes',
+            id ? id : '',
+          )
+          const selectionOfRecipeSnapshot = await getDoc(selectionOfRecipeRef)
+          if (selectionOfRecipeSnapshot.exists()) {
+            const data = selectionOfRecipeSnapshot.data() as SelectionOfRecipes
+            return { data: data }
+          } else {
+            return { data: undefined }
+          }
+        } catch (error) {
+          return { error }
+        }
+      },
     }),
   }),
 })
@@ -260,9 +289,10 @@ export const {
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
   useFetchWidgetNewsByIdQuery,
-  // useFetchFavouritesQuery,
   useAddRecipeMutation,
   useRemoveRecipeMutation,
   useAddRecipeToCounterMutation,
-  useFetchFavouritesCounterQuery,
+  useRemoveRecipeFromCounterMutation,
+  useFetchRecipesInFavouriteQuery,
+  useFetchSelectionOfRecipesByIdQuery,
 } = recipesApi

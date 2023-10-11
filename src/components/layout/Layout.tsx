@@ -1,4 +1,5 @@
 import React from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { Outlet } from 'react-router-dom'
 import { Header } from './Header'
 import { Footer } from './Footer'
@@ -6,11 +7,13 @@ import { Footer } from './Footer'
 export const Layout: React.FC = () => {
   return (
     <>
-      <div className='flex flex-col min-h-screen'>
-        <Header />
-        <Outlet />
-        <Footer />
-      </div>
+      <AnimatePresence>
+        <div className='flex min-h-screen flex-col'>
+          <Header />
+          <Outlet />
+          <Footer />
+        </div>
+      </AnimatePresence>
     </>
   )
 }

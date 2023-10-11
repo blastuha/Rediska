@@ -28,6 +28,14 @@ export default {
       'lines-blue': '#005278',
       'line-gray': '#e0e0e0',
     },
+    screens: {
+      xs: '320px',
+      s: '470px',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+    },
   },
   plugins: [require('daisyui')],
   daisyui: {

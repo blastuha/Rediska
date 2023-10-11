@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 
+import { useScrollToTop } from '../../../hooks/useScrollToTop'
+
 export const ForgotPassword: React.FC = () => {
-  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = useFormik({
+  const { values, handleChange, handleBlur, handleSubmit } = useFormik({
     initialValues: {
       email: '',
     },
@@ -15,8 +17,6 @@ export const ForgotPassword: React.FC = () => {
       handlePasswordReset(values.email)
     },
   })
-
-  console.log(errors)
 
   const handlePasswordReset = (email: string) => {
     const isConfirmed = window.confirm('Вы уверены, что хотите сбросить пароль?')
@@ -34,6 +34,8 @@ export const ForgotPassword: React.FC = () => {
 
   const auth = getAuth()
 
+  useScrollToTop()
+
   return (
     <div className='container mx-auto flex-grow'>
       <motion.div
@@ -48,7 +50,7 @@ export const ForgotPassword: React.FC = () => {
         <div className='mx-auto mb-16 flex flex-col p-14 shadow-[0_0_25px_10px_#f8f8fb]'>
           <div className='mb-5 text-center'>
             <h5 className='mb-1 font-dancingScript text-3xl font-bold'>Forgot Password</h5>
-            <p className='mb-6 font-inter text-[17px] text-[#9096B2]'>
+            <p className='mb-6 font-inter  text-[#9096B2] xs:text-[0.9rem] sm:text-[1rem]'>
               Пожалуйста, введите email для восстановления пароля.
             </p>
           </div>
