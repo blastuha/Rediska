@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import { FC, ReactElement } from 'react'
 import { AiFillInstagram } from 'react-icons/ai'
 import { GrFacebookOption, GrTwitter } from 'react-icons/gr'
 import { Link } from 'react-router-dom'

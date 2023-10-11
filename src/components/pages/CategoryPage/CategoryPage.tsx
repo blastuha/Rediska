@@ -14,7 +14,7 @@ import { categoriesData, sortOptions } from '../../../constants'
 
 export const CategoryPage: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState(sortOptions[0])
-  const { data: recipesData = [], isLoading: isRecipesLoading } = useFetchRecipesQuery(null)
+  const { data: recipesData = [] } = useFetchRecipesQuery(null)
   const { data: favouritesData = [] } = useFetchRecipesInFavouriteQuery(null)
   const { category } = useParams()
 
