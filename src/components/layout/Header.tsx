@@ -10,10 +10,7 @@ import { MobileNavList } from '../ui/Mobile/MobileNavList'
 
 import { useWindowWidth } from '../../hooks/useWindowWidth'
 
-const fadeInOut = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-}
+import { fadeInOut } from '../../constants/'
 
 export const Header: React.FC = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false)
@@ -64,6 +61,7 @@ export const Header: React.FC = () => {
               windowWidth={windowWidth}
               handleMobileNav={handleMobileNav}
               isMobileNavOpen={isMobileNavOpen}
+              // recipes={recipes}
             />
           </motion.div>
         )}

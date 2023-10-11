@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useFetchRecipesQuery } from '../../redux/recipes/recipesApi'
@@ -12,7 +12,6 @@ type SearchProp = {
 
 export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
   const [searchValue, setSearchValue] = useState('')
-  const [filteredRecipes, setFilteredRecipes] = useState<RecipeData[]>([])
   const debouncedSearchValue = useDebounce(searchValue, 300)
   const { data: recipes = [] } = useFetchRecipesQuery(null)
 
@@ -20,16 +19,15 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
     setSearchValue(event.target.value)
   }
 
-  useEffect(() => {
+  const filteredRecipes: RecipeData[] = useMemo(() => {
     if (debouncedSearchValue) {
-      const results = recipes.filter((recipe) =>
+      return recipes.filter((recipe) =>
         recipe.title.toLowerCase().includes(debouncedSearchValue.toLowerCase()),
       )
-      setFilteredRecipes(results)
     } else {
-      setFilteredRecipes([])
+      return []
     }
-  }, [debouncedSearchValue, recipes])
+  }, [recipes, debouncedSearchValue])
 
   return (
     <div className='container mx-auto pb-[12px]'>
@@ -57,25 +55,20 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
         <ul className='max-h-[460px] overflow-y-scroll'>
           {filteredRecipes.map((recipe) => {
             return (
-              <Link to={`reciept/${recipe.id}`} key={recipe.id}>
+              <Link to={`reciept/${recipe.id}`} key={recipe.id} onClick={onSearchClose}>
                 <li className='flex pb-4'>
-                  <figure className='mr-4 h-[100px] max-w-[170px] overflow-hidden rounded-lg'>
+                  <figure className='mr-4 h-[100px] max-w-[170px] overflow-hidden rounded-lg xs:w-2/5'>
                     <img
                       src={recipe.photoURL}
                       alt='recipe_pic'
                       className='h-full w-full object-cover'
                     />
                   </figure>
-                  <span className='flex items-center'>{recipe.title}</span>
+                  <span className='flex items-center xs:w-3/5'>{recipe.title}</span>
                 </li>
               </Link>
             )
           })}
-          {/* <Link to='/search' className='flex justify-center p-2'>
-            <button className='btn max-w-[200px] border-0 bg-light-blue p-2 text-[12px] hover:bg-line-gray'>
-              Open Search Page
-            </button>
-          </Link> */}
         </ul>
       )}
     </div>

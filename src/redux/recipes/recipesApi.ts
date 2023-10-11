@@ -20,6 +20,7 @@ import {
   WidgetNewsData,
   RecipesInFavourites,
   SelectionOfRecipes,
+  RecipeFavObj,
 } from '../../models/'
 
 export const recipesApi = createApi({
@@ -37,13 +38,6 @@ export const recipesApi = createApi({
     fetchRecipes: build.query({
       async queryFn() {
         try {
-          //*----- разобраться почему закомментированный вариант возвращает undefined?
-          // const recipesCol = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
-          // const recipesSnapshot = await getDocs(recipesCol)
-          // const recipesList = recipesSnapshot.docs.map((doc) => doc.data())
-          // return recipesList
-          //*-------
-
           const recipesData: RecipeData[] = []
 
           const recipesRef = collection(db, '/reciepts/Q4Dhy8x85wPSOsHSsaim/recipets')
@@ -160,27 +154,6 @@ export const recipesApi = createApi({
         }
       },
     }),
-
-    // fetchFavourites: build.query({
-    //   async queryFn() {
-    //     try {
-    //       if (auth.currentUser) {
-    //         return { data: await getFavourites() }
-    //       }
-
-    //       return { data: [] }
-    //     } catch (error) {
-    //       return { error }
-    //     }
-    //   },
-    //   providesTags: (result) =>
-    //     result
-    //       ? [
-    //           ...result.map(({ id }) => ({ type: 'Favourites' as const, id })),
-    //           { type: 'Favourites', id: 'LIST' },
-    //         ]
-    //       : [{ type: 'Favourites', id: 'LIST' }],
-    // }),
 
     addRecipe: build.mutation({
       async queryFn(recipe: RecipeData) {
@@ -316,7 +289,6 @@ export const {
   useFetchWidgetNewsQuery,
   useFetchWeekPlotByIdQuery,
   useFetchWidgetNewsByIdQuery,
-  // useFetchFavouritesQuery,
   useAddRecipeMutation,
   useRemoveRecipeMutation,
   useAddRecipeToCounterMutation,

@@ -17,7 +17,7 @@ export const Footer: FC = (): ReactElement => {
                     shevnin.boris2@gmail.com
                   </a>
                   <a
-                    href='https://t.me/wsxxsw'
+                    href='https://t.me/blasterblast'
                     rel='noreferrer'
                     target='_blank'
                     className='text-base text-[#7F7F7F]'
@@ -32,13 +32,19 @@ export const Footer: FC = (): ReactElement => {
                 <h5 className='mb-6 font-dancingScript text-2xl font-semibold'>Social Media</h5>
                 <ul className='font-inter text-[#7F7F7F]'>
                   <li className='footer-li'>
-                    <Link to='/'>Instagram</Link>
+                    <Link to='https://www.instagram.com/' target='_blank'>
+                      Instagram
+                    </Link>
                   </li>
                   <li className='footer-li'>
-                    <Link to='/'>YouTube</Link>
+                    <Link to='https://www.youtube.com/' target='_blank'>
+                      YouTube
+                    </Link>
                   </li>
                   <li className='footer-li'>
-                    <Link to='/'>Telegram</Link>
+                    <Link to='https://t.me/blasterblast' target='_blank'>
+                      Telegram
+                    </Link>
                   </li>
                 </ul>
               </div>

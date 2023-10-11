@@ -10,7 +10,7 @@ export const AboutPage: React.FC = () => {
       <div className='mb-16 flex flex-col items-center'>
         <h2 className='mb-4 text-center font-dancingScript text-[2.4rem]'>Author</h2>
         <div className='mb-6 max-h-[280px] xs:max-w-[180px] md:max-w-[280px]'>
-          <img src={me} alt='' className='' />
+          <img src={me} alt='me' />
         </div>
         <p className='mb-4'>
           Позвольте представиться. Меня зовут Борис Шевнин, и я являюсь веб-разработчиком с более
@@ -75,7 +75,7 @@ export const AboutPage: React.FC = () => {
             Реализован поиск с задержкой (debounce), чтобы исключить большое количество запросов.
           </li>
           <li className='mb-3'>
-            <b className='mr-2'>Сортировка рецептов</b>
+            <b className='mr-2'>Сортировка рецептов:</b>
             Вы можете сортировать рецепты по разным параметрам. В том числе по количеству
             добавленных рецептов в избранное.
           </li>

@@ -23,8 +23,6 @@ export const RecipePage: React.FC = () => {
   const { addToFavourites, removeFromFavourites, optimisticFavouritesCounter } =
     useFavouritesActions(favouritesCounter)
 
-  console.log('recipe', recipe)
-
   useScrollToTop()
 
   return (

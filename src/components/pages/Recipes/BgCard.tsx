@@ -13,8 +13,6 @@ export const BgCard: React.FC<SpecialDientCardProp> = ({
   title,
   firstCardStyles,
 }) => {
-  console.log('firstCardStyles', firstCardStyles)
-
   return (
     <li
       className={`${
