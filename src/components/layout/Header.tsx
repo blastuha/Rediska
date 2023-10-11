@@ -15,6 +15,7 @@ import { fadeInOut } from '../../constants/'
 export const Header: React.FC = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+
   const windowWidth = useWindowWidth()
 
   const handleMobileNav = () => {
@@ -61,7 +62,6 @@ export const Header: React.FC = () => {
               windowWidth={windowWidth}
               handleMobileNav={handleMobileNav}
               isMobileNavOpen={isMobileNavOpen}
-              // recipes={recipes}
             />
           </motion.div>
         )}

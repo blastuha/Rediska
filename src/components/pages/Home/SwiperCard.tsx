@@ -10,6 +10,7 @@ export const SwiperCard: React.FC<WidgetNewsData> = ({ title, photoURL, smallTex
           src={photoURL}
           alt='Shoes'
           className='h-full w-full object-cover xs:rounded-tl-lg xs:rounded-tr-lg lg:rounded-bl-lg  lg:rounded-tr-none'
+          loading='lazy'
         />
       </div>
 

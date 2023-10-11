@@ -10,7 +10,7 @@ export const AboutPage: React.FC = () => {
       <div className='mb-16 flex flex-col items-center'>
         <h2 className='mb-4 text-center font-dancingScript text-[2.4rem]'>Author</h2>
         <div className='mb-6 max-h-[280px] xs:max-w-[180px] md:max-w-[280px]'>
-          <img src={me} alt='me' />
+          <img src={me} alt='me' loading='lazy' />
         </div>
         <p className='mb-4'>
           Позвольте представиться. Меня зовут Борис Шевнин, и я являюсь веб-разработчиком с более
@@ -91,6 +91,10 @@ export const AboutPage: React.FC = () => {
           <li className='mb-3'>
             <b className='mr-2'>Работа с Grid-Сетками:</b>Большинство элементов сайта использует
             Grid-сетку.
+          </li>
+          <li className='mb-3'>
+            <b className='mr-2'>Уведомления:</b> При добавлении рецепта в избранное - появляется
+            уведомление. Реализовано с помощью библиотеки Toastify.
           </li>
           <li className='mb-3'>
             <b className='mr-2'>Адаптивная верстка:</b>Сайт адаптирован для экранов всех размеров,

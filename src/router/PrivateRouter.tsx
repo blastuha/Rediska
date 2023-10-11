@@ -18,7 +18,11 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   }, [])
 
   if (isAuth === null) {
-    return <p>Loading...</p>
+    return (
+      <main className='container mx-auto flex flex-grow justify-center pl-4 pr-4 font-dancingScript text-5xl'>
+        Loading...
+      </main>
+    )
   }
 
   if (!isAuth) {

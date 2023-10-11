@@ -15,6 +15,7 @@ export const TextRightCard: React.FC<RecipeCardProp> = ({ id, photoURL, title })
             src={photoURL}
             alt='picture'
             className='h-full w-full transform object-cover transition-transform duration-1000 group-hover:scale-110'
+            loading='lazy'
           />
         </figure>
 

@@ -62,6 +62,7 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
                       src={recipe.photoURL}
                       alt='recipe_pic'
                       className='h-full w-full object-cover'
+                      loading='lazy'
                     />
                   </figure>
                   <span className='flex items-center xs:w-3/5'>{recipe.title}</span>

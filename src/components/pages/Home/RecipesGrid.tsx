@@ -20,6 +20,7 @@ export const RecipesGrid: React.FC<RecipesGridProps> = ({ recipesData }) => {
                     src={recipe.photoURL}
                     alt='picture'
                     className='transform rounded-lg transition-transform duration-1000 group-hover:scale-110'
+                    loading='lazy'
                   />
                 </figure>
                 <div className='flex justify-between xs:pb-2 xs:pt-2 md:pb-4 md:pt-4'>

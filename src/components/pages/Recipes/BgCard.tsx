@@ -21,7 +21,12 @@ export const BgCard: React.FC<SpecialDientCardProp> = ({
     >
       <Link to={`/reciept/${id ? id : ''}`} key={id} className=' flex h-full w-full flex-col'>
         <figure className='overflow-hidden xs:min-h-[220px]  xs:min-w-[280px]  md:min-h-[280px]  md:min-w-[220px]'>
-          <img src={photoURL} alt='picture' className='h-full w-full transform  object-cover' />
+          <img
+            src={photoURL}
+            alt='picture'
+            className='h-full w-full transform  object-cover'
+            loading='lazy'
+          />
         </figure>
         <h2
           className={`h-fit flex-grow bg-light-blue p-4 font-bold text-dark-blue  ${
