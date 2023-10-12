@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-
 import { useFetchRecipesQuery } from '../../redux/recipes/recipesApi'
 import { useDebounce } from '../../hooks/useDebounce'
-
+import { slideDown, listItemTransition } from '../../constants'
 import { RecipeData } from '../../models'
 
 type SearchProp = {
@@ -52,11 +52,31 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
         </svg>
       </div>
       {filteredRecipes.length > 0 && (
-        <ul className='max-h-[460px] overflow-y-scroll'>
+        <motion.ul
+          className='max-h-[460px] overflow-y-scroll'
+          initial='hidden'
+          animate='visible'
+          exit='exit'
+          variants={slideDown}
+          transition={{
+            duration: 0.5,
+            ease: 'easeInOut',
+          }}
+        >
           {filteredRecipes.map((recipe) => {
             return (
               <Link to={`reciept/${recipe.id}`} key={recipe.id} onClick={onSearchClose}>
-                <li className='flex pb-4'>
+                <motion.li
+                  className='flex pb-4'
+                  variants={listItemTransition}
+                  initial='hidden'
+                  animate='visible'
+                  exit='exit'
+                  transition={{
+                    duration: 0.5,
+                    ease: 'easeInOut',
+                  }}
+                >
                   <figure className='mr-4 h-[100px] max-w-[170px] overflow-hidden rounded-lg xs:w-2/5'>
                     <img
                       src={recipe.photoURL}
@@ -66,11 +86,11 @@ export const Search: React.FC<SearchProp> = ({ onSearchClose }) => {
                     />
                   </figure>
                   <span className='flex items-center xs:w-3/5'>{recipe.title}</span>
-                </li>
+                </motion.li>
               </Link>
             )
           })}
-        </ul>
+        </motion.ul>
       )}
     </div>
   )

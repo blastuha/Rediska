@@ -7,7 +7,7 @@ import { auth } from '../../../api/firebase'
 import { useActions } from '../../../hooks/useActions'
 import { useScrollToTop } from '../../../hooks/useScrollToTop'
 
-import avatar from '../../../assets/avatar.png'
+import avatar from '../../../assets/avatar.webp'
 import pot from '../../../assets/pot.svg'
 
 export const UserPage: React.FC = () => {

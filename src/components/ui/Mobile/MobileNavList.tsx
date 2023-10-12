@@ -2,19 +2,12 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Lines } from '../Lines'
-import { headerNavigation } from '../../../constants'
-
-const slideDown = {
-  hidden: { height: 0, opacity: 0 },
-  visible: { height: 'auto', opacity: 1 },
-  exit: { height: 0, opacity: 0 },
-}
+import { headerNavigation, slideDown } from '../../../constants'
 
 export const MobileNavList: React.FC<{ handleMobileNav: () => void }> = ({ handleMobileNav }) => {
   return (
     <div>
       <motion.div
-        // key='mobileNav'
         className='container mx-auto'
         initial='hidden'
         animate='visible'
