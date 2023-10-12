@@ -13,7 +13,11 @@ export const AppComponent = lazy(() => import('./App'))
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Suspense fallback={<Loader />}>
+      <Suspense
+        fallback={
+          <Loader styles='flex h-screen w-full items-center justify-center overflow-hidden bg-[#ffff]' />
+        }
+      >
         <AppComponent />
       </Suspense>
     </Provider>

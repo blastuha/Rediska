@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getAuth, signInWithEmailAndPassword, AuthError } from 'firebase/auth'
 
+import Loader from '../../ui/Loader'
+
 import { useActions } from '../../../hooks/useActions'
 import { useScrollToTop } from '../../../hooks/useScrollToTop'
 import { SignInSchema } from '../../../helpers/accountValidation'
@@ -113,7 +115,7 @@ export const Login: React.FC = () => {
             </form>
           </div>
         ) : (
-          <p>Попытка входа...</p>
+          <Loader styles='flex h-full w-full items-center justify-center overflow-hidden bg-[#ffff]' />
         )}
       </motion.div>
     </div>

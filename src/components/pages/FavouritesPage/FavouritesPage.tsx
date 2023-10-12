@@ -57,13 +57,13 @@ export const FavouritesPage: React.FC = () => {
           <RecipesCustomGrid
             recipesData={favouritesArr}
             gridStyles='lg:col-span-4 grid lg:grid-cols-4 gap-4 sm:grid-cols-3 sm:col-span-3 xs:grid-cols-1 xs:col-span-1 s:grid-cols-2 s:col-span-2'
-            cardsQuantity={3}
+            cardsQuantity={100}
             card={<FavouritesCard removeFromFavourites={removeFromFavourites} />}
           />
         )}
       </motion.div>
     </main>
   ) : (
-    <Loader />
+    <Loader styles='flex h-full w-full flex-grow items-center justify-center overflow-hidden bg-[#ffff]' />
   )
 }

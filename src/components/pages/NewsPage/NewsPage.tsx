@@ -16,23 +16,21 @@ export const NewsPage: React.FC = () => {
 
   useScrollToTop()
 
-  return (
+  return !isLoading ? (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
-      {!isLoading ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 1 },
-          }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
-        >
-          <ContentHeading data={news} date={news?.date} title={news?.title} />
-          <MarkDown content={news?.text} />
-        </motion.div>
-      ) : (
-        <Loader />
-      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 1 },
+        }}
+        exit={{ opacity: 0, transition: { duration: 1 } }}
+      >
+        <ContentHeading data={news} date={news?.date} title={news?.title} />
+        <MarkDown content={news?.text} />
+      </motion.div>
     </main>
+  ) : (
+    <Loader styles='flex h-full w-full flex-grow items-center justify-center overflow-hidden bg-[#ffff]' />
   )
 }
