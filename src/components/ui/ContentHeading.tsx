@@ -1,5 +1,5 @@
 import React from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 import { Date } from './Icons/Date'
 import { Heart } from './Icons/Heart'
@@ -44,7 +44,6 @@ export const ContentHeading: React.FC<ContentHeadingProps> = ({
 
   return (
     <div className='flex flex-col'>
-      <ToastContainer />
       <h1 className='mb-6 font-playfair font-bold leading-none xs:text-[2rem] md:text-[3rem]'>
         {title}
       </h1>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Heart } from './Icons/Heart'
 import { Search } from './Icons/Search'
@@ -18,6 +19,8 @@ export const HeaderNavIcons: React.FC<HeaderNavIconsProp> = ({
   handleMobileNav,
   isMobileNavOpen,
 }) => {
+  const location = useLocation().pathname
+
   return (
     <div className='flex cursor-pointer self-center '>
       <div onClick={onSearchVisible} className='mr-2 '>
@@ -29,13 +32,13 @@ export const HeaderNavIcons: React.FC<HeaderNavIconsProp> = ({
       </div>
 
       {windowWidth >= 768 && (
-        <Link to='favourites'>
+        <Link to={location === '/signin' ? 'signin' : 'favourites'}>
           <Heart styles='w-6 h-6 mr-2 hover:scale-110 transition-all duration-300 ease-in' />
         </Link>
       )}
 
       {windowWidth >= 768 && (
-        <Link to='user'>
+        <Link to={location === '/signin' ? 'signin' : 'user'}>
           <Person styles='w-6 h-6 hover:scale-110 transition-all duration-300 ease-in' />
         </Link>
       )}
