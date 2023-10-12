@@ -1,5 +1,7 @@
 # Rediska
 
+rediska.vercel.app
+
 Стек технологий: React, Firebase, RTK, RTK Query, Tailwind, React-markdown.
 
 ## Getting started
