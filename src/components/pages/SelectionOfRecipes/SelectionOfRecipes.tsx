@@ -10,26 +10,24 @@ export const SelectionOfRecipes: React.FC = () => {
     useFetchSelectionOfRecipesByIdQuery('HW1oQrycB8lZiQNURo3i')
   useScrollToTop()
 
-  return (
+  return !isLoading ? (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
-      {!isLoading ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 1 },
-          }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
-        >
-          <ContentHeading
-            title='Пять интересных и очень-очень быстрых блюд на всю неделю'
-            date='2023-09-23'
-          />
-          <MarkDown content={selectionOfRecipes?.text} />
-        </motion.div>
-      ) : (
-        <Loader />
-      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 1 },
+        }}
+        exit={{ opacity: 0, transition: { duration: 1 } }}
+      >
+        <ContentHeading
+          title='Пять интересных и очень-очень быстрых блюд на всю неделю'
+          date='2023-09-23'
+        />
+        <MarkDown content={selectionOfRecipes?.text} />
+      </motion.div>
     </main>
+  ) : (
+    <Loader styles='flex h-full w-full flex-grow items-center justify-center overflow-hidden bg-[#ffff]' />
   )
 }

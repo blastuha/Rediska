@@ -25,41 +25,39 @@ export const RecipePage: React.FC = () => {
 
   useScrollToTop()
 
-  return (
+  return !isLoading ? (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
-      {!isLoading ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 1 },
-          }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
-        >
-          <ContentHeading
-            data={recipe}
-            date={recipe?.date}
-            title={recipe?.title}
-            addToFavourites={addToFavourites}
-            removeFromFavourites={removeFromFavourites}
-            isRecipeInFavourites={isRecipeInFavourites}
-            favouritesCounter={optimisticFavouritesCounter}
-          />
-          <p className='pb-6 text-[1rem] xs:text-[1rem]'>{recipe?.paragraph}</p>
-          <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 w-full rounded-lg' />
-          <div className='flex justify-between xs:flex-col md:flex-row'>
-            <div className='flex max-w-lg flex-col xs:mb-6 md:mb-0 md:w-3/6 md:pr-10'>
-              <Ingredients reciept={recipe} margins='mb-10' />
-              <NutritionFacts reciept={recipe} />
-            </div>
-            <div className='flex flex-col md:w-3/5'>
-              <RecipeSteps reciept={recipe} />
-            </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 1 },
+        }}
+        exit={{ opacity: 0, transition: { duration: 1 } }}
+      >
+        <ContentHeading
+          data={recipe}
+          date={recipe?.date}
+          title={recipe?.title}
+          addToFavourites={addToFavourites}
+          removeFromFavourites={removeFromFavourites}
+          isRecipeInFavourites={isRecipeInFavourites}
+          favouritesCounter={optimisticFavouritesCounter}
+        />
+        <p className='pb-6 text-[1rem] xs:text-[1rem]'>{recipe?.paragraph}</p>
+        <img src={recipe?.photoURL} alt='recieptPhoto' className='mb-8 w-full rounded-lg' />
+        <div className='flex justify-between xs:flex-col md:flex-row'>
+          <div className='flex max-w-lg flex-col xs:mb-6 md:mb-0 md:w-3/6 md:pr-10'>
+            <Ingredients reciept={recipe} margins='mb-10' />
+            <NutritionFacts reciept={recipe} />
           </div>
-        </motion.div>
-      ) : (
-        <Loader />
-      )}
+          <div className='flex flex-col md:w-3/5'>
+            <RecipeSteps reciept={recipe} />
+          </div>
+        </div>
+      </motion.div>
     </main>
+  ) : (
+    <Loader styles='flex h-full w-full flex-grow items-center justify-center overflow-hidden bg-[#ffff]' />
   )
 }

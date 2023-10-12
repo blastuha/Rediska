@@ -21,41 +21,39 @@ export const Home: React.FC = () => {
 
   useScrollToTop()
 
-  return (
+  return !isWeekPlotsLoading && !isRecipesLoading && !isNewsLoading ? (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
-      {!isWeekPlotsLoading && !isRecipesLoading && !isNewsLoading ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 1 },
-          }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
-        >
-          <HomeSection>
-            <HomeSwiper widgetNewsData={widgetNews} />
-          </HomeSection>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 1 },
+        }}
+        exit={{ opacity: 0, transition: { duration: 1 } }}
+      >
+        <HomeSection>
+          <HomeSwiper widgetNewsData={widgetNews} />
+        </HomeSection>
 
-          <HomeSection title='Сюжеты недели'>
-            <WeekPlotsGrid weekPlotsData={weekPlots} />
-          </HomeSection>
+        <HomeSection title='Сюжеты недели'>
+          <WeekPlotsGrid weekPlotsData={weekPlots} />
+        </HomeSection>
 
-          <HomeSection title='Подборки'>
-            <Widget
-              photoURL='https://www.gastronom.ru/binfiles/images/20230919/b664260d.jpg'
-              title='Пять интересных и очень-очень быстрых блюд на всю неделю'
-              paragraph='Откажитесь от еды на вынос и скучной еды навсегда'
-              link='/selectionOfRecipes'
-            />
-          </HomeSection>
+        <HomeSection title='Подборки'>
+          <Widget
+            photoURL='https://i.ibb.co/MS42Hmp/image.webp'
+            title='Пять интересных и очень-очень быстрых блюд на всю неделю'
+            paragraph='Откажитесь от еды на вынос и скучной еды навсегда'
+            link='/selectionOfRecipes'
+          />
+        </HomeSection>
 
-          <HomeSection title='Последние рецепты'>
-            <RecipesGrid recipesData={recipes} />
-          </HomeSection>
-        </motion.div>
-      ) : (
-        <Loader />
-      )}
+        <HomeSection title='Последние рецепты'>
+          <RecipesGrid recipesData={recipes} />
+        </HomeSection>
+      </motion.div>
     </main>
+  ) : (
+    <Loader styles='flex h-full w-full flex-grow items-center justify-center overflow-hidden bg-[#ffff]' />
   )
 }

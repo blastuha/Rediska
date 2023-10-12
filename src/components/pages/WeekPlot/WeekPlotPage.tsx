@@ -14,23 +14,21 @@ export const WeekPlotPage: React.FC = () => {
   const { data: plot, isLoading } = useFetchWeekPlotByIdQuery(id)
   useScrollToTop()
 
-  return (
+  return !isLoading ? (
     <main className='container mx-auto flex-grow pl-4 pr-4'>
-      {!isLoading ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 1 },
-          }}
-          exit={{ opacity: 0, transition: { duration: 1 } }}
-        >
-          <ContentHeading data={plot} title={plot?.title} date={plot?.date} />
-          <MarkDown content={plot?.text} />
-        </motion.div>
-      ) : (
-        <Loader />
-      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 1 },
+        }}
+        exit={{ opacity: 0, transition: { duration: 1 } }}
+      >
+        <ContentHeading data={plot} title={plot?.title} date={plot?.date} />
+        <MarkDown content={plot?.text} />
+      </motion.div>
     </main>
+  ) : (
+    <Loader styles='flex w-full flex-grow items-center justify-center overflow-hidden bg-[#ffff]' />
   )
 }

@@ -1,8 +1,12 @@
 import { GridLoader } from 'react-spinners'
 
-const Loader: React.FC = () => {
+type LoeaderProps = {
+  styles: string
+}
+
+const Loader: React.FC<LoeaderProps> = ({ styles }) => {
   return (
-    <div className='flex h-screen w-full items-center justify-center overflow-hidden bg-[#ffff]'>
+    <div className={styles}>
       <GridLoader color='#5d82c2' margin={5} size={20} />
     </div>
   )
