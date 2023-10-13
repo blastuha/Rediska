@@ -2,9 +2,15 @@
 
 [https://rediska.vercel.app/](https://rediska.vercel.app/)
 
-Стек технологий: React, Firebase, RTK, RTK Query, Tailwind, React-markdown.
+![React](https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Redux Toolkit](https://img.shields.io/badge/-Redux%20Toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![RTK Query](https://img.shields.io/badge/-RTK%20Query-4B32C3?style=for-the-badge&logo=redux&logoColor=white)
+![React Markdown](https://img.shields.io/badge/-React%20Markdown-000000?style=for-the-badge)
 
-## Getting started
+## Запуск проекта
 
 First, clone repo:
 
@@ -36,7 +42,3 @@ $ npm run dev
 - **Работа с Grid-Сетками**: Большинство элементов сайта использует Grid-сетку.
 - **Уведомления**: При добавлении рецепта в избранное - появляется уведомление. Реализовано с помощью библиотеки Toastify.
 - **Адаптивная верстка**: Сайт адаптирован для экранов всех размеров, начиная от узких экранов шириной 320px.
-
-![image](https://i.ibb.co/V2Bp9qL/image-2023-10-12-14-55-41.png)
-![image](https://i.ibb.co/s3mmLwX/image-2023-10-12-14-56-07.png)
-![image](https://i.ibb.co/W3Bx9hw/image-2023-10-12-14-56-58.png)
